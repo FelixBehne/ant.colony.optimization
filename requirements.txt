@@ -1,0 +1,8 @@
+cffi==1.14.5
+lineedit==0.1.6
+pycparser==2.20
+Pygments==2.8.1
+radian==0.5.10
+rchitect==0.3.30
+six==1.15.0
+wcwidth==0.2.5
