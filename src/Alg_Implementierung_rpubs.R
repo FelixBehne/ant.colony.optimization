@@ -146,7 +146,10 @@ grr <- function(x) { ## Gradient of Rosenbrock Banana function
   c(-400 * x1 * (x2 - x1^2) - 2 * (1 - x1), #erste Ableitung nach x1
     200 *      (x2 - x1^2)) # erste Ableitung nach x2
 }
-print(optim(c(-1.2,1), fr)) # convergence=0, wenn Funktion konvergiert hat; Mimimum bei x1=1, x2=1, f=0 
+optim(c(-1.2,1), fr) # convergence=0, wenn Funktion konvergiert hat; Mimimum bei x1=1, x2=1, f=0 
+Optimum = optim(c(-1.2,1), fr)
+print(Optimum$value)
+
 #-------------------------------------------
 
 #Ant Optim. Alg auf Rosenbrock Function anwenden
@@ -156,17 +159,10 @@ costFRosenbrock <- function(datos,paramList){
   100 * (x2 - x1 * x1)^2 + (1 - x1)^2
 }
 set.seed(120)
-#vars<-data.frame(x1=c(-5,5),x2=c(-5,5))# Inter von x1, x2
-#ACO(datos="NA",costF=costFRosenbrock,paramListR=vars,hor=100,q=0.7,eps=0.5,gen=1000,tip=c("num","num"),paralelo=0,printIt=200)
+vars<-data.frame(x1=c(-5,5),x2=c(-5,5))# Inter von x1, x2
+ACO(datos="NA",costF=costFRosenbrock,paramListR=vars,hor=100,q=0.7,eps=0.5,gen=800,tip=c("num","num"),paralelo=0,printIt=200)
 #--> konvergiert nicht nach 1000 iterationen
 
-#-------------------------------------------
-#library(knitr)    # For knitting document and include_graphics function
-#library(ggplot2)  # For plotting
-#library(png)  
-#img1_path <- "images/ant.png"
-#img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
-#attr(img1, "info")
 #-------------------------------------------
 #Himmelblau-Funktion graphisch darstellen
 himmelblau <- function(x, y){
@@ -190,11 +186,12 @@ f_himmelblau <- function(x) {
 gradient_himmelblau <- function(x) { ## Gradient der Funktion
   x1 <- x[1]
   x2 <- x[2]
-  c(4*x1*(x1^2+x2-11)+2(x1+x2^2 − 7) ,
+  c(4*x1*(x1^2+x2-11)+2(x1+x2^2−7),
     4*x2*(x2^2+x1-7)+2*(x2+x1^2-11))
 }
 print(optim(c(-5,5), f_himmelblau)) # convergence=0, wenn Funktion konvergiert hat; 4 lokale Mimima, globales Minimum bei x1=-3.77, x2=-3.28, f=0 
 #--> lokales Minimum wird gefunden
+
 
 #----------------------------------
 #Ant Optim. Alg auf Himmelblau Funktion anwenden
@@ -205,5 +202,8 @@ costFHImmelblau <- function(datos,paramList){
 }
 set.seed(120)
 vars<-data.frame(x1=c(-5,5),x2=c(-5,5))# Intervall von x1, x2
-ACO(datos="NA",costF=costFHImmelblau,paramListR=vars,hor=100,q=0.7,eps=0.5,gen=800,tip=c("num","num"),paralelo=0,printIt=100)
+#ACO(datos="NA",costF=costFHImmelblau,paramListR=vars,hor=100,q=0.7,eps=0.5,gen=800,tip=c("num","num"),paralelo=0,printIt=100)
 #--> landet nach 300 Generationen in lokalem Minimum und kommt nicht mehr raus
+
+rlang::last_error()
+rlang::last_trace()
