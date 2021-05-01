@@ -1,19 +1,26 @@
 #https://shiny.rstudio.com/gallery/navbar-example.html
 library(markdown)
 library(shinydashboard)
-navbarPage("Ant Optimization Algorithm",
+fluidPage(
+  # App title ----
+  titlePanel("Ant Optimization Algorithm"),
+  theme=shinythemes::shinytheme("yeti"),
+      tabsetPanel(
            tabPanel("Generelles",
                     fluidRow(
-                      column(6,
+                      column(12,
                              includeMarkdown("generalInfo.Rmd")
                       ))),   
         navbarMenu("Implementierung",
            tabPanel("Plot Rosenbrock",
-                    titlePanel("Anwendung auf die Rosenbrock Funktion"),
-                    sidebarLayout(
-                      sidebarPanel(
+                    titlePanel("Minimierung der Rosenbrock Funktion"),
+                    fluidRow(
+                      column(4,
+                    #sidebarLayout(
+                     # sidebarPanel(
                           title = "Inputs Optimierungsfunktion", status = "warning", solidHeader = TRUE,
                           textOutput("textOne"),
+                          br(),
                           #radioButtons("functione", "Zu minimierende Funktion: ",
                           #             c("Rosenbrock"="rosenbrock", "Himmelblau"="himmelblau"))
                           #sliderInput("sliderX","Min and max X:",
@@ -32,19 +39,25 @@ navbarPage("Ant Optimization Algorithm",
                           numericInput("intervalMinR","Intervall Untergrenze",value=-1,
                                         min=-50,max=-1,step=1),
                           numericInput("intervalMaxR","Intervall Obergrenze",value=1,
-                                     min=1,max=50,step=1),
-                          textOutput('minRoseText'),
-                          tableOutput('tableMinimaRose'),
-                          textOutput('textAntRose'),
-                          sliderInput("iterationsR","Iterationen",
-                                    min = 0,max = 500,value = 1,step=1),
-                          shinycssloaders::withSpinner(tableOutput('tableAntRose'))),
+                                     min=1,max=50,step=1)
+                      ),
+          
                           #DT::dataTableOutput("textAntAlg")
-
-                      mainPanel(
-                        plotOutput("plotOne"))
-                      )
-        ),
+                      #mainPanel(
+                    column(6,
+                      plotOutput("plotOne"),
+                      textOutput('minRoseText'),
+                      tableOutput('tableMinimaRose'))),
+                      
+                   
+                      fluidRow(
+                        column(12, style = "background-color:	#E8E8E8;",
+                        br(),
+                        textOutput('textAntRose'),
+                        sliderInput("iterationsR","Iterationen",
+                                  min = 0,max = 120,value = 1,step=1),
+                        shinycssloaders::withSpinner(tableOutput('tableAntRose')))
+                      )),
             tabPanel("Plot Himmelblau",
                      titlePanel("Anwendung auf die Himmelblau Funktion"),
                      sidebarLayout(
@@ -62,7 +75,7 @@ navbarPage("Ant Optimization Algorithm",
                        tableOutput('tableMinimaHim'),
                        textOutput('textAntHim'),
                        sliderInput("iterationsH","Iterationen",
-                                   min = 0,max = 500,value = 1,step=1),
+                                   min = 0,max = 120,value = 1,step=1),
                        shinycssloaders::withSpinner(tableOutput('tableAntHim')))
                      ,
                        mainPanel(
@@ -81,7 +94,7 @@ navbarPage("Ant Optimization Algorithm",
                                      verbatimTextOutput("about")
                             )
                  )
-        )
+      )  )
      
            
                  
