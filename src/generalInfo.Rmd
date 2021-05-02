@@ -15,6 +15,7 @@ Schwarmintelligenz...
 ### Geschichte
 ### Arten von Ameisenalgorythmen
 ### Anwendungsfälle
+Projektplanungsprobleme, Quadratisches Zuordnungsproblem, IP-Routing, Probleme der Logistik
 
 ### Herkunft 
 ![Ameisenstraße](images/Safari_ants_small.jpg)
