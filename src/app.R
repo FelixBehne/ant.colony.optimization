@@ -1,12 +1,10 @@
-library(shiny)
-library(DT)
+library(rsconnect)
+deployApp()
 
-
-
-#source("Alg_Implementierung_rpubs.R")
 source("ui.R")
 source("server.R")
 source("global.R")
+
 
 
 #run the App
