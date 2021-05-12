@@ -3,7 +3,8 @@ library(DT)
 library(markdown)
 library(shinydashboard)
 library(shinycssloaders)
-library("ggplot2")
+library(ggplot2)
+library(shinyWidgets)
 
 #Rosenbrock Funktion Minimum berechnen 
 f_rosenbrock <- function(x) {   

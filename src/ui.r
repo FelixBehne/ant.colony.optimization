@@ -1,6 +1,7 @@
 #https://shiny.rstudio.com/gallery/navbar-example.html
 
 fluidPage(
+  includeCSS("www/styles.css"),
   # App title ----
   titlePanel("Ant Colony Optimization"),
   theme=shinythemes::shinytheme("yeti"),
@@ -22,11 +23,27 @@ fluidPage(
                           )
                         )
                       ),
-                      shinycssloaders::withSpinner(uiOutput('formel_one')), 
+                      fluidRow(
+                        column(10,
+                      shinycssloaders::withSpinner(uiOutput('formel_one'))),
+                        column(2,
+                      actionButton("infobuttonFormel1",label= "" , width = '60px' , icon = icon("info"))
+                        )),
+
                       h4('2. Berechne den neuen Pheromonwert nach partieller Verdunstung der alten Pheromone und Verteilung der neuen Pheromone'),
-                      shinycssloaders::withSpinner(uiOutput('formel_two')),
+                      fluidRow(
+                        column(10,
+                        shinycssloaders::withSpinner(uiOutput('formel_two'))),
+                        column(2,
+                               actionButton("infobuttonFormel2",label= "" , width = '60px' , icon = icon("info"))
+                        )),
                       h4('3. Belohnung mit Pheromonwerten'),
-                      shinycssloaders::withSpinner(uiOutput('formel_three')))),
+                      fluidRow(
+                        column(10,
+                      shinycssloaders::withSpinner(uiOutput('formel_three'))),
+                      column(2,
+                             actionButton("infobuttonFormel3",label= "" , width = '60px' , icon = icon("info"))
+                      )))),
     
     navbarMenu("Implementierung",
                tabPanel("Plot Rosenbrock",
