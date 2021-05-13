@@ -6,9 +6,11 @@ fluidPage(
   titlePanel("Ant Colony Optimization"),
   theme=shinythemes::shinytheme("yeti"),
   tabsetPanel(
-    navbarMenu("Generelles",
-             tabPanel("Einordnung und Herkunft",
-                     includeMarkdown("generalInfo.Rmd")), 
+    navbarMenu("Generelles",icon = icon("info"),
+               tabPanel("Einordnung und Herkunft",
+                        includeMarkdown("generalInfo.Rmd")), 
+               tabPanel("Ameisen bei der Futtersuche",
+                        includeMarkdown("ameisenFuttersuche.Rmd")),
              tabPanel("Übertragung auf Algorithmen",
                       titlePanel("Übertragung auf Algorithmen"),
                       br(),
@@ -45,7 +47,7 @@ fluidPage(
                              actionButton("infobuttonFormel3",label= "" , width = '60px' , icon = icon("info"))
                       )))),
     
-    navbarMenu("Implementierung",
+    navbarMenu("Implementierung", icon = icon("hammer"),
                tabPanel("Plot Rosenbrock",
                         titlePanel("Minimierung der Rosenbrock Funktion"),
                         fluidRow(
@@ -114,13 +116,13 @@ fluidPage(
                                              min = 0,max = 120,value = 1,step=1),
                                  shinycssloaders::withSpinner(tableOutput('tableAntHim')))
                         ))),
-    tabPanel("Taveling salesman",
+    tabPanel("Taveling salesman",  icon = icon("map-marked-alt"),
              verbatimTextOutput("travel")
     ),
-    tabPanel("Performance",
+    tabPanel("Performance", icon = icon("chart-line"),
              verbatimTextOutput("perform")
     ),
-    navbarMenu("More",
+    navbarMenu("More",  icon= icon("hand-peace"),
                tabPanel("Hinweise zur R-Shiny Erstellung"
                ),
                tabPanel("Sonstiges",
