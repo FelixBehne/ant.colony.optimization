@@ -2,15 +2,17 @@
 
 fluidPage(
   includeCSS("www/styles.css"),
+  setBackgroundColor(color="ghostwhite"),
+  useShinydashboard(),
   # App title ----
   titlePanel("Ant Colony Optimization"),
   theme=shinythemes::shinytheme("yeti"),
   tabsetPanel(
-    navbarMenu("Generelles",icon = icon("info"),
-               tabPanel("Einordnung und Herkunft",
-                        includeMarkdown("generalInfo.Rmd")), 
-               tabPanel("Ameisen bei der Futtersuche",
-                        includeMarkdown("ameisenFuttersuche.Rmd")),
+    navbarMenu("Generelles",
+             tabPanel("Einordnung und Herkunft",
+                     includeMarkdown("generalInfo.Rmd")), 
+             tabPanel("Ameisen bei der Futtersuche",
+                      includeMarkdown("ameisenFuttersuche.Rmd")),
              tabPanel("Übertragung auf Algorithmen",
                       titlePanel("Übertragung auf Algorithmen"),
                       br(),
@@ -47,7 +49,7 @@ fluidPage(
                              actionButton("infobuttonFormel3",label= "" , width = '60px' , icon = icon("info"))
                       )))),
     
-    navbarMenu("Implementierung", icon = icon("hammer"),
+    navbarMenu("Implementierung",
                tabPanel("Plot Rosenbrock",
                         titlePanel("Minimierung der Rosenbrock Funktion"),
                         fluidRow(
@@ -115,14 +117,50 @@ fluidPage(
                                  sliderInput("iterationsH","Iterationen",
                                              min = 0,max = 120,value = 1,step=1),
                                  shinycssloaders::withSpinner(tableOutput('tableAntHim')))
-                        ))),
-    tabPanel("Taveling salesman",  icon = icon("map-marked-alt"),
+                        )),
+               tabPanel("Plot Ameisen-Generationen",
+                        titlePanel("Generationen von Ameisen auf der Suche nach dem Minimum"),
+                        fluidRow(
+                          column(4,
+                                 h3("Wähle Parameter:"),
+                                 numericInput("uGrenze","Intervall Untergrenze",value=-5,
+                                              min=-20,max=-1,step=1),
+                                 numericInput("oGrenze","Intervall Obergrenze",value=5,
+                                              min=1,max=20,step=1),
+                                 sliderInput("horNumb","Anzahl Ameisen",
+                                             min = 1,max = 100,value = 40),
+                                 sliderInput("generationenAnzahl","Anzahl Generationen",
+                                             min = 0,max = 50,value = 1),
+                                 actionButton("showGen",label= "Start")
+                                
+                            ),
+                          column(6,
+                                 # mainPanel(
+                                 h3("Himmelblau-Funktion als Kostenfunktion"),
+                                 shinycssloaders::withSpinner(plotlyOutput("generation")),
+                                 br(),
+                                 #useShinydashboard(),
+                                 fluidRow(
+                                   column(12,
+                                          
+                                   h5('Generation: '),
+                                   textOutput('generationNumber'),
+                                   h5('mean x: '),
+                                   textOutput('meanx'),
+                                   h5('mean y: '),
+                                   textOutput('meany'),
+                                   h5('mean f: '),
+                                   textOutput('meanf')
+                                   )
+                                )
+                                 )))),
+    tabPanel("Taveling salesman",
              verbatimTextOutput("travel")
     ),
-    tabPanel("Performance", icon = icon("chart-line"),
+    tabPanel("Performance",
              verbatimTextOutput("perform")
     ),
-    navbarMenu("More",  icon= icon("hand-peace"),
+    navbarMenu("More",
                tabPanel("Hinweise zur R-Shiny Erstellung"
                ),
                tabPanel("Sonstiges",
