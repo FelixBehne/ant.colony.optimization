@@ -2,13 +2,13 @@
 
 fluidPage(
   includeCSS("www/styles.css"),
-  setBackgroundColor(color="ghostwhite"),
+  setBackgroundColor(color="F5F9FC"),
   useShinydashboard(),
   # App title ----
   titlePanel("Ant Colony Optimization"),
   theme=shinythemes::shinytheme("yeti"),
   tabsetPanel(
-    navbarMenu("Generelles",
+    navbarMenu("Generelles",icon = icon("info"),
              tabPanel("Einordnung und Herkunft",
                      includeMarkdown("generalInfo.Rmd")), 
              tabPanel("Ameisen bei der Futtersuche",
@@ -49,14 +49,11 @@ fluidPage(
                              actionButton("infobuttonFormel3",label= "" , width = '60px' , icon = icon("info"))
                       )))),
     
-    navbarMenu("Implementierung",
+    navbarMenu("Implementierung", icon = icon("hammer"),
                tabPanel("Plot Rosenbrock",
                         titlePanel("Minimierung der Rosenbrock Funktion"),
                         fluidRow(
                           column(4,
-                                 #sidebarLayout(
-                                 # sidebarPanel(
-                                 # title = "Inputs Optimierungsfunktion", status = "warning", solidHeader = TRUE,
                                  textOutput("textOne"),
                                  br(),
                                  sliderInput("phiR","Phi Rotation:",
@@ -71,8 +68,6 @@ fluidPage(
                                               min=1,max=50,step=1)
                           ),
                           
-                          #DT::dataTableOutput("textAntAlg")
-                          #mainPanel(
                           column(6,
                                  plotOutput("plotOne"),
                                  textOutput('minRoseText'),
@@ -99,6 +94,9 @@ fluidPage(
                                              min = -40,max = 300,value = -40),
                                  sliderInput("shadeH", "Schattierung:",
                                              min = 0, max = 1, value = 0.3),
+                                 br(),
+                                 br(),
+                                 br(),
                                  numericInput("intervalMinH","Intervall Untergrenze",value=-5,
                                               min=-50,max=-1,step=1),
                                  numericInput("intervalMaxH","Intervall Obergrenze",value=5,
@@ -131,36 +129,38 @@ fluidPage(
                                              min = 1,max = 100,value = 40),
                                  sliderInput("generationenAnzahl","Anzahl Generationen",
                                              min = 0,max = 50,value = 1),
-                                 actionButton("showGen",label= "Start")
+                                 actionButton("showGen",label= "Start"),
+                                 br(),
+                                 br(),
+                                 h4('Minima der Himmelblaufunktion'),        
+                                 tableOutput('tableMinimaHim2')
                                 
                             ),
                           column(6,
-                                 # mainPanel(
                                  h3("Himmelblau-Funktion als Kostenfunktion"),
                                  shinycssloaders::withSpinner(plotlyOutput("generation")),
-                                 br(),
+                              #   br(),
                                  #useShinydashboard(),
-                                 fluidRow(
-                                   column(12,
-                                          
-                                   h5('Generation: '),
-                                   textOutput('generationNumber'),
-                                   h5('mean x: '),
-                                   textOutput('meanx'),
-                                   h5('mean y: '),
-                                   textOutput('meany'),
-                                   h5('mean f: '),
-                                   textOutput('meanf')
-                                   )
-                                )
+                              #   fluidRow(
+                              #     column(6,
+                                    # textOutput('generationNumber'),
+                                    # tableOutput('tableMean'),
+                                    # h5('mean x1: '),
+                                    # textOutput('meanx'),
+                                    # h5('mean x2: '),
+                                    # textOutput('meany'),
+                                    # h5('mean f: '),
+                                    # textOutput('meanf')
+                              #     )
+                              #  )
                                  )))),
-    tabPanel("Taveling salesman",
+    tabPanel("Taveling salesman", icon = icon("map-marked-alt"),
              verbatimTextOutput("travel")
     ),
-    tabPanel("Performance",
+    tabPanel("Performance", icon = icon("chart-line"),
              verbatimTextOutput("perform")
     ),
-    navbarMenu("More",
+    navbarMenu("More", icon= icon("hand-peace"),
                tabPanel("Hinweise zur R-Shiny Erstellung"
                ),
                tabPanel("Sonstiges",

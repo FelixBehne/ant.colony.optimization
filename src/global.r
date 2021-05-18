@@ -42,9 +42,9 @@ gradient_himmelblau <- function(x) { ## Gradient der Funktion
   c(4*x1*(x1^2+x2-11)+2(x1+x2^2-7),
     4*x2*(x2^2+x1-7)+2*(x2+x1^2-11))
 }
-OptimumHim = optim(c(-5,5), f_himmelblau) # convergence=0, wenn Funktion konvergiert hat; 4 lokale Mimima, globales Minimum bei x1=-3.77, x2=-3.28, f=0 
+OptimumHim = optim(c(-5,5), f_himmelblau) # convergence=0, wenn Funktion konvergiert hat: 4 lokale Mimima, globales Minimum bei x1=-3.77, x2=-3.28, f=0 
 
-#weitere Minima hinzufügen
+#weitere Minima manuell hinzufügen
 MinimaHimmelblau <-data.frame(
   x1 = c(OptimumHim$par[1], 3, -3.78, 3.58),
   x2 = c(OptimumHim$par[2], 2, -3.28, -1.85),
@@ -72,7 +72,6 @@ calculateMin <- function(iter=30,minim=-1,maxim=1,fu ='rosenbrock'){
   acorOptions<-OptionsACOR$new ( )
   acorOptions$setValue("iterations",iter)
   system.time(results<-extremize("acor", objective, acorOptions))
-  #results$getBest()
   antOptimRosenbrock <- data.frame(
     x1 = c (results$getBest()$x1), 
     x2 = c(results$getBest()$x2),
@@ -89,18 +88,10 @@ costFHImmelblau <- function(datos,paramList){
   (x1^2+x2-11)^2+(x1+x2^2-7)^2
 }
 
-#Intervall von x und y 
-#vars<-data.frame(x1=c(-10,10),x2=c(-10,10))
-
-#Anzahl Ameisen
-#horNumb = 50
-
 makeStartSet<-function(numberOfAnts, anfangsintervall){
   set.seed(120)
   genP = randParam(paramList=anfangsintervall, hor=numberOfAnts)
   genP_df <- data.frame(matrix(unlist(genP), nrow=length(genP), byrow=TRUE))
-  #genP_matrix <- matrix(c(genP[1]),c(genP[2]))
-  #genP_matrix <- matrix(c(c(genP[1]),c(genP[2])), ncol = 2, nrow =numberOfAnts)
   return(genP)
 }
 getFirstGenerationWithF<-function(datos="NA", genP, costF, paralelo=0){
@@ -116,15 +107,12 @@ vekGen= c(firstGeneration)
 print(vekGen)
 print(data.frame(vekGen))
 
-#Values for first generation, use Algorythm from "Versuch 2.r" 
+#Values for first generation, use Algorythm-Functions from File "Ameisenalgorythmus_Implementierung_2" 
 ACO_calcGens<-function(datos="NA",costF,paramListR,genP,gen,q=0.2,eps=0.5,paralelo=0){
   meanErrP<-0.1
   bestHorP<-0.1
   while(gen>0){
     errGen<-calcErr(datos,costF,genP,paralelo=paralelo)
-    #if(((gen %% printIt) ==0) | (gen == 1)){
-    #plot(genP)
-    #}
     pesosGen<-pesos(errGen,q)
     probGen<-probHor(pesosGen)
     desv<-cSigma(genP,eps)
@@ -134,6 +122,7 @@ ACO_calcGens<-function(datos="NA",costF,paramListR,genP,gen,q=0.2,eps=0.5,parale
   XYF <- c(genP, errGen)
   return(XYF)
 }
+
 
 prepareForPlot<-function(horNumb, xyf){ #Anzahl Ameisen und xyz-Werte
   
@@ -166,42 +155,25 @@ prepareForPlot<-function(horNumb, xyf){ #Anzahl Ameisen und xyz-Werte
   xyf$colour <- c(xyf$colour, 'min')
   
   # add mean values of ants
-  meanF= sum(xyf$f)/horNumb
-  meanX= sum(xyf$x)/horNumb
-  meanY= sum(xyf$y)/horNumb
-  print(typeof(meanF))
+  meanF <<- sum(xyf$f)/horNumb
+  #assign("meanF", meanF, envir = .GlobalEnv)
+  meanX1 <<-  sum(xyf$x)/horNumb
+  meanX2 <<- sum(xyf$y)/horNumb
   
   #add mean values of ants
-  xyf$x <- c(xyf$x, meanX)
-  xyf$y <- c(xyf$y, meanY)
+  xyf$x <- c(xyf$x, meanX1)
+  xyf$y <- c(xyf$y, meanX2)
   xyf$f <- c(xyf$f, meanF)
   xyf$colour <- c(xyf$colour, 'mean')
   
   return(xyf)
 }
 
-#------------------------------------------
-#https://www.r-bloggers.com/2018/06/valuebox-without-shinydashboard-2/
+MinimaHimmelblau2 <-data.frame(
+  x = c(OptimumHim$par[1], 3, -3.78, 3.58),
+  y = c(OptimumHim$par[2], 2, -3.28, -1.85),
+  f = c (OptimumHim$value, 0, 0, 0)
+)
 
-valueBoxExample <- function(value, subtitle, icon, color) {
-  div(class = "col-lg-3 col-md-6",
-      div(class = "panel panel-primary",
-          div(class = "panel-heading", style = paste0("background-color:", color),
-              div(class = "row",
-                  div(class = "col-xs-3",
-                      icon(icon, "fa-5x")
-                  ),
-                  div(class = ("col-xs-9 text-right"),
-                      div(style = ("font-size: 56px; font-weight: bold;"),
-                          textOutput(value)
-                      ),
-                      div(subtitle)
-                  )
-              )
-          ),
-          div(class = "panel-footer",
-              div(class = "clearfix")
-          )
-      )
-  )
-}
+#------------------------------------------
+

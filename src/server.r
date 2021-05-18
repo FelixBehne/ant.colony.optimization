@@ -66,8 +66,8 @@ function(input, output, session) {
   # output$textAntAlg = DT::renderDataTable({
   # Create the data frame.
   #   MinimaRosenbrock
-  
   # })
+  
   output$minRoseText <- renderText({"tatsächliches Minimum der Rosenbrockfunktion: "})
   output$tableMinimaRose <- renderTable(MinimaRosenbrock)
   output$textAntRose <- renderText({"Ergebnis des Algorithmus:"})
@@ -81,31 +81,29 @@ function(input, output, session) {
   output$tableAntHim <- renderTable({calculateMin(input$iterationsH,input$intervalMinH,input$intervalMaxH,'himmelblau')})
   
 #--------------------------
-  #Intervallbereich entsprechend verändern
-  #vars<-data.frame(x1=c(-10,10),x2=c(-10,10))
- # vars <- reactive({
- #   data.frame(x1=c(input$uGrenze,input$oGrenze),x2=c(input$uGrenze,input$oGrenze))
- # })
+
   vars <- eventReactive(input$showGen, {
     data.frame(x1=c(input$uGrenze,input$oGrenze),x2=c(input$uGrenze,input$oGrenze))
   })
   
   output$generationNumber <- renderText({
-    input$generationenAnzahl
+    paste0("Nach " , input$generationenAnzahl, " Generationen")
   })
-
+  output$tableMinimaHim2 <- renderTable(MinimaHimmelblau2)
   
+ # output$meanx <- renderText({ meanX1 })
+ # output$meany <- renderText({ meanX2 })
+ # output$meanf <- renderText({ meanF })
   
- #plotly Generations-Plot
- #  output$generation <- renderPlotly({
-#    plot_ly(x=xyf$x, y=xyf$y, z=xyf$f, type="scatter3d", mode="markers", color=xyf$colour) # 3d plot
-#  })}
   output$generation <- renderPlotly({
     generation1 = makeStartSet(numberOfAnts=input$horNumb, anfangsintervall=vars())
     ameisenwerte_xyf = ACO_calcGens(costF=costFHImmelblau,paramListR=vars(),genP=generation1,gen=input$generationenAnzahl)
     plotData = prepareForPlot(horNumb=input$horNumb, xyf=ameisenwerte_xyf)
     plot_ly(x=plotData$x, y=plotData$y, z=plotData$f, type="scatter3d", mode="markers", color=plotData$colour)
-    })}
+  })
+
+  
+}
 
 
 
