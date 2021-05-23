@@ -5,7 +5,13 @@ fluidPage(
   setBackgroundColor(color="F5F9FC"),
   useShinydashboard(),
   # App title ----
-  titlePanel("Ant Colony Optimization"),
+  fluidRow(
+    column(9,
+      titlePanel("Ant Colony Optimization")),
+  column(1, offset = 1,
+        img(src="ant.jpg", height = "75", weight = "125")
+          )),
+  br(),
   theme=shinythemes::shinytheme("yeti"),
   tabsetPanel(
     navbarMenu("Generelles",icon = icon("info"),
@@ -49,7 +55,7 @@ fluidPage(
                              actionButton("infobuttonFormel3",label= "" , width = '60px' , icon = icon("info"))
                       )))),
     
-    navbarMenu("Visualisierung", icon = icon("hammer"),
+    navbarMenu("Visualisierung", icon = icon("eye"),
                tabPanel("Plot Rosenbrock",
                         titlePanel("Minimierung der Rosenbrock Funktion"),
                         fluidRow(
@@ -152,7 +158,7 @@ fluidPage(
                         titlePanel("Ameisengenerationen auf der Suche nach dem Minimum der Himmelblaufunktion"),
                         fluidRow(
                           column(4,
-                                # h3("Wähle Parameter:"),
+                                
                                 br(),
                                  numericInput("uGrenze","Intervall Untergrenze",value=-5,
                                               min=-20,max=-1,step=1),
@@ -162,11 +168,12 @@ fluidPage(
                                              min = 1,max = 100,value = 40),
                                  sliderInput("generationenAnzahl","Anzahl Generationen",
                                              min = 0,max = 50,value = 1),
-                                 actionButton("showGen",label= "Start"),
-                                 br(),
+                                
                                  br(),
                                  h4('Minima der Himmelblaufunktion'),        
-                                 tableOutput('tableMinimaHim2')
+                                 tableOutput('tableMinimaHim2'),
+                                br(),
+                                actionButton("showGen",label= "Start", style='margin-left:10px; font-size:150%'),
                                 
                             ),
                           column(6,

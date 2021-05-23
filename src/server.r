@@ -21,7 +21,7 @@ function(input, output, session) {
                0 & \\text{sonst.} \\end{cases}\\!$$
                mit Wahrscheinlichkeit \\(P\\), Ameise \\(s_a\\), aktueller Pfad-Abschnitt \\(c_l\\), potenzieller nächster Pfad-Abschnitt \\(c_r\\), Menge der wählbaren Pfad-Abschnitte \\(J\\), Pheromonwert des Pfad-Abschnitts \\(\\tau\\), konstantem Verdunstungsfaktor \\(\\rho\\)'))
   })
-#--ActionButtons---------------------
+#--ActionButtons für Erklärung zu Formeln ---------------------
   observeEvent(input$infobuttonFormel1, {
     shinyWidgets::sendSweetAlert(
       session = session, 
@@ -42,7 +42,7 @@ function(input, output, session) {
     shinyWidgets::sendSweetAlert(
       session = session, 
       title = "Belohnung mit Pheromon",
-      text = "Für jede Ameise wird geschaut, welchen Pfad-Abschnitt sie gewählt hat. Die Höhe der Pheromon-\"Belohnung\" wird mithilfe eine problemspezifische Funktion ermittelt, wenn der Pfad-Abschnitt von der Ameise begangen wurde. Wege, die nicht von der Ameise begangen wurden, bekommen kein Pheromon.",
+      text = "Wir betrachten die einzelnen Pfad-Abschnitte nacheinander: Die Höhe ihrer Pheromon-\"Belohnung\" wird mittels einer problemspezifischen Funktion ermittelt, wenn der Pfad-Abschnitt von der Ameise begangen wurde. Abschnitte, die nicht von der Ameise begangen wurden, bekommen kein Pheromon.",
       type = "info"
     )
   })
