@@ -42,7 +42,8 @@ gradient_himmelblau <- function(x) { ## Gradient der Funktion
   c(4*x1*(x1^2+x2-11)+2(x1+x2^2-7),
     4*x2*(x2^2+x1-7)+2*(x2+x1^2-11))
 }
-OptimumHim = optim(c(-5,5), f_himmelblau) # convergence=0, wenn Funktion konvergiert hat: 4 lokale Mimima, globales Minimum bei x1=-3.77, x2=-3.28, f=0 
+OptimumHim = optim(c(-5,5), f_himmelblau) # convergence=0, wenn Funktion konvergiert 
+                                          # hat: 4 lokale Mimima, globales Minimum bei x1=-3.77, x2=-3.28, f=0 
 
 #weitere Minima manuell hinzufügen
 MinimaHimmelblau <-data.frame(

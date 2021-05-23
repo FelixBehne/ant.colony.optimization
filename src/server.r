@@ -54,8 +54,9 @@ function(input, output, session) {
     )
   })
 
-#----------------------------------
+#--------------- Visualisierung des Algorithmus-----------------------------------------
   
+# --------------Anwendung auf Rosenbrockfunktion---------------
   output$textOne <- renderText({ "Darstellung der Optimierungsfunktion" })
   output$plotOne <- renderPlot({
     returnPlot("rosenbrock", input$intervalMinR, input$intervalMaxR, input$thetaR,input$phiR, input$shadeR, "green")
@@ -76,7 +77,7 @@ function(input, output, session) {
   output$textAntRose <- renderText({"Ergebnis des Algorithmus:"})
   output$tableAntRose <- renderTable({calculateMin(input$iterationsR,input$intervalMinR,input$intervalMaxR,'rosenbrock')})
   
-  
+  # --------------Anwendung auf Himmelblaufunktion---------------
   
   output$minHimText <- renderText({"Minima der Himmelblaufunktion: "})
   output$tableMinimaHim <- renderTable(MinimaHimmelblau)
@@ -91,7 +92,7 @@ function(input, output, session) {
   
   output$tableAntHim <- renderTable({calculateMin(input$iterationsH,input$intervalMinH,input$intervalMaxH,'himmelblau')})
   
-#--------------------------
+#--------------------------Plot Generations of ants on Himmelblau function-----------------------------
 
   vars <- eventReactive(input$showGen, {
     data.frame(x1=c(input$uGrenze,input$oGrenze),x2=c(input$uGrenze,input$oGrenze))
