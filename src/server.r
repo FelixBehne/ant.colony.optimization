@@ -58,7 +58,7 @@ function(input, output, session) {
     returnPlot("rosenbrock", input$intervalMinR, input$intervalMaxR, input$thetaR,input$phiR, input$shadeR, "green")
   })
   
-  output$textTwo <- renderText({ "Himmelblau Funktion" })
+ # output$textTwo <- renderText({ "Himmelblau Funktion" })
   output$plotTwo <- renderPlot({
     returnPlot("himmelblau", input$intervalMinH, input$intervalMaxH, input$thetaH, input$phiH, input$shadeH, "orange")
   })
@@ -78,6 +78,14 @@ function(input, output, session) {
   output$minHimText <- renderText({"Minima der Himmelblaufunktion: "})
   output$tableMinimaHim <- renderTable(MinimaHimmelblau)
   output$textAntHim <- renderText({"Ergebnis des Algorithmus:"})
+  # Value Boxes for the result of the calculation of the alt optim alg 
+  # output$x_val_alg <- renderValueBox(
+  #   valueBox("x-Wert", 4,icon = icon("credit-card"), color = 'light-blue'))
+  # output$y_val_alg <- renderValueBox(
+  #   valueBox("y-Wert", 4,icon = icon("credit-card"), color = 'light-blue'))
+  # output$f_val_alg <- renderValueBox(
+  #   valueBox("f-Wert", 4,icon = icon("credit-card"), color = 'light-blue'))
+  
   output$tableAntHim <- renderTable({calculateMin(input$iterationsH,input$intervalMinH,input$intervalMaxH,'himmelblau')})
   
 #--------------------------

@@ -21,10 +21,10 @@ Projektplanungsprobleme, Quadratisches Zuordnungsproblem, IP-Routing, Probleme d
 ![Ameisenstraße](images/Safari_ants_small.jpg)
 
 
-```{r ant, echo=FALSE}
-library(imager)
-im <- load.image("images/Safari_ants_small.png")
-plot(im, yaxt='n', xaxt='n') 
+#```{r ant, echo=FALSE}
+#library(imager)
+#im <- load.image("images/Safari_ants_small.png")
+#plot(im, yaxt='n', xaxt='n') 
 
 ```
 ```

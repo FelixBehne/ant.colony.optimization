@@ -101,12 +101,6 @@ getFirstGenerationWithF<-function(datos="NA", genP, costF, paralelo=0){
 }
 
 
-firstGeneration = makeStartSet(numberOfAnts = horNumb, anfangsintervall = vars) # gibt numberOfAnts-viele paare von zufälligen Werten im Anfangsbereich zurück
-print(firstGeneration)
-vekGen= c(firstGeneration)
-print(vekGen)
-print(data.frame(vekGen))
-
 #Values for first generation, use Algorythm-Functions from File "Ameisenalgorythmus_Implementierung_2" 
 ACO_calcGens<-function(datos="NA",costF,paramListR,genP,gen,q=0.2,eps=0.5,paralelo=0){
   meanErrP<-0.1
