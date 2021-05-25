@@ -57,20 +57,10 @@ function(input, output, session) {
 #--------------- Visualisierung des Algorithmus-----------------------------------------
   
 # --------------Anwendung auf Rosenbrockfunktion---------------
-  output$textOne <- renderText({ "Darstellung der Optimierungsfunktion" })
+  
   output$plotOne <- renderPlot({
     returnPlot("rosenbrock", input$intervalMinR, input$intervalMaxR, input$thetaR,input$phiR, input$shadeR, "green")
   })
-  
- # output$textTwo <- renderText({ "Himmelblau Funktion" })
-  output$plotTwo <- renderPlot({
-    returnPlot("himmelblau", input$intervalMinH, input$intervalMaxH, input$thetaH, input$phiH, input$shadeH, "orange")
-  })
-  
-  # output$textAntAlg = DT::renderDataTable({
-  # Create the data frame.
-  #   MinimaRosenbrock
-  # })
   
   output$minRoseText <- renderText({"tatsächliches Minimum der Rosenbrockfunktion: "})
   output$tableMinimaRose <- renderTable(MinimaRosenbrock)
@@ -79,17 +69,13 @@ function(input, output, session) {
   
   # --------------Anwendung auf Himmelblaufunktion---------------
   
+  output$plotTwo <- renderPlot({
+    returnPlot("himmelblau", input$intervalMinH, input$intervalMaxH, input$thetaH, input$phiH, input$shadeH, "orange")
+  })
+  
   output$minHimText <- renderText({"Minima der Himmelblaufunktion: "})
   output$tableMinimaHim <- renderTable(MinimaHimmelblau)
   output$textAntHim <- renderText({"Ergebnis des Algorithmus:"})
-  # Value Boxes for the result of the calculation of the alt optim alg 
-  # output$x_val_alg <- renderValueBox(
-  #   valueBox("x-Wert", 4,icon = icon("credit-card"), color = 'light-blue'))
-  # output$y_val_alg <- renderValueBox(
-  #   valueBox("y-Wert", 4,icon = icon("credit-card"), color = 'light-blue'))
-  # output$f_val_alg <- renderValueBox(
-  #   valueBox("f-Wert", 4,icon = icon("credit-card"), color = 'light-blue'))
-  
   output$tableAntHim <- renderTable({calculateMin(input$iterationsH,input$intervalMinH,input$intervalMaxH,'himmelblau')})
   
 #--------------------------Plot Generations of ants on Himmelblau function-----------------------------
@@ -103,10 +89,6 @@ function(input, output, session) {
   })
   output$tableMinimaHim2 <- renderTable(MinimaHimmelblau2)
   
- # output$meanx <- renderText({ meanX1 })
- # output$meany <- renderText({ meanX2 })
- # output$meanf <- renderText({ meanF })
-  
   output$generation <- renderPlotly({
     generation1 = makeStartSet(numberOfAnts=input$horNumb, anfangsintervall=vars())
     ameisenwerte_xyf = ACO_calcGens(costF=costFHImmelblau,paramListR=vars(),genP=generation1,gen=input$generationenAnzahl)
@@ -114,6 +96,10 @@ function(input, output, session) {
     plot_ly(x=plotData$x, y=plotData$y, z=plotData$f, type="scatter3d", mode="markers", color=plotData$colour)
   })
 
+  # output$meanx <- renderText({ meanX1 })
+  # output$meany <- renderText({ meanX2 })
+  # output$meanf <- renderText({ meanF })
+  
   
 }
 

@@ -78,8 +78,27 @@ calculateMin <- function(iter=30,minim=-1,maxim=1,fu ='rosenbrock'){
     x2 = c(results$getBest()$x2),
     f = c(results$getBest()$fitness)
   )
-  return(antOptimRosenbrock)      
+  return(antOptimRosenbrock)     
 } 
+#---------------------------------------------------------------------
+# Plot the functions 3d
+
+returnPlot<- function(fu="rosenbrock",minim=-1,maxim=1, thetaRot = "150", phiRot= "20", shade = 0.3, colour="green"){ 
+  
+  if (fu == 'rosenbrock'){
+    fun <- function(x, y){(1-x)^2+100*(y-x^2)^2}
+    text = "Rosenbrock-Funktion mit a=1, b=100"
+  }else if(fu == 'himmelblau'){
+    fun <- function(x, y){(x^2+y-11)^2+(x+y^2-7)^2}
+    text = "Himmelblau-Funktion"
+  }
+  x <- y <- seq(minim, maxim, length= 20)
+  z <- outer(x, y, fun )
+  persp(x, y, z, 
+        main = text,
+        theta = thetaRot, phi = phiRot,
+        shade = shade, col = colour)
+}
 
 #---Plot Generations of ants on Himmelblau function --------------------
 

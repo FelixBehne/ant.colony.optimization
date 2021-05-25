@@ -55,7 +55,6 @@ fluidPage(
                         titlePanel("Minimierung der Rosenbrock Funktion"),
                         fluidRow(
                           column(4,
-                                 # textOutput("textOne"),
                                  br(),
                                  sliderInput("phiR","Vertikale Rotation:",
                                              min = 1,max = 300,value = 20),
