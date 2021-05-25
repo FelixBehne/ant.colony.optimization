@@ -1,0 +1,29 @@
+---
+title: "Anwendungsfälle"
+runtime: shiny
+output: html_document
+---
+
+### Weitere Anwendungsfälle:
+
+-	Routenoptimierung
+
+-	Maschinenbelegungsproblem
+
+- Logistikoptimierung
+
+-	Beschickung von Lackieranlagen: Losbildung zur Minimierung der Farbwechsel
+
+-	Fertigungssteuerung:Beschleunigung und Einhalten von Terminen
+
+- Proteinfaltung
+
+- Netzwerke -> schnelle Routen/ Verbindungen finden
+
+- Einsatz von Personal
+
+- Optimierung von der Steuerung und Auslastung von Fahrzeugen und Fahrwegen
+
+
+
+

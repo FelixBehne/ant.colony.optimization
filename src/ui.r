@@ -189,7 +189,32 @@ fluidPage(
                                  #  )
                           )))),
     tabPanel("Taveling salesman", icon = icon("map-marked-alt"),
-             verbatimTextOutput("travel")
+             verbatimTextOutput("travel"),
+             titlePanel("Travelling Salesman Problem"),
+             fluidRow(
+               column(4,
+                      sliderInput("alpha","alpha",min = 1,max = 10,value = 5),
+                      sliderInput("beta","beta",min = 1,max = 10,value = 5),
+                      sliderInput("evaporation","Verdunstung ",min = 0.1,max = 1.0,value = 0.5),
+                      sliderInput("randomnessf","Zufälligkeitsfaktor",min = 0,max = 10,value = 5),
+                      sliderInput("nOfAnts","Anzahl der Ameisen",min = 1,max = 50,value = 30),
+                      sliderInput("iterations","Iterationen",min = 1,max = 50,value = 30),
+                      actionButton("action", "Action"),
+                      actionButton('info', 'Info'),
+                      br()
+               ),
+               column(8,
+                      plotOutput("TSPlot"),
+                      dataTableOutput('table'),
+                      
+               )
+             ),
+             fluidRow(style = "background-color:	#E8E8E8;",
+               column(10,
+                includeMarkdown("Anwendung.Rmd")
+               )
+             )
+             
     ),
     tabPanel("Performance", icon = icon("chart-line"),
              verbatimTextOutput("perform")

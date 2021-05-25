@@ -1,0 +1,11 @@
+---
+title: "Info_TSP"
+output: html_document
+---
+### Bedeutung der Paramter<br><br>
+#### Alpha: Stärke der Pheromone wird hier festgelegt, umo höher -> umso stärker <br><br>
+#### Beta: Die Relevanz der Distanz wird hier festgelegt, umso höher -> destro weniger relevant <br><br>
+#### Verdunstung: Wie stark sich die Pheromonspur auflöst  <br><br>
+#### Zufälligkeitsfaktor: Anzahl von zufälligen Iterationen <br><br>
+#### Anzahl der Ameisen<br><br>
+#### Iterationen: Anzahl der Iterationen<br><br>

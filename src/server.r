@@ -100,7 +100,41 @@ function(input, output, session) {
   # output$meany <- renderText({ meanX2 })
   # output$meanf <- renderText({ meanF })
   
+  #--------------------------Anwendungsfälle und TSP----------------------------- 
   
+  #Hier wird der Plot erstellt
+  output$TSPlot <- renderPlot({
+    x = getXValues()
+    y = getYValues()
+    labels = c(1,2,3,4,5,6,7,8,9,10)
+    plot(x,y)
+    text(x,y ,labels = labels, cex=1.2, pos=2)
+  })
+  #Hier wird die Dunktion des Algorithmus aufgerufen und die Slider Inputwerte als Parameter übergeben
+  
+  ntext <- eventReactive(input$action, {
+    options = acoAlg(
+      getXValues(),
+      getYValues(),
+      input$alpha,
+      input$beta, 
+      input$evaporation,
+      input$randomnessf,
+      input$nOfAnts,
+      input$iterations
+      )
+  })
+  #Ausgeführt wird die Funktion und dadurch die Tabelle erst bei dem drücken des ActionButtons in der UI.
+  output$table <- renderDataTable({
+    options = ntext()
+  })
+  observeEvent(input$info,{
+    showModal(modalDialog(
+      title = "Info!",
+      includeMarkdown("Info_TSP.Rmd")
+      
+    ))
+  })  
 }
 
 

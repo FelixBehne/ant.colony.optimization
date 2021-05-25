@@ -13,21 +13,23 @@ Schwarmintelligenz...
 <br>
 
 ### Geschichte
-### Arten von Ameisenalgorythmen
-### Anwendungsfälle
-Projektplanungsprobleme, Quadratisches Zuordnungsproblem, IP-Routing, Probleme der Logistik
+
+Das Verhalten der Ameisen bei der Futtersuche wurde schon 1940 von Richard P. Feynman untersucht.<br>
+Das Ant System wurde dann 1991 entwickelt und darauf folgten dann weitere Ant-Algorithmen. <br>
+![Zeitstrahl](images/Zeitstrahl.jpg)
+
+### Arten von Ameisenalgorithmen
+1.	Ant System
+2.	Ant Colony System
+3.	Ant System mit „Elitist Strategy“
+4.	Ranke Based Version von Ant System
+5.	Hybrid Ant System
+6.	Max-Min Ant System
+7.	Approximate Nondeterministic Tree Search
+8.	Fast Ant System
+
 
 ### Herkunft 
-![Ameisenstraße](images/Safari_ants_small.jpg)
-
-
-#```{r ant, echo=FALSE}
-#library(imager)
-#im <- load.image("images/Safari_ants_small.png")
-#plot(im, yaxt='n', xaxt='n') 
-
-```
-```
-
-
-
+Der Algorithmus von dem natürlichen Verhalten der Ameisen bei der Futtersuche abgeschaut.<br>
+Der Ant Colony Algorithmus ist eine weiterentwicklung des Ant System.<br>
+![Ameisenstraße](images/Ant_Futter.jpg)
