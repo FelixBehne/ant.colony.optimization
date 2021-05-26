@@ -6,6 +6,7 @@ library(shinycssloaders)
 library(ggplot2)
 library(shinyWidgets)
 library(plotly)
+library(slickR)
 
 #Rosenbrock Funktion Minimum berechnen 
 f_rosenbrock <- function(x) {   

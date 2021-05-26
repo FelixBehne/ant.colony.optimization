@@ -134,7 +134,12 @@ function(input, output, session) {
       includeMarkdown("Info_TSP.Rmd")
       
     ))
-  })  
+  })
+  #Hier werden die Ameisen bei der Futtersuche gerendert
+output$slickr <- renderSlickR({
+  imgs <- list.files("C:/Users/kochma/Documents/GitHub/ant-colony-optimization/src/images/antSlideShow/", pattern=".png", full.names = TRUE)
+  slickR(imgs)
+})
 }
 
 
