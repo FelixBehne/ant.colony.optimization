@@ -2,29 +2,29 @@
 rm(list=ls())
 library(dplyr)
 
-#Hier ist der Algorihtmus für das TSP Problem.
-#Der Code ist von dem Git Repository: https://github.com/ciessielski/ACOTSP
+# This is the code for the ACO Algorithm
+#The code is from the Git Repository: https://github.com/ciessielski/ACOTSP
 
 acoAlg <- function(xVal,yVal, a, b , eva, rf, nAnts, iter){
-  #Hier werden die Parameter festgelegt
-  alpha <- a #Stärke der Pheromone wird hier festgelegt, umo höher -> umso stärker
-  beta <- b  #Die Relevanz der Distanz wird hier festgelegt, umso höher -> destro weniger relevant
-  evaporation <- eva
-  randomness_factor <- rf #Anzahl von zufälligen Interationen -> kann man auch auf 0 Seitzen um keine zu haben
-  nOfCities <- 10 #Anzahl der Städte -> wird bei uns immer bei 10 bleiben 
-  nOfAnts <- nAnts #Anzahl der Ameisen
-  iterations <- iter #Anzahl der Iterationen
+  #Here we assign the params for the function
+  alpha <- a # The strength of the pheromone. As higher -> as stronger
+  beta <- b  # Relevanz of the distance. As higher -> as less relevant
+  evaporation <- eva # How string the pheromone evaporate
+  randomness_factor <- rf #Factor for random Iterations
+  nOfCities <- 10 #Number of the cities
+  nOfAnts <- nAnts #Number of Ants
+  iterations <- iter #ANumber of Iterations
   
-  cities <- data.frame(cid = c(1:nOfCities),x = xVal , y = xVal , visited = FALSE, pheromone = 0)#Data Frame aus den x,y Werten der Städte
+  cities <- data.frame(cid = c(1:nOfCities),x = xVal , y = xVal , visited = FALSE, pheromone = 0)#Data Frame from the x and y Values from the cities
   routes <- data.frame(distance = 0)
   
   for (i in 1:nOfCities) { routes[,paste0("stop_",i)] = 0 }
   
   trips <- 0
   
-  for (i in 1:iterations)#So hoch die Anzahl der Iterationen, so oft wird es ausgeführt
+  for (i in 1:iterations)#The number if Iterations determine the number of runs 
   {
-    for (a in 1:nOfAnts)#Für jede Ameise 
+    for (a in 1:nOfAnts)#For every ant
     {
       trips <- trips + 1
       
@@ -37,33 +37,33 @@ acoAlg <- function(xVal,yVal, a, b , eva, rf, nAnts, iter){
       for (j in 1:stops) 
       {
         not_visited <- filter(cities, cities$visited == FALSE)
-        if (is.null(current_city_id)) { current_city_id <- 1 } #Hier wird festgelegt, dass alle Ameisen von der selben Stelle (Stadt starten)
+        if (is.null(current_city_id)) { current_city_id <- 1 } #All Ants starts from the selfe point
         
         not_visited$dist_from_current <- ((not_visited$x - cities$x["cid" = current_city_id])^2 + (not_visited$y - cities$x["cid" = current_city_id])^2)^(1/2)
-        #Distanz zu allen noch nicht besichtigten Städte wird hier berechnet
-        not_visited$rank <- not_visited$dist_from_current / beta + not_visited$pheromone * alpha #Rang der Noch nicht besichitgten Stadt wird über die ACO Formel berechnet
+        #calculate the dinstance with the ACO Formel for the not visited cities
+        not_visited$rank <- not_visited$dist_from_current / beta + not_visited$pheromone * alpha #calculate the rank with the ACO Formel for the not visited cities
         
-        cities$visited[current_city_id] <- TRUE #Wenn besichtigt wird auf True gesetzt
-        cities$pheromone[current_city_id] <- cities$pheromone[current_city_id] + 1 #Naächste Stadt wird ausgewählt und die Pheromonspur upgedatet
+        cities$visited[current_city_id] <- TRUE #if visited becomes True
+        cities$pheromone[current_city_id] <- cities$pheromone[current_city_id] + 1 # Chooses next city and the pheromons become updated
         
-        not_visited <- not_visited[-grep(current_city_id,not_visited$cid),]#Nicht besichtigte Städte werden upgedatet
+        not_visited <- not_visited[-grep(current_city_id,not_visited$cid),]#not visited cities become updated
         routes[trips,paste0("stop_",j)] <- current_city_id
         
         #randomise:
-        if (i <= randomness_factor && j < nOfCities) #Zufällige auswahl der nächste Stadt
+        if (i <= randomness_factor && j < nOfCities) #Chooses randomly next city
         {
           if(nrow(not_visited) == 1)
           {
-            next_city_id <- not_visited$cid[1]#nächste Stadt wird ausgewählt 
+            next_city_id <- not_visited$cid[1]#Chooses next city
           }
           else
           {
-            next_city_id <- sample(not_visited$cid, 1)#nächste Stadt wird ausgewählt 
+            next_city_id <- sample(not_visited$cid, 1)#Chooses next city
           }
         }
-        else #Keine zufällige Auswahl der Stadt
+        else # no random city selectioin 
         {
-          next_city_id <- not_visited[not_visited$rank==min(not_visited$rank),]$cid # nächste Stadt wird ausgewählt 
+          next_city_id <- not_visited[not_visited$rank==min(not_visited$rank),]$cid # chooses the next city
         }
         
         next_city_row <- filter(not_visited, not_visited$cid == next_city_id)
@@ -71,7 +71,7 @@ acoAlg <- function(xVal,yVal, a, b , eva, rf, nAnts, iter){
         
         if (j < nOfCities) 
         { 
-          routes[trips, "distance"] <- routes[trips, "distance"] + distance_to_next #Distanz wird upgedatet
+          routes[trips, "distance"] <- routes[trips, "distance"] + distance_to_next #upgedates the distance
           cities$pheromone[current_city_id] <- max(cities$pheromone[current_city_id] - distance_to_next*evaporation, 0)
         }
         current_city_id <- next_city_id
@@ -81,16 +81,16 @@ acoAlg <- function(xVal,yVal, a, b , eva, rf, nAnts, iter){
       cities$visited <- FALSE
     }
   }
-  #Ausgabe -> Alle Routen mit dem Min Ergebniss, können auch mehrere sein!
+  #returns all the routes with the minimal distance, possible that this are more than one
   return(routes[routes$distance==min(routes$distance),])
 }
 
-#Hier werden die X-Werte festgelegt
+#Determine the x-Values
 getXValues <- function(){
   x = c(1,5,6,7,8,1,12,3,15,16)
   return(x)
 }
-#Hier werden die Y-Werte festgelegt
+#Determine the y-Values
 getYValues <- function(){
   y = c(5,1,9,4,5,9,7,6,5,7) 
   return(y)

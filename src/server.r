@@ -102,15 +102,15 @@ function(input, output, session) {
   
   #--------------------------Anwendungsfälle und TSP----------------------------- 
   
-  #Hier wird der Plot erstellt
+  #returns the plot with the cities
   output$TSPlot <- renderPlot({
     x = getXValues()
     y = getYValues()
     labels = c(1,2,3,4,5,6,7,8,9,10)
-    plot(x,y)
-    text(x,y ,labels = labels, cex=1.2, pos=2)
+    plot(x,y, col =2, pch = 16, xlab ="", ylab ="")
+    text(x,y,labels = labels, cex=1.2, pos=2)
   })
-  #Hier wird die Dunktion des Algorithmus aufgerufen und die Slider Inputwerte als Parameter übergeben
+  #here the function acoAlg starts and be fuled with the values from the sliders
   
   ntext <- eventReactive(input$action, {
     options = acoAlg(
@@ -124,13 +124,13 @@ function(input, output, session) {
       input$iterations
       )
   })
-  #Ausgeführt wird die Funktion und dadurch die Tabelle erst bei dem drücken des ActionButtons in der UI.
+  #Returns the Table but waits until the actionButton is activated.
   output$table <- renderDataTable({
     options = ntext()
   })
   observeEvent(input$info,{
     showModal(modalDialog(
-      title = "Info!",
+      title = "Parameter",
       includeMarkdown("Info_TSP.Rmd")
       
     ))

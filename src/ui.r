@@ -15,7 +15,7 @@ fluidPage(
   theme=shinythemes::shinytheme("yeti"),
   tabsetPanel(
     navbarMenu("Generelles",icon = icon("info"),
-               tabPanel("Einordnung und Herkunft",
+               tabPanel("Einordnung und Herkunft", style = "background-color:	#E8E8E8;",
                         includeMarkdown("generalInfo.Rmd")), 
                tabPanel("Ameisen bei der Futtersuche",
                         includeMarkdown("ameisenFuttersuche.Rmd")),
@@ -192,9 +192,9 @@ fluidPage(
              verbatimTextOutput("travel"),
              titlePanel("Travelling Salesman Problem"),
              fluidRow(
-               column(4,
-                      sliderInput("alpha","alpha",min = 1,max = 10,value = 5),
-                      sliderInput("beta","beta",min = 1,max = 10,value = 5),
+               column(4,style = "background-color:	#add8e6;",
+                      sliderInput("alpha","Alpha",min = 1,max = 10,value = 5),
+                      sliderInput("beta","Beta",min = 1,max = 10,value = 5),
                       sliderInput("evaporation","Verdunstung ",min = 0.1,max = 1.0,value = 0.5),
                       sliderInput("randomnessf","Zufälligkeitsfaktor",min = 0,max = 10,value = 5),
                       sliderInput("nOfAnts","Anzahl der Ameisen",min = 1,max = 50,value = 30),
