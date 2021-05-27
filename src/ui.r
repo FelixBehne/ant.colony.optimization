@@ -9,7 +9,7 @@ fluidPage(
     column(9,
            titlePanel("Ant Colony Optimization")),
     column(1, offset = 1,
-           img(src="ant.jpg", height = "75", weight = "125")
+           img(src="DHBW_Logo.png", height = "125", weight = "200")
     )),
   br(),
   theme=shinythemes::shinytheme("yeti"),
@@ -18,8 +18,25 @@ fluidPage(
                tabPanel("Einordnung und Herkunft", style = "background-color:	#E8E8E8;",
                         includeMarkdown("generalInfo.Rmd")), 
                tabPanel("Ameisen bei der Futtersuche",
-                        slickROutput("slickr",height= "534", width="1200"),
-               ),         
+                        titlePanel("Ameisen bei der Futtersuche"),
+                        fluidRow( 
+                            column(10, style = "background-color: #E8E8E8", h3('- Phase 1: Orientierung ')),
+                              column(2,  
+                                 actionButton("infobuttonAF1",label= "" , width = '60px' , icon = icon("info"))
+                          )),
+                        fluidRow(
+                        column(10,h3('- Phase 2: Routine')),
+                          column(2,
+                                 actionButton("infobuttonAF2",label= "" , width = '60px' , icon = icon("info"))
+                          )),
+                        fluidRow(
+                           column(10, style = "background-color: #E8E8E8", h3('- Phase 3: Dauerhaftigkeit')),
+                              column(2,
+                                 actionButton("infobuttonAF3",label= "" , width = '60px' , icon = icon("info"))
+                          )),
+                        
+                        shinycssloaders::withSpinner(slickROutput("slickr",height= "534", width="1200")),
+                         ),         
                tabPanel("Übertragung auf Algorithmen",
                         titlePanel("Übertragung auf Algorithmen"),
                         br(),
