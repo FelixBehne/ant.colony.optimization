@@ -135,39 +135,39 @@ function(input, output, session) {
       
     ))
   })
-#----------------einfügen einer Slideshow durch Package slickR----------------------------------------------------
-output$slickr <- renderSlickR({
-  imgs <- list.files("images/antSlideShow/", pattern=".png", full.names = TRUE)
-  slickR(imgs)
-})
+  #Erstellen einer Slideshow mittels Zugriff auf File mit Bildern
+  output$slickr <- renderSlickR({
+    imgs <- list.files("images/antSlideShow/", pattern=".png", full.names = TRUE)
+      slickR(imgs)
+  })
 
-#---------------Actionbuttons für mehr Informationen zu den drei Phasen bei Ameisen-------------------------------
-observeEvent(input$infobuttonAF1, {
-  shinyWidgets::sendSweetAlert(
-    session = session, 
-    title = "Phase 1",
-    text = "Die Ameisen laufen in unterschiedliche Richtungen um Futter zu suchen. Dabei geben Sie Pheromone (Sexuallockstoffe) ab.",
-    type = "info"
-  )
-})
-observeEvent(input$infobuttonAF2, {
-  shinyWidgets::sendSweetAlert(
-    session = session, 
-    title = "Phase 2",
-    text = "Die Ameisen orientieren sich an dem Weg mit den meisten Pheromonspuren und nehmen diesen Weg zur Futterbeschaffung.",
-    type = "info"
-  )
-})
-observeEvent(input$infobuttonAF3, {
-  shinyWidgets::sendSweetAlert(
-    session = session, 
-    title = "Phase 3",
-    text = "Die Ameisen bilden eine sogenannte Ameisenstrasse und behalten diesen Weg auch wenn ein neuer Weg hinzukommt der nicht so lang ist
-    wie die Ameisenstrasse.",
-    type = "info"
-  )
-})
-}
+  #Erstellen von Infobuttons
+  observeEvent(input$infobuttonAF1, {
+    shinyWidgets::sendSweetAlert(
+      session = session, 
+      title = "Phase 1",
+      text = "Die Ameisen laufen in unterschiedliche Richtungen um Futter zu suchen. Dabei geben Sie Pheromone (Sexuallockstoffe) ab.",
+      type = "info"
+    )
+  })
+  observeEvent(input$infobuttonAF2, {
+    shinyWidgets::sendSweetAlert(
+      session = session, 
+      title = "Phase 2",
+      text = "Die Ameisen orientieren sich an dem Weg mit den meisten Pheromonspuren und nehmen diesen Weg zur Futterbeschaffung.",
+      type = "info"
+   )
+  })
+  observeEvent(input$infobuttonAF3, {
+    shinyWidgets::sendSweetAlert(
+     session = session, 
+     title = "Phase 3",
+     text = "Die Ameisen bilden eine sogenannte Ameisenstrasse und behalten diesen Weg auch wenn ein neuer Weg hinzukommt der nicht so lang ist
+     wie die Ameisenstrasse.",
+     type = "info"
+   )
+  })
+  }
 
 
 
