@@ -17,6 +17,7 @@ fluidPage(
     navbarMenu("Generelles",icon = icon("info"),
                tabPanel("Einordnung und Herkunft", style = "background-color:	#E8E8E8;",
                         includeMarkdown("generalInfo.Rmd")), 
+              # Implementierung des Tab Panel Ameisen bei der Futtersuche
                tabPanel("Ameisen bei der Futtersuche",
                         titlePanel("Ameisen bei der Futtersuche"),
                         fluidRow( 
@@ -34,7 +35,7 @@ fluidPage(
                               column(2,
                                  actionButton("infobuttonAF3",label= "" , width = '60px' , icon = icon("info"))
                           )),
-                        
+                        # spinner Aufruf und Aufruf von slickROutput
                         shinycssloaders::withSpinner(slickROutput("slickr",height= "534", width="1200")),
                          ),         
                tabPanel("Übertragung auf Algorithmen",

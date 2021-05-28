@@ -135,11 +135,13 @@ function(input, output, session) {
       
     ))
   })
-  #Hier werden die Ameisen bei der Futtersuche gerendert
+#----------------einfügen einer Slideshow durch Package slickR----------------------------------------------------
 output$slickr <- renderSlickR({
   imgs <- list.files("images/antSlideShow/", pattern=".png", full.names = TRUE)
   slickR(imgs)
 })
+
+#---------------Actionbuttons für mehr Informationen zu den drei Phasen bei Ameisen-------------------------------
 observeEvent(input$infobuttonAF1, {
   shinyWidgets::sendSweetAlert(
     session = session, 
