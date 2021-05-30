@@ -1,0 +1,25 @@
+Package: ant.colony.optimization
+Title: Ant Colony Optimization Dashboard
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Sarah, Markus, Moritz, Felix",
+           family = "Engelmayer, Koch, Link, Behne",
+           role = c("cre", "aut"),
+           email = "Behne@stud.dhbw-ravensburg.de")
+Description: Shiny Dashboard for showing the functionality of the ant
+    colony optimization algorithm.
+License: MIT + file LICENSE
+URL: https://github.com/FelixBehne/ant-colony-optimization
+BugReports: https://github.com/FelixBehne/ant-colony-optimization/issues
+Imports:
+    bs4Dash,
+    config (>= 0.3.1),
+    dplyr,
+    golem (>= 0.3.1),
+    plotly,
+    shiny (>= 1.6.0),
+    shinyWidgets,
+    slickR
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
