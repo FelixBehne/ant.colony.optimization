@@ -37,3 +37,6 @@ calculate_min <- function(iter = 30, minim = -1, maxim = 1, fu = "rosenbrock") {
   )
   return(ant_optim_rosenbrock)
 }
+
+
+

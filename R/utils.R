@@ -120,7 +120,7 @@ cost_function_himmelblau <- function(param_list) {
 #' Creates a start set
 #'
 #' @param number_ants Number of ants to start with.
-#' @param start_interval
+#' @param start_interval the range in which the ants 
 #'
 #' @noRd
 make_start_set <- function(number_ants, start_interval) {
@@ -162,14 +162,16 @@ calc_gens <- function(datos = "NA", cost_f, param_list, gen_p, gen, q = 0.2, eps
 prepare_for_plot <- function(hor_number, xyf) {
 
   # Add column for colour
-  vector_for_color <- rep("ants", hor_number) # Vector with length hor (number of ants) and one similar value.
+  vector_for_color <- rep("ants", hor_number) # Vector with length hor (number of ants) and a random string-value that determines 
+                                              # that the ant values are displayed in the same colour.
   xyf$colour <- vector_for_color
 
   # Add first minimum of Himmelblau
   xyf$x <- c(xyf$x, -2.80)
   xyf$y <- c(xyf$y, 3.13)
   xyf$f <- c(xyf$f, 0.00)
-  xyf$colour <- c(xyf$colour, "min")
+  xyf$colour <- c(xyf$colour, "min") # give the actual minima a string-value that differs from the string-value of the ant-values 
+                                      # in order to give them a different colour 
 
   # Add second minimum of Himmelblau
   xyf$x <- c(xyf$x, 3.00)
@@ -189,9 +191,9 @@ prepare_for_plot <- function(hor_number, xyf) {
   xyf$f <- c(xyf$f, 0.00)
   xyf$colour <- c(xyf$colour, "min")
 
-  # Add mean values of ants
+  # Calculate mean values of ants
   mean_f <- sum(xyf$f) / hor_number
-  # assign("meanF", meanF, envir = .GlobalEnv)
+  # assign("meanF", meanF, envir = .GlobalEnv) #try to assign a value to a global variable 
   mean_x1 <- sum(xyf$x) / hor_number
   mean_x2 <- sum(xyf$y) / hor_number
 
@@ -199,7 +201,8 @@ prepare_for_plot <- function(hor_number, xyf) {
   xyf$x <- c(xyf$x, mean_x1)
   xyf$y <- c(xyf$y, mean_x2)
   xyf$f <- c(xyf$f, mean_f)
-  xyf$colour <- c(xyf$colour, "mean")
+  xyf$colour <- c(xyf$colour, "mean") # give the mean values of the ants a string-value that differs from the ones above in order 
+                                      # to give them a third different colour 
 
   return(xyf)
 }
