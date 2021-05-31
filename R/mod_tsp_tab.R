@@ -12,26 +12,42 @@ mod_tsp_tab_ui <- function(id) {
   tagList(
     titlePanel("Travelling Salesman Problem"),
     shiny::fluidRow(
+       
+        bs4Dash::box(
+          id = "tsp_plot",
+          title = "Traveling Salesman Problem",
+          maximizable = TRUE,
+          collapsible = TRUE,
+          closable = TRUE,
+          width = 12,
+          height = "100%",
+          shinycssloaders::withSpinner(shiny::plotOutput(ns("tsp_plot")))
+        )
+      ,
+      
+        bs4Dash::box(
+               id = "tsp_plot",
+               title = "Traveling Salesman Table",
+               maximizable = TRUE,
+               collapsible = TRUE,
+               closable = TRUE,
+               width = 12,
+               height = "100%",
+               shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
+        ),
       bs4Dash::box(
-        id = "tsp_plot",
-        title = "Traveling Salesman Problem",
+        id = "UseCases",
+        title = "Anwendungen",
         maximizable = TRUE,
         collapsible = TRUE,
         closable = TRUE,
-        width = 6,
+        width = 12,
         height = "100%",
-        shinycssloaders::withSpinner(shiny::plotOutput(ns("tsp_plot")))
-      ),
-      bs4Dash::box(
-        id = "tsp_plot",
-        title = "Traveling Salesman Table",
-        maximizable = TRUE,
-        collapsible = TRUE,
-        closable = TRUE,
-        width = 6,
-        height = "100%",
-        shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
+        includeMarkdown(app_sys("app/www/rmd/use_cases.Rmd"))
       )
+      
+      
+    
     )
     # fluidRow(
     #   style = "background-color:	#E8E8E8;",
@@ -52,8 +68,8 @@ mod_tsp_tab_server <- function(id, input_c) {
 
     # Returns the plot with the cities
     output$tsp_plot <- shiny::renderPlot({
-      x <- get_x_values()
-      y <- get_y_values()
+      x <- getXValues()
+      y <- getYValues()
       labels <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
       plot(x, y, col = 2, pch = 16, xlab = "", ylab = "")
       text(x, y, labels = labels, cex = 1.2, pos = 2)
@@ -62,13 +78,13 @@ mod_tsp_tab_server <- function(id, input_c) {
     # Here the function acoAlg starts and be fuled with the values from the sliders
     ntext <- eventReactive(input_c$action, {
       options <- aco_tsp(
-        x_val = get_x_values(),
-        y_val = get_y_values(),
+        x= getXValues(),
+        y = getYValues(),
         alpha = input_c$alpha,
         beta = input_c$beta,
         evaporation = input_c$evaporation,
         randomness_factor = input_c$randomness_f,
-        n_ants = input_c$numb_ants,
+        nOfAnts = input_c$numb_ants,
         iterations = input_c$iterations
       )
     })
