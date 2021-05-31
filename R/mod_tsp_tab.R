@@ -22,20 +22,20 @@ mod_tsp_tab_ui <- function(id) {
           width = 12,
           height = "100%",
           shinycssloaders::withSpinner(shiny::plotOutput(ns("tsp_plot")))
-        )
-      ,
-      
-        bs4Dash::box(
-               id = "tsp_plot",
-               title = "Traveling Salesman Table",
-               maximizable = TRUE,
-               collapsible = TRUE,
-               closable = TRUE,
-               width = 12,
-               height = "100%",
-               shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
         ),
-      bs4Dash::box(
+      
+       bs4Dash::box(
+          id = "tsp_plot",
+          title = "Traveling Salesman Table",
+          maximizable = TRUE,
+          collapsible = TRUE,
+          closable = TRUE,
+          width = 12,
+          height = "100%",
+          shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
+        ),
+       
+       bs4Dash::box(
         id = "UseCases",
         title = "Anwendungen",
         maximizable = TRUE,
@@ -45,9 +45,6 @@ mod_tsp_tab_ui <- function(id) {
         height = "100%",
         includeMarkdown(app_sys("app/www/rmd/use_cases.Rmd"))
       )
-      
-      
-    
     )
     # fluidRow(
     #   style = "background-color:	#E8E8E8;",

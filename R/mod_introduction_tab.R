@@ -10,6 +10,44 @@
 mod_introduction_tab_ui <- function(id) {
   ns <- NS(id) # nolint
   tagList(
-    htmltools::includeMarkdown(app_sys("app/www/rmd/introduction.Rmd"))
+    shiny::fluidRow(
+      
+    
+      
+      bs4Dash::box(
+        id = "introduction",
+        title = "Grundlagen",
+        maximizable = TRUE,
+        collapsible = TRUE,
+        closable = TRUE,
+        width = 12,
+        height = "100%",
+        includeMarkdown(app_sys("app/www/rmd/history.Rmd"))
+      ),
+      bs4Dash::box(
+        id = "introduction",
+        title = "Grundlagen",
+        maximizable = TRUE,
+        collapsible = TRUE,
+        closable = TRUE,
+        width = 12,
+        height = "100%",
+        includeMarkdown(app_sys("app/www/rmd/Arten.Rmd"))
+      ),
+      bs4Dash::box(
+        id = "introduction",
+        title = "Grundlagen",
+        maximizable = TRUE,
+        collapsible = TRUE,
+        closable = TRUE,
+        width = 12,
+        height = "100%",
+        includeMarkdown(app_sys("app/www/rmd/Herkunft.Rmd"))
+      )
+    )
+    
+    
+    
+    
   )
 }
