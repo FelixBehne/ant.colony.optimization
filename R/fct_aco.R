@@ -1,13 +1,14 @@
-# ACO Implementation used for plotting
+# ACO Implementation used for plotting generations of ants
 # Adopted from:
 # https://rpubs.com/gingersling/ACO#:~:text=The%20algorithm%20is%20a%20method,the%20behavior%20of%20the%20ants.&text=From%20generation%20to%20generation%20the,weight%20based%20on%20different%20function. # nolint
 
 
-#' Sets first ants randomly
-#' @param param_list
-#' @param hor
+#' Sets first generation of ants randomly
+#' 
+#' @param param_list the range of the x, y and f value in which we search the minimum
+#' @param hor number of ants
 #'
-#' @return
+#' @return a list of the x and y value of each ant of the generation
 #' @noRd
 rand_param <- function(param_list, hor) {
   res <- data.frame(matrix(ncol = 2, nrow = 0)) # Make result variable
@@ -21,16 +22,16 @@ rand_param <- function(param_list, hor) {
   res
 }
 
-#' Calculate function value (error)
+#' Calculate f-value ("error") of each ant based on the objective function 
 #'
-#' @param datos
-#' @param cost_f
-#' @param param_list
-#' @param paralelo
+#' @param datos (not necessary for us)
+#' @param cost_f the objective function e.g. himmelblau function 
+#' @param param_list a list of the ants' x1 and x2 values 
+#' @param paralelo 1 if the errors should be calculated in parallel
 #'
 #' @import parallel foreach
 #'
-#' @return
+#' @return a list of the f-values (errors) of each ant of the generation 
 #' @noRd
 calc_err <- function(datos, cost_f, param_list, paralelo) {
   res <- data.frame(err = numeric())
@@ -61,12 +62,12 @@ calc_err <- function(datos, cost_f, param_list, paralelo) {
   res
 }
 
-#' Calculate weight
+#' Calculate the weight of each ant based on the gaussian distribution
 #'
-#' @param err
-#' @param q
+#' @param err the calculated list of errors of the ants
+#' @param q  meta-parameter, with a range of (0,1). If q is close to 0 it will give more relevance to better ants, in the other hand, if its closer to 1 it will distribute the weight between all the ants more equitatively
 #'
-#' @return
+#' @return a list with the ants' weights
 #' @noRd
 pesos <- function(err, q) {
   tot <- dim(err)[1]
@@ -76,10 +77,10 @@ pesos <- function(err, q) {
   }
   res
 }
-#' Calculates probability
+#' Calculates the probability
 #'
-#' @param peso
-#' @return
+#' @param peso the list of the calculated ants' weights
+#' @return a list of the probabilities of choosing each ant as a prototype for the next generation
 #' @noRd
 prob_hor <- function(peso) {
   res <- peso
@@ -88,12 +89,12 @@ prob_hor <- function(peso) {
   res
 }
 
-#' Calculates Sigma
+#' Calculates Sigma (standard deviation) of each ant
 #'
-#' @param param_list
-#' @param eps
+#' @param param_list a list of the x and y values of the ants of the current generation 
+#' @param eps represents the symmetry to the expected value; has a range of (0,1); if eps = 0.5 the distribution is symmetric 
 #'
-#' @return
+#' @return a list with the standard deviations of the x and y values of each ant
 #' @noRd
 c_sigma <- function(param_list, eps) {
   hor <- dim(param_list)[1]
@@ -110,12 +111,12 @@ c_sigma <- function(param_list, eps) {
   res
 }
 
-#' Calculate ant generations
-#' @param param_list
-#' @param desv
-#' @param param_list_r
+#' Calculate the new generation of ants
+#' @param param_list the old generation of ants
+#' @param desv the calculated standard deviation of each ants x and y values
+#' @param param_list_r the range of the x, y and f value in which we search the minimum
 #'
-#' @return
+#' @return a list of the x and y value of each ant of the generation
 #' @noRd
 new_gen <- function(param_list, desv, prob, param_list_r) {
   res <- param_list

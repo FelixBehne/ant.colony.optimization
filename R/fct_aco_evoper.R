@@ -1,11 +1,11 @@
 #' ACO Implemenatation with the package evoper
 #'
-#' @param iter
-#' @param minim
-#' @param maxim
-#' @param fu
+#' @param iter number of iterations (= generations)
+#' @param minim the minimum limit of the range in which we search the minimum (for the x1, x2, f value)
+#' @param maxim the maximum limit of the range in which we search the minimum (for the x1, x2, f value)
+#' @param fu the objective function to minimize
 #'
-#' @return
+#' @return the calculated minimum (x1, x2 and f value)
 #'
 #' @import evoper
 #' @noRd
