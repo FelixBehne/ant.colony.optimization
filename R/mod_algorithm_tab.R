@@ -62,6 +62,7 @@ mod_algorithm_tab_ui <- function(id) {
 mod_algorithm_tab_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns # nolint
+    # output element for formula of the probability of an ant to decide to pass a specific path-section
     output$formel_one <- shiny::renderUI({
       withMathJax(
         helpText("
@@ -70,12 +71,14 @@ mod_algorithm_tab_server <- function(id) {
                ")
       )
     })
+    # output element for formula to calculate the new pheromone level 
     output$formel_two <- shiny::renderUI({
       withMathJax(
         helpText("$$\\tau_j=(1-\\rho)\\cdot\\tau_j + \\sum\\limits_{\\alpha\\in A} \\Delta \\tau_j^{s_a}\\!$$
                ")
       )
     })
+    # output element for formula to calculate the additional amount of pheromone
     output$formel_three <- shiny::renderUI({
       withMathJax(
         helpText("$$\\Delta \\tau_j^{s_a} = \\begin{cases} F(s_a), & \\text{wenn $c_j$ eine Komponente von $s_a$ ist} \\\\
@@ -85,6 +88,7 @@ mod_algorithm_tab_server <- function(id) {
                Verdunstungsfaktor \\(\\rho\\)")
       )
     })
+    # Event-Listener for the infobutton for the first formula 
     shiny::observeEvent(input$infobuttonFormel1, {
       shinyWidgets::sendSweetAlert(
         session = session,
@@ -96,6 +100,7 @@ mod_algorithm_tab_server <- function(id) {
         type = "info"
       )
     })
+    # Event-Listener for the Infobutton for the second formula 
     shiny::observeEvent(input$infobuttonFormel2, {
       shinyWidgets::sendSweetAlert(
         session = session,
@@ -105,6 +110,7 @@ mod_algorithm_tab_server <- function(id) {
         type = "info"
       )
     })
+    # Event-Listener for the Infobutton for the third formula 
     shiny::observeEvent(input$infobuttonFormel3, {
       shinyWidgets::sendSweetAlert(
         session = session,

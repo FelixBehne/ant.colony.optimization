@@ -23,6 +23,7 @@ app_server <- function(input, output, session) {
             id = "controlbar_menu",
             bs4Dash::controlbarItem(
               title = "ACO Config",
+              # Slider to choose the minimum value of the area in which we search the minimum of the objective function (equal for x1, x2 and f)
               shiny::sliderInput(
                 inputId = "interval_min",
                 label = "Interval Lower Limit:",
@@ -31,6 +32,7 @@ app_server <- function(input, output, session) {
                 max = -1,
                 step = 1
               ),
+              # Slider to choose the maximum value of the area in which we search the minimum of the objective function (equal for x1, x2 and f)
               shiny::sliderInput(
                 inputId = "interval_max",
                 label = "Interval Upper Limit:",
@@ -39,6 +41,7 @@ app_server <- function(input, output, session) {
                 max = 50,
                 step = 1
               ),
+              # Slider to choose the number of iterations for the algorithm 
               shiny::sliderInput(
                 inputId = "iterations",
                 label = "Iterations:",
@@ -48,6 +51,7 @@ app_server <- function(input, output, session) {
                 step = 1
               )
             ),
+            # Slider to choose the degree of the vertical rotation of the 3d plot of the objective function
             bs4Dash::controlbarItem(
               title = "Plot Config",
               shiny::sliderInput(
@@ -57,6 +61,7 @@ app_server <- function(input, output, session) {
                 max = 300,
                 value = 20
               ),
+              # Slider to choose the degree of the horizontal rotation of the 3d plot of the objective function
               shiny::sliderInput(
                 inputId = "theta",
                 label = "Horizontal Rotation:",
@@ -64,6 +69,7 @@ app_server <- function(input, output, session) {
                 max = 300,
                 value = 150
               ),
+              # Slider to choose the intensity of the shade of the 3d plot of the objective function (the higher the value the darker the plot is shaded)
               shiny::sliderInput(
                 inputId = "shade",
                 label = "Shade:",

@@ -54,6 +54,7 @@ mod_himmelblau_tab_server <- function(id, input_c) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns # nolintr
 
+    # output element for rendering the 3d plot of the Himmelblau function
     output$himmelblau <- shiny::renderPlot({
       return_3d_plot(
         fu = "himmelblau",
@@ -65,9 +66,10 @@ mod_himmelblau_tab_server <- function(id, input_c) {
         colour = "green"
       )
     })
-
+    # output element to show actual minimum of the Himmelblau function 
     output$result_actual <- shiny::renderTable(minima_himmelblau)
-
+    
+    # output element to show the minima calculated by ACO (with package evoper)
     output$result_aco <- shiny::renderTable({
       calculate_min(
         iter = input_c$iterations,

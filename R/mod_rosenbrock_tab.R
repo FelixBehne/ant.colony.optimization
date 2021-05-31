@@ -53,6 +53,7 @@ mod_rosenbrock_tab_ui <- function(id) {
 mod_rosenbrock_tab_server <- function(id, input_c) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns # nolintr
+    # output element for rendering the 3d plot of the Rosenbrock function
     output$rosenbrock <- shiny::renderPlot({
       return_3d_plot(
         fu = "rosenbrock",
@@ -64,6 +65,10 @@ mod_rosenbrock_tab_server <- function(id, input_c) {
         colour = "green"
       )
     })
+    # output element to show actual minimum of the Rosenbrock function 
+    output$result_actual <- shiny::renderTable(minima_rosenbrock)
+    })
+  # output element to show the minimum calculated by ACO (with package evoper)
     output$result_aco <- shiny::renderTable({
       calculate_min(
         iter = input_c$iterations,
@@ -72,6 +77,5 @@ mod_rosenbrock_tab_server <- function(id, input_c) {
         fu = "rosenbrock"
       )
     })
-    output$result_actual <- shiny::renderTable(minima_rosenbrock)
-  })
+    
 }

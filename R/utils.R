@@ -1,3 +1,4 @@
+
 #---Himmelblau ------------------------------------
 
 #' Himmelblau function
@@ -27,7 +28,6 @@ gradient_himmelblau <- function(x) {
 #'
 #' @noRd
 opt_himmelblau <- optim(c(-5, 5), himmelblau)
-
 
 minima_himmelblau <- data.frame(
   x1 = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
