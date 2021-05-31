@@ -12,7 +12,7 @@ app_ui <- function(request) {
     bs4Dash::dashboardPage(
       title = "Ant Colony Optimization",
       fullscreen = FALSE,
-      help = FALSE,
+      help = TRUE,
       header = bs4Dash::dashboardHeader(
         title = bs4Dash::dashboardBrand(
           title = "ACO Algorithm",
@@ -26,7 +26,6 @@ app_ui <- function(request) {
         status = "primary",
         brandColor = "primary",
         collapsed = TRUE,
-        
         bs4Dash::sidebarMenu(
           id = "welcome",
           bs4Dash::sidebarHeader("Welcome!"),
@@ -36,7 +35,6 @@ app_ui <- function(request) {
             icon = icon("star")
           )
         ),
-  
         br(),
         bs4Dash::sidebarMenu(
           id = "general",

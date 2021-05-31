@@ -4,38 +4,35 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd
+#' @import shiny bs4Dash shinycssloaders
 #'
-#' @importFrom shiny NS tagList
+#' @noRd
 mod_tsp_tab_ui <- function(id) {
-  ns <- NS(id)
-  tagList(
-    titlePanel("Travelling Salesman Problem"),
+  ns <- shiny::NS(id) # nolint
+  shiny::tagList(
+    shiny::titlePanel("Travelling Salesman Problem"),
     shiny::fluidRow(
-       
-        bs4Dash::box(
-          id = "tsp_plot",
-          title = "Traveling Salesman Problem",
-          maximizable = TRUE,
-          collapsible = TRUE,
-          closable = TRUE,
-          width = 12,
-          height = "100%",
-          shinycssloaders::withSpinner(shiny::plotOutput(ns("tsp_plot")))
-        ),
-      
-       bs4Dash::box(
-          id = "tsp_plot",
-          title = "Traveling Salesman Table",
-          maximizable = TRUE,
-          collapsible = TRUE,
-          closable = TRUE,
-          width = 12,
-          height = "100%",
-          shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
-        ),
-       
-       bs4Dash::box(
+      bs4Dash::box(
+        id = "tsp_plot",
+        title = "Traveling Salesman Problem",
+        maximizable = TRUE,
+        collapsible = TRUE,
+        closable = TRUE,
+        width = 12,
+        height = "100%",
+        shinycssloaders::withSpinner(shiny::plotOutput(ns("tsp_plot")))
+      ),
+      bs4Dash::box(
+        id = "tsp_plot",
+        title = "Traveling Salesman Table",
+        maximizable = TRUE,
+        collapsible = TRUE,
+        closable = TRUE,
+        width = 12,
+        height = "100%",
+        shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
+      ),
+      bs4Dash::box(
         id = "UseCases",
         title = "Anwendungen",
         maximizable = TRUE,
@@ -43,20 +40,15 @@ mod_tsp_tab_ui <- function(id) {
         closable = TRUE,
         width = 12,
         height = "100%",
-        includeMarkdown(app_sys("app/www/rmd/use_cases.Rmd"))
+        htmltools::includeMarkdown(app_sys("app/www/rmd/use_cases.Rmd"))
       )
     )
-    # fluidRow(
-    #   style = "background-color:	#E8E8E8;",
-    #   column(
-    #     10,
-    #     includeMarkdown("Anwendung.Rmd")
-    #   )
-    # )
   )
 }
 
 #' tsp_tab Server Functions
+#'
+#' @import graphics shiny
 #'
 #' @noRd
 mod_tsp_tab_server <- function(id, input_c) {
@@ -65,23 +57,23 @@ mod_tsp_tab_server <- function(id, input_c) {
 
     # Returns the plot with the cities
     output$tsp_plot <- shiny::renderPlot({
-      x <- getXValues()
-      y <- getYValues()
+      x <- get_x_values()
+      y <- get_y_values()
       labels <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-      plot(x, y, col = 2, pch = 16, xlab = "", ylab = "")
-      text(x, y, labels = labels, cex = 1.2, pos = 2)
+      graphics::plot(x, y, col = 2, pch = 16, xlab = "", ylab = "")
+      graphics::text(x, y, labels = labels, cex = 1.2, pos = 2)
     })
 
     # Here the function acoAlg starts and be fuled with the values from the sliders
-    ntext <- eventReactive(input_c$action, {
+    ntext <- shiny::eventReactive(input_c$action, {
       options <- aco_tsp(
-        x= getXValues(),
-        y = getYValues(),
+        x = get_x_values(),
+        y = get_y_values(),
         alpha = input_c$alpha,
         beta = input_c$beta,
         evaporation = input_c$evaporation,
         randomness_factor = input_c$randomness_f,
-        nOfAnts = input_c$numb_ants,
+        numb_ants = input_c$numb_ants,
         iterations = input_c$iterations
       )
     })

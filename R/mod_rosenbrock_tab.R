@@ -5,7 +5,6 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @import shiny shinycssloaders bs4Dash
-#' @importFrom htmltools br
 #'
 #' @noRd
 mod_rosenbrock_tab_ui <- function(id) {
@@ -48,6 +47,8 @@ mod_rosenbrock_tab_ui <- function(id) {
 #'
 #' @param id Ui Module Id. Needed to allocate the right inputs to the right outputs.
 #' @param input_c INput from the global server that contains the controlbar inputs.
+#'
+#' @import shiny
 #'
 #' @noRd
 mod_rosenbrock_tab_server <- function(id, input_c) {

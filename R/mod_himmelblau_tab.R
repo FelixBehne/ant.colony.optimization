@@ -4,7 +4,7 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @import shiny
+#' @import shiny bs4Dash shinycssloaders
 #'
 #' @noRd
 mod_himmelblau_tab_ui <- function(id) {
@@ -49,6 +49,8 @@ mod_himmelblau_tab_ui <- function(id) {
 #' @param id Ui Module Id. Needed to allocate the right inputs to the right outputs.
 #' @param input_c INput from the global server that contains the controlbar inputs.
 #'
+#' @import shiny
+#'
 #' @noRd
 mod_himmelblau_tab_server <- function(id, input_c) {
   moduleServer(id, function(input, output, session) {
@@ -78,4 +80,3 @@ mod_himmelblau_tab_server <- function(id, input_c) {
     })
   })
 }
-

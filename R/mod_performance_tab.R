@@ -4,17 +4,17 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd
+#' @import shiny bs4Dash htmltools
 #'
-#' @importFrom shiny NS tagList
+#' @noRd
 mod_performance_tab_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
     shiny::titlePanel("Performance"),
-    br(),
-    fluidRow(
+    htmltools::br(),
+    shiny::fluidRow(
       width = 12,
-      column(
+      shiny::column(
         6,
         bs4Dash::box(
           id = "aco_box",
@@ -24,7 +24,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          infoBoxOutput(outputId = ns("aco"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::infoBoxOutput(outputId = ns("aco"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "alo_box",
@@ -34,7 +34,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          infoBoxOutput(outputId = ns("alo"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::infoBoxOutput(outputId = ns("alo"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "ba_nox",
@@ -44,10 +44,10 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          infoBoxOutput(outputId = ns("ba"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::infoBoxOutput(outputId = ns("ba"), tags$style("#dri {width:400px; height:300px;}"))
         )
       ),
-      column(
+      shiny::column(
         6,
         bs4Dash::box(
           id = "cso_box",
@@ -57,7 +57,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          infoBoxOutput(outputId = ns("cso"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::infoBoxOutput(outputId = ns("cso"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "da_box",
@@ -67,7 +67,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          infoBoxOutput(outputId = ns("da"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::infoBoxOutput(outputId = ns("da"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "ffa_box",
@@ -77,7 +77,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          infoBoxOutput(outputId = ns("ffa"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::infoBoxOutput(outputId = ns("ffa"), tags$style("#dri {width:400px; height:300px;}"))
         )
       )
     )
@@ -85,6 +85,8 @@ mod_performance_tab_ui <- function(id) {
 }
 
 #' performance_tab Server Functions
+#'
+#' @import bs4Dash shiny
 #'
 #' @noRd
 mod_performance_tab_server <- function(id) {
@@ -95,46 +97,46 @@ mod_performance_tab_server <- function(id) {
         subtitle = "",
         value = h2("MIN", 150),
         width = 6,
-        icon = icon("bug")
+        icon = shiny::icon("bug")
       )
     })
-    output$alo <- renderInfoBox({
-      valueBox(
+    output$alo <- bs4Dash::renderInfoBox({
+      bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN", 150),
-        icon = icon("paw"),
+        icon = shiny::icon("paw"),
       )
     })
-    output$ba <- renderInfoBox({
-      valueBox(
+    output$ba <- bs4Dash::renderInfoBox({
+      bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN:", 150),
         width = 6,
-        icon = icon("dove"),
+        icon = shiny::icon("dove"),
       )
     })
-    output$cso <- renderValueBox({
-      valueBox(
+    output$cso <- bs4Dash::renderValueBox({
+      bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN", 150),
         width = NULL,
-        icon = icon("cat"),
+        icon = shiny::icon("cat"),
       )
     })
-    output$da <- renderValueBox({
-      valueBox(
+    output$da <- bs4Dash::renderValueBox({
+      bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN", 150),
         width = 6,
-        icon = icon("dragon"),
+        icon = shiny::icon("dragon"),
       )
     })
-    output$ffa <- renderValueBox({
-      valueBox(
+    output$ffa <- bs4Dash::renderValueBox({
+      bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN", 150),
         width = 6,
-        icon = icon("crow"),
+        icon = shiny::icon("crow"),
       )
     })
   })
