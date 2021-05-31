@@ -16,7 +16,7 @@ app_ui <- function(request) {
       header = bs4Dash::dashboardHeader(
         title = bs4Dash::dashboardBrand(
           title = "ACO Algorithm",
-          href = "https://adminlte.io/themes/v3",
+          href = "https://felixbehne.shinyapps.io/ant-colony-optimization/",
           image = "https://fbassets.blob.core.windows.net/images/ant-2.png"
         )
       ),
