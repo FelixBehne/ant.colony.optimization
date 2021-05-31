@@ -13,12 +13,18 @@ URL: https://github.com/FelixBehne/ant-colony-optimization
 BugReports: https://github.com/FelixBehne/ant-colony-optimization/issues
 Imports:
     bs4Dash,
+    caret,
     config (>= 0.3.1),
     dplyr,
+    evoper,
+    foreach,
     golem (>= 0.3.1),
-    pkgload,
+    graphics,
+    htmltools,
+    parallel,
     plotly,
     shiny (>= 1.6.0),
+    shinycssloaders,
     shinyWidgets,
     slickR
 Encoding: UTF-8

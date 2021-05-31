@@ -4,53 +4,52 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @import shiny shinycssloaders shinyWidgets
-#' @importFrom htmltools br
+#' @import shiny shinycssloaders htmltools
 #'
 #' @noRd
 mod_algorithm_tab_ui <- function(id) {
   ns <- shiny::NS(id) # nolint
   shiny::tagList(
     shiny::titlePanel("Übertragung auf Algorithmen"),
-    br(),
-    h4("1. Berechne die bedingte Wahrscheinlichkeit, dass eine Ameise sich für einen bestimmten Weg entscheidet,
+    htmltools::br(),
+    htmltools::h4("1. Berechne die bedingte Wahrscheinlichkeit, dass eine Ameise sich für einen bestimmten Weg entscheidet,
                         ausgehend von ihrem aktuellen Standort"),
-    withMathJax(),
-    tags$head(
-      tags$style(
-        HTML(".MathJax {font-size: 4em !important;}")
+    shiny::withMathJax(),
+    htmltools::tags$head(
+      htmltools::tags$style(
+        htmltools::HTML(".MathJax {font-size: 4em !important;}")
       )
     ),
-    fluidRow(
-      column(
+    shiny::fluidRow(
+      shiny::column(
         10,
         shinycssloaders::withSpinner(uiOutput(ns("formel_one")))
       ),
-      column(
+      shiny::column(
         2,
-        actionButton("infobuttonFormel1", label = "", width = "60px", icon = icon("info"))
+        bs4Dash::actionButton("infobuttonFormel1", label = "", width = "60px", icon = icon("info"))
       )
     ),
-    h4("2. Berechne den neuen Pheromonwert nach partieller Verdunstung der alten Pheromone und Verteilung der neuen Pheromone"),
-    fluidRow(
-      column(
+    htmltools::h4("2. Berechne den neuen Pheromonwert nach partieller Verdunstung der alten Pheromone und Verteilung der neuen Pheromone"),
+    shiny::fluidRow(
+      shiny::column(
         10,
         shinycssloaders::withSpinner(uiOutput(ns("formel_two")))
       ),
-      column(
+      shiny::column(
         2,
-        actionButton("infobuttonFormel2", label = "", width = "60px", icon = icon("info"))
+        bs4Dash::actionButton("infobuttonFormel2", label = "", width = "60px", icon = icon("info"))
       )
     ),
-    h4("3. Belohnung mit Pheromonwerten"),
-    fluidRow(
-      column(
+    htmltools::h4("3. Belohnung mit Pheromonwerten"),
+    shiny::fluidRow(
+      shiny::column(
         10,
         shinycssloaders::withSpinner(uiOutput((ns("formel_three"))))
       ),
-      column(
+      shiny::column(
         2,
-        actionButton("infobuttonFormel3", label = "", width = "60px", icon = icon("info"))
+        bs4Dash::actionButton("infobuttonFormel3", label = "", width = "60px", icon = icon("info"))
       )
     )
   )
@@ -58,14 +57,16 @@ mod_algorithm_tab_ui <- function(id) {
 
 #' algorithm Server Functions
 #'
+#' @import shiny shinyWidgets
+#'
 #' @noRd
 mod_algorithm_tab_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns # nolint
     # output element for formula of the probability of an ant to decide to pass a specific path-section
     output$formel_one <- shiny::renderUI({
-      withMathJax(
-        helpText("
+      shiny::withMathJax(
+        shiny::helpText("
               $$P(c_r|s_a[c_l]) = \\begin{cases} \\frac{\\eta_r^\\alpha \\cdot \\tau_r^\\beta}{\\sum\\limits_{c_u\\in J(s_a[c_l])}
               \\eta_u^\\alpha \\cdot \\tau_u^\\beta} & \\text{wenn $c_r\\in J(s_\\alpha [c_l])$,} \\\\ 0 & \\text{sonst.} \\end{cases}\\!$$
                ")
@@ -73,15 +74,15 @@ mod_algorithm_tab_server <- function(id) {
     })
     # output element for formula to calculate the new pheromone level 
     output$formel_two <- shiny::renderUI({
-      withMathJax(
-        helpText("$$\\tau_j=(1-\\rho)\\cdot\\tau_j + \\sum\\limits_{\\alpha\\in A} \\Delta \\tau_j^{s_a}\\!$$
+      shiny::withMathJax(
+        shiny::helpText("$$\\tau_j=(1-\\rho)\\cdot\\tau_j + \\sum\\limits_{\\alpha\\in A} \\Delta \\tau_j^{s_a}\\!$$
                ")
       )
     })
     # output element for formula to calculate the additional amount of pheromone
     output$formel_three <- shiny::renderUI({
-      withMathJax(
-        helpText("$$\\Delta \\tau_j^{s_a} = \\begin{cases} F(s_a), & \\text{wenn $c_j$ eine Komponente von $s_a$ ist} \\\\
+      shiny::withMathJax(
+        shiny::helpText("$$\\Delta \\tau_j^{s_a} = \\begin{cases} F(s_a), & \\text{wenn $c_j$ eine Komponente von $s_a$ ist} \\\\
                0 & \\text{sonst.} \\end{cases}\\!$$
                mit Wahrscheinlichkeit \\(P\\), Ameise \\(s_a\\), aktueller Pfad-Abschnitt \\(c_l\\), potenzieller nächster Pfad-Abschnitt
                \\(c_r\\), Menge der wählbaren Pfad-Abschnitte \\(J\\), Pheromonwert des Pfad-Abschnitts \\(\\tau\\), konstantem

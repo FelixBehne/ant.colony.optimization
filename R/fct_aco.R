@@ -4,7 +4,7 @@
 
 
 #' Sets first generation of ants randomly
-#' 
+#'
 #' @param param_list the range of the x, y and f value in which we search the minimum
 #' @param hor number of ants
 #'
@@ -22,16 +22,16 @@ rand_param <- function(param_list, hor) {
   res
 }
 
-#' Calculate f-value ("error") of each ant based on the objective function 
+#' Calculate f-value ("error") of each ant based on the objective function
 #'
 #' @param datos (not necessary for us)
-#' @param cost_f the objective function e.g. himmelblau function 
-#' @param param_list a list of the ants' x1 and x2 values 
+#' @param cost_f the objective function e.g. himmelblau function
+#' @param param_list a list of the ants' x1 and x2 values
 #' @param paralelo 1 if the errors should be calculated in parallel
 #'
 #' @import parallel foreach
 #'
-#' @return a list of the f-values (errors) of each ant of the generation 
+#' @return a list of the f-values (errors) of each ant of the generation
 #' @noRd
 calc_err <- function(datos, cost_f, param_list, paralelo) {
   res <- data.frame(err = numeric())
@@ -65,7 +65,8 @@ calc_err <- function(datos, cost_f, param_list, paralelo) {
 #' Calculate the weight of each ant based on the gaussian distribution
 #'
 #' @param err the calculated list of errors of the ants
-#' @param q  meta-parameter, with a range of (0,1). If q is close to 0 it will give more relevance to better ants, in the other hand, if its closer to 1 it will distribute the weight between all the ants more equitatively
+#' @param q  meta-parameter, with a range of (0,1). If q is close to 0 it will give more relevance to better ants,
+#'  on the other hand, if its closer to 1 it will distribute the weight between all the ants more equitatively
 #'
 #' @return a list with the ants' weights
 #' @noRd
@@ -91,8 +92,8 @@ prob_hor <- function(peso) {
 
 #' Calculates Sigma (standard deviation) of each ant
 #'
-#' @param param_list a list of the x and y values of the ants of the current generation 
-#' @param eps represents the symmetry to the expected value; has a range of (0,1); if eps = 0.5 the distribution is symmetric 
+#' @param param_list a list of the x and y values of the ants of the current generation
+#' @param eps represents the symmetry to the expected value; has a range of (0,1); if eps = 0.5 the distribution is symmetric
 #'
 #' @return a list with the standard deviations of the x and y values of each ant
 #' @noRd

@@ -15,8 +15,3 @@ output: html_document
 6.	Max-Min Ant System
 7.	Approximate Nondeterministic Tree Search
 8.	Fast Ant System
-
-
-
-
-

@@ -4,8 +4,9 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
+#' @import shiny bs4Dash slickR shinycssloaders
+#'
 #' @noRd
-#' @import slickR shiny
 mod_ant_foraging_tab_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
@@ -32,7 +33,7 @@ mod_ant_foraging_tab_ui <- function(id) {
           "Phase 3",
         )
       ),
-      column(12, align = "center", shinycssloaders::withSpinner(slickR::slickROutput(
+      shiny::column(12, align = "center", shinycssloaders::withSpinner(slickR::slickROutput(
         outputId = ns("slickr"),
         height = 500,
         width = "100%"
@@ -43,8 +44,9 @@ mod_ant_foraging_tab_ui <- function(id) {
 
 #' ant_foraging_tab Server Functions
 #'
+#' @import shiny slickR shinyWidgets
+#'
 #' @noRd
-#' @import slickR
 mod_ant_foraging_tab_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns # nolint
@@ -53,7 +55,7 @@ mod_ant_foraging_tab_server <- function(id) {
       slickR::slickR(imgs)
     })
 
-    observeEvent(input$phase_1, {
+    shiny::observeEvent(input$phase_1, {
       shinyWidgets::sendSweetAlert(
         session,
         title = "Phase 1",
@@ -62,7 +64,7 @@ mod_ant_foraging_tab_server <- function(id) {
       )
     })
 
-    observeEvent(input$phase_2, {
+    shiny::observeEvent(input$phase_2, {
       shinyWidgets::sendSweetAlert(
         session,
         title = "Phase 2",
@@ -71,7 +73,7 @@ mod_ant_foraging_tab_server <- function(id) {
       )
     })
 
-    observeEvent(input$phase_3, {
+    shiny::observeEvent(input$phase_3, {
       shinyWidgets::sendSweetAlert(
         session,
         title = "Phase 3",
