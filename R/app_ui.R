@@ -26,6 +26,18 @@ app_ui <- function(request) {
         status = "primary",
         brandColor = "primary",
         collapsed = TRUE,
+        
+        bs4Dash::sidebarMenu(
+          id = "welcome",
+          bs4Dash::sidebarHeader("Welcome!"),
+          bs4Dash::menuItem(
+            text = "Welcome",
+            tabName = "welcome",
+            icon = icon("star")
+          )
+        ),
+  
+        br(),
         bs4Dash::sidebarMenu(
           id = "general",
           bs4Dash::sidebarHeader("Theoretical Background"),
