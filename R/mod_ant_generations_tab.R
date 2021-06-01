@@ -45,7 +45,7 @@ mod_ant_generations_tab_ui <- function(id) {
 mod_ant_generations_tab_server <- function(id, input_c) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    # create the 
+    # set the range of the x, y and f value in which we search the minimum and update it on user inputs
     vars <- shiny::eventReactive(
       eventExpr = input_c$start_gen,
       valueExpr = {
@@ -54,22 +54,27 @@ mod_ant_generations_tab_server <- function(id, input_c) {
       ignoreNULL = FALSE
     )
 
-    # Plot based on computed data
+    # Plot the location of the ants, their mean value and the actual minima of the objective function in a scatter plot
     output$generation <- plotly::renderPlotly({
+      # create the locations of the first generation randomly 
       generation1 <- make_start_set(
         number_ants = input_c$hor_numb,
         start_interval = vars()
       )
+      # calculate the new locations of the ants after a specified number of iterations
       xyf <- calc_gens(
         cost_f = cost_function_himmelblau,
         param_list = vars(),
         gen_p = generation1,
         gen = input_c$gen_numb
       )
+      # add the mean value of the ants' location, furthermore add the locations of the actual minima and add
+      # a column for the colour of the points in the plot 
       plot_data <- prepare_for_plot(
         hor_number = input_c$hor_numb,
         xyf = xyf
       )
+      # generate the 3d scatterplot
       plotly::plot_ly(
         x = plot_data$x,
         y = plot_data$y,
@@ -80,7 +85,8 @@ mod_ant_generations_tab_server <- function(id, input_c) {
       )
     })
 
-    # Render Himmelblau Minima Table
+    # return a table with the actual minima of the Himmelblau function
     output$table_minima <- shiny::renderTable(minima_himmelblau2)
+    
   })
 }
