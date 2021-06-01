@@ -24,7 +24,7 @@ rand_param <- function(param_list, hor) {
 
 #' Calculate f-value ("error") of each ant based on the objective function
 #'
-#' @param datos (not necessary for us)
+#' @param datos the data of interest (this parameter is not necessary for us) 
 #' @param cost_f the objective function e.g. himmelblau function
 #' @param param_list a list of the ants' x1 and x2 values
 #' @param paralelo 1 if the errors should be calculated in parallel

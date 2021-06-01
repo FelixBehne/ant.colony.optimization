@@ -45,7 +45,7 @@ mod_ant_generations_tab_ui <- function(id) {
 mod_ant_generations_tab_server <- function(id, input_c) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    # Compute Plot requirements
+    # create the 
     vars <- shiny::eventReactive(
       eventExpr = input_c$start_gen,
       valueExpr = {

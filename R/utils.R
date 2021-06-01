@@ -74,14 +74,14 @@ minima_rosenbrock <- data.frame(
 
 #---Plotting Utils ------------------------------------
 
-#' Generate 3d function for a given test function
+#' Generate 3d function for a given objective function
 #'
 #' @param fu the function to plot for
-#' @param minim Minimum of function.
-#' @param maxim Maximum of function.
-#' @param theta_input Angle defining the viewing direction. Theta gives the azimuthal direction.
-#' @param phi_input Angle defining the viewing direction. Phi gives the colatitude.
-#' @param shade_input Values of shade close to one yield shading similar to a point light source model and values close to zero
+#' @param minim Minimum limit of the axes
+#' @param maxim Maximum limit of the axes
+#' @param theta_input Angle defining the viewing direction. Theta gives the degree of the vertical rotation.
+#' @param phi_input Angle defining the viewing direction. Phi gives the degree of the horizontal rotation.
+#' @param shade_inputValues Values of shade close to one yield shading similar to a point light source model and values close to zero
 #'    produce no shading. Values in the range 0.5 to 0.75 provide an approximation to daylight illumination.
 #' @param colour The color(s) of the surface facets._input
 #'
@@ -106,7 +106,7 @@ return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input
 
 #---Plot Generations of ants on Himmelblau function --------------------
 
-#' Cost function of Himmelbalu Function
+#' Cost function of Himmelblau Function
 #'
 #' @param param_list List of Parameters.
 #'
@@ -119,9 +119,9 @@ cost_function_himmelblau <- function(param_list) {
 
 #' Creates a start set
 #'
-#' @param number_ants Number of ants to start with.
-#' @param start_interval the range in which the ants 
-#'
+#' @param number_ants number of ants of each generation.
+#' @param start_interval the range of the x, y and f value in which we search the minimum; the interval of the initial locations of the ants
+#' @return a list of the x-, y- and f- value of each ant which represents the locations of the ants
 #' @noRd
 make_start_set <- function(number_ants, start_interval) {
   set.seed(120)
@@ -136,10 +136,11 @@ get_first_generation_with_f <- function(datos = "NA", gen_p, cost_f, paralelo = 
 }
 
 
-#' Values for first generation, use Algorithm-Functions from File "Ameisenalgorythmus_Implementierung_2"
+#' Calculates an iteration step,  calculate Values for first generation (use Algorithm-Functions from File "fct_aco.R")
 #'
-#' @param datos
-#' @param cost_f
+#' @param datos the data of interest (this parameter is not necessary for us)
+#' @param cost_f the objective function 
+#' @return a new list of the x-, y- and f- value of each ant which represents the new locations of the ants
 calc_gens <- function(datos = "NA", cost_f, param_list, gen_p, gen, q = 0.2, eps = 0.5, paralelo = 0) {
   print(param_list)
   while (gen > 0) {
@@ -154,15 +155,15 @@ calc_gens <- function(datos = "NA", cost_f, param_list, gen_p, gen, q = 0.2, eps
   return(xyf)
 }
 
-#'
+#' Prepares the data with the ants' locations for plotting 
 #' @param hor_number Number of ants.
-#' @param xyf
+#' @param xyf the list of the x-, y- and f- value of each ant which represents the locations of the ants
 #'
 #' @noRd
 prepare_for_plot <- function(hor_number, xyf) {
 
   # Add column for colour
-  vector_for_color <- rep("ants", hor_number) # Vector with length hor (number of ants) and a random string-value that determines 
+  vector_for_color <- rep("ants", hor_number) # create a vector with length hor (number of ants) and a random string-value that determines 
                                               # that the ant values are displayed in the same colour.
   xyf$colour <- vector_for_color
 
@@ -207,6 +208,9 @@ prepare_for_plot <- function(hor_number, xyf) {
   return(xyf)
 }
 
+#' Actual minima of Himmelblau Function in a data frame
+#'
+#' @noRd
 minima_himmelblau2 <- data.frame(
   x = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
   y = c(opt_himmelblau$par[2], 2, -3.28, -1.85),
