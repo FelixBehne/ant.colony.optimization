@@ -11,7 +11,7 @@ app_ui <- function(request) {
       title = "Ant Colony Optimization",
       fullscreen = FALSE,
       help = FALSE,
-      # preloader = list(html = shiny::tagList(waiter::spin_solar()), color = "#343a40"),
+      preloader = list(html = shiny::tagList(waiter::spin_solar()), color = "#343a40"),
       dark = TRUE,
       freshTheme = customize_theme(),
       header = bs4Dash::dashboardHeader(
