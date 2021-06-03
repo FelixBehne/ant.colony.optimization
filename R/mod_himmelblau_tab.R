@@ -68,9 +68,9 @@ mod_himmelblau_tab_server <- function(id, input_c) {
         colour = "green"
       )
     })
-    # output element to show actual minimum of the Himmelblau function 
+    # output element to show actual minimum of the Himmelblau function
     output$result_actual <- shiny::renderTable(minima_himmelblau)
-    
+
     # output element to show the minima calculated by ACO (with package evoper)
     output$result_aco <- shiny::renderTable({
       calculate_min(

@@ -9,8 +9,6 @@
 #' @return The return value, if any, from executing the function.
 #'
 #' @import shiny bs4Dash
-#'
-#' @noRd
 update_controlbar <- function(input, output, session) {
   return(observeEvent(
     eventExpr = input$visualisations,

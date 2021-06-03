@@ -24,7 +24,7 @@ rand_param <- function(param_list, hor) {
 
 #' Calculate f-value ("error") of each ant based on the objective function
 #'
-#' @param datos the data of interest (this parameter is not necessary for us) 
+#' @param datos the data of interest (this parameter is not necessary for us)
 #' @param cost_f the objective function e.g. himmelblau function
 #' @param param_list a list of the ants' x1 and x2 values
 #' @param paralelo 1 if the errors should be calculated in parallel
@@ -69,7 +69,6 @@ calc_err <- function(datos, cost_f, param_list, paralelo) {
 #'  on the other hand, if its closer to 1 it will distribute the weight between all the ants more equitatively
 #'
 #' @return a list with the ants' weights
-#' @noRd
 pesos <- function(err, q) {
   tot <- dim(err)[1]
   res <- data.frame(w = numeric())
@@ -82,7 +81,6 @@ pesos <- function(err, q) {
 #'
 #' @param peso the list of the calculated ants' weights
 #' @return a list of the probabilities of choosing each ant as a prototype for the next generation
-#' @noRd
 prob_hor <- function(peso) {
   res <- peso
   tot <- sum(peso[, 1])
@@ -96,7 +94,6 @@ prob_hor <- function(peso) {
 #' @param eps represents the symmetry to the expected value; has a range of (0,1); if eps = 0.5 the distribution is symmetric
 #'
 #' @return a list with the standard deviations of the x and y values of each ant
-#' @noRd
 c_sigma <- function(param_list, eps) {
   hor <- dim(param_list)[1]
   res <- param_list
@@ -118,7 +115,6 @@ c_sigma <- function(param_list, eps) {
 #' @param param_list_r the range of the x, y and f value in which we search the minimum
 #'
 #' @return a list of the x and y value of each ant of the generation
-#' @noRd
 new_gen <- function(param_list, desv, prob, param_list_r) {
   res <- param_list
   hor <- dim(param_list)[1] # Anzahl der x1 Werte

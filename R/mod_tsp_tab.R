@@ -34,7 +34,7 @@ mod_tsp_tab_ui <- function(id) {
       ),
       bs4Dash::box(
         id = "UseCases",
-        title = "Anwendungen",
+        title = "Use Cases",
         maximizable = TRUE,
         collapsible = TRUE,
         closable = TRUE,
@@ -54,7 +54,6 @@ mod_tsp_tab_ui <- function(id) {
 mod_tsp_tab_server <- function(id, input_c) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
     # Returns the plot with the cities
     output$tsp_plot <- shiny::renderPlot({
       x <- get_x_values()

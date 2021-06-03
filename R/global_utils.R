@@ -2,8 +2,6 @@
 #---Himmelblau ------------------------------------
 
 #' Himmelblau function
-#'
-#' @noRd
 himmelblau <- function(x) {
   x1 <- x[1]
   x2 <- x[2]
@@ -11,8 +9,6 @@ himmelblau <- function(x) {
 }
 
 #' Gradient of the Himmelblau function
-#'
-#' @noRd
 gradient_himmelblau <- function(x) {
   x1 <- x[1]
   x2 <- x[2]
@@ -25,8 +21,6 @@ gradient_himmelblau <- function(x) {
 #' Minimize Himmelblau function
 #'
 #' @details If convergence=0 function converges; 4 local mimima and a global minimum at x1=-3.77, x2=-3.28, f=0
-#'
-#' @noRd
 opt_himmelblau <- optim(c(-5, 5), himmelblau)
 
 minima_himmelblau <- data.frame(
@@ -39,8 +33,6 @@ minima_himmelblau <- data.frame(
 #---Rosenbrock ------------------------------------
 
 #' Rosenbrock function
-#'
-#' @noRd
 rosenbrock <- function(x) {
   x1 <- x[1]
   x2 <- x[2]
@@ -48,8 +40,6 @@ rosenbrock <- function(x) {
 }
 
 #' Gradient of the Rosenbrock function
-#'
-#' @noRd
 gradient_rosenbrock <- function(x) {
   x1 <- x[1]
   x2 <- x[2]
@@ -62,8 +52,6 @@ gradient_rosenbrock <- function(x) {
 #' Minimize Rosenbrock function
 #'
 #' @details If convergence=0 function converges; Mimimum at x1=1, x2=1, f=0
-#'
-#' @noRd
 opt_rosenbrock <- optim(c(-1.2, 1), rosenbrock)
 
 minima_rosenbrock <- data.frame(
@@ -84,8 +72,6 @@ minima_rosenbrock <- data.frame(
 #' @param shade_inputValues Values of shade close to one yield shading similar to a point light source model and values close to zero
 #'    produce no shading. Values in the range 0.5 to 0.75 provide an approximation to daylight illumination.
 #' @param colour The color(s) of the surface facets._input
-#'
-#' @noRd
 return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input = "150", phi_input = "20", shade_input = 0.3, colour = "green") {
   if (fu == "rosenbrock") {
     fun <- function(x, y) {
@@ -109,8 +95,6 @@ return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input
 #' Cost function of Himmelblau Function
 #'
 #' @param param_list List of Parameters.
-#'
-#' @noRd
 cost_function_himmelblau <- function(param_list) {
   x1 <- param_list[1]
   x2 <- param_list[2]
@@ -122,7 +106,6 @@ cost_function_himmelblau <- function(param_list) {
 #' @param number_ants number of ants of each generation.
 #' @param start_interval the range of the x, y and f value in which we search the minimum; the interval of the initial locations of the ants
 #' @return a list of the x-, y- and f- value of each ant which represents the locations of the ants
-#' @noRd
 make_start_set <- function(number_ants, start_interval) {
   set.seed(120)
   gen_p <- rand_param(param_list = start_interval, hor = number_ants)
@@ -139,7 +122,7 @@ get_first_generation_with_f <- function(datos = "NA", gen_p, cost_f, paralelo = 
 #' Calculates an iteration step,  calculate Values for first generation (use Algorithm-Functions from File "fct_aco.R")
 #'
 #' @param datos the data of interest (this parameter is not necessary for us)
-#' @param cost_f the objective function 
+#' @param cost_f the objective function
 #' @return a new list of the x-, y- and f- value of each ant which represents the new locations of the ants
 calc_gens <- function(datos = "NA", cost_f, param_list, gen_p, gen, q = 0.2, eps = 0.5, paralelo = 0) {
   print(param_list)
@@ -155,24 +138,22 @@ calc_gens <- function(datos = "NA", cost_f, param_list, gen_p, gen, q = 0.2, eps
   return(xyf)
 }
 
-#' Prepares the data with the ants' locations for plotting 
+#' Prepares the data with the ants' locations for plotting
 #' @param hor_number Number of ants.
 #' @param xyf the list of the x-, y- and f- value of each ant which represents the locations of the ants
-#'
-#' @noRd
 prepare_for_plot <- function(hor_number, xyf) {
 
   # Add column for colour
-  vector_for_color <- rep("ants", hor_number) # create a vector with length hor (number of ants) and a random string-value that determines 
-                                              # that the ant values are displayed in the same colour.
+  vector_for_color <- rep("ants", hor_number) # create a vector with length hor (number of ants) and a random string-value that determines
+  # that the ant values are displayed in the same colour.
   xyf$colour <- vector_for_color
 
   # Add first minimum of Himmelblau
   xyf$x <- c(xyf$x, -2.80)
   xyf$y <- c(xyf$y, 3.13)
   xyf$f <- c(xyf$f, 0.00)
-  xyf$colour <- c(xyf$colour, "min") # give the actual minima a string-value that differs from the string-value of the ant-values 
-                                      # in order to give them a different colour 
+  xyf$colour <- c(xyf$colour, "min") # give the actual minima a string-value that differs from the string-value of the ant-values
+  # in order to give them a different colour
 
   # Add second minimum of Himmelblau
   xyf$x <- c(xyf$x, 3.00)
@@ -194,7 +175,7 @@ prepare_for_plot <- function(hor_number, xyf) {
 
   # Calculate mean values of ants
   mean_f <- sum(xyf$f) / hor_number
-  # assign("meanF", meanF, envir = .GlobalEnv) #try to assign a value to a global variable 
+  # assign("meanF", meanF, envir = .GlobalEnv) #try to assign a value to a global variable
   mean_x1 <- sum(xyf$x) / hor_number
   mean_x2 <- sum(xyf$y) / hor_number
 
@@ -202,15 +183,13 @@ prepare_for_plot <- function(hor_number, xyf) {
   xyf$x <- c(xyf$x, mean_x1)
   xyf$y <- c(xyf$y, mean_x2)
   xyf$f <- c(xyf$f, mean_f)
-  xyf$colour <- c(xyf$colour, "mean") # give the mean values of the ants a string-value that differs from the ones above in order 
-                                      # to give them a third different colour 
+  xyf$colour <- c(xyf$colour, "mean") # give the mean values of the ants a string-value that differs from the ones above in order
+  # to give them a third different colour
 
   return(xyf)
 }
 
 #' Actual minima of Himmelblau Function in a data frame
-#'
-#' @noRd
 minima_himmelblau2 <- data.frame(
   x = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
   y = c(opt_himmelblau$par[2], 2, -3.28, -1.85),

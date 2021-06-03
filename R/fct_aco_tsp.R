@@ -13,8 +13,6 @@
 #' @author The code is adopted from: https://github.com/ciessielski/ACOTSP
 #'
 #' @import dplyr
-#'
-#' @noRd
 aco_tsp <- function(x, y, alpha, beta, evaporation, randomness_factor, numb_ants, iterations) { # nolint
   numb_cities <- 10 # number of cities
   # Create df from the x,y Values and the number of cities

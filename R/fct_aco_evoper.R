@@ -8,7 +8,6 @@
 #' @return the calculated minimum (x1, x2 and f value)
 #'
 #' @import evoper
-#' @noRd
 calculate_min <- function(iter = 30, minim = -1, maxim = 1, fu = "rosenbrock") {
   set.seed(161803398)
   if (fu == "rosenbrock") {
@@ -37,6 +36,3 @@ calculate_min <- function(iter = 30, minim = -1, maxim = 1, fu = "rosenbrock") {
   )
   return(ant_optim_rosenbrock)
 }
-
-
-

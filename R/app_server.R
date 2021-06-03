@@ -13,5 +13,6 @@ app_server <- function(input, output, session) {
   mod_ant_generations_tab_server(id = "ant_generations_tab_ui_1", input_c = input)
   mod_tsp_tab_server(id = "tsp_tab_ui_1", input_c = input)
   mod_performance_tab_server("performance_tab_ui_1")
+  mod_welcome_tab_server("welcome_tab_ui_1")
   update_controlbar(input, output, session)
 }

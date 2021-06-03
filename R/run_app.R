@@ -9,7 +9,7 @@
 #' @importFrom golem with_golem_options
 # nolint start
 run_app <- function(onStart = NULL,
-                    options = list(),
+                    options = list(shiny.autoreload = TRUE),
                     enableBookmarking = NULL,
                     uiPattern = "/",
                     ...) {
