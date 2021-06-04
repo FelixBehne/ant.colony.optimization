@@ -3,7 +3,7 @@
 #' @param x X-Values from the Cities
 #' @param y y-Values from the Cities
 #' @param alpha The strength of the pheromone. The higher the stronger.
-#' @param beta Relevan of the distance. The higher the more decreases the relevance.
+#' @param beta Relevance of the distance. The higher the more decreases the relevance.
 #' @param evaporation Strength with which the pheromones evaporate.
 #' @param randomness_factor Factor for random iterations.
 #' @param numb_ants Number of ants.

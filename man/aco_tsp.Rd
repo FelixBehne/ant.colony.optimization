@@ -22,7 +22,7 @@ aco_tsp(
 
 \item{alpha}{The strength of the pheromone. The higher the stronger.}
 
-\item{beta}{Relevan of the distance. The higher the more decreases the relevance.}
+\item{beta}{Relevance of the distance. The higher the more decreases the relevance.}
 
 \item{evaporation}{Strength with which the pheromones evaporate.}
 

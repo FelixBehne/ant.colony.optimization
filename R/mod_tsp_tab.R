@@ -86,5 +86,100 @@ mod_tsp_tab_server <- function(id, input_c) {
         includeMarkdown(app_sys("app/www/rmd/tsp.Rmd"))
       ))
     })
+    shiny::observeEvent(
+      eventExpr = input_c$alpha_info,
+      handlerExpr = {
+        shinyalert::shinyalert(
+          title = "Alpha",
+          text = "The strength of the pheromone. The higher the stronger.",
+          size = "s",
+          closeOnEsc = TRUE,
+          closeOnClickOutside = FALSE,
+          html = FALSE,
+          type = "info",
+          showConfirmButton = TRUE,
+          showCancelButton = FALSE,
+          confirmButtonText = "OK",
+          confirmButtonCol = "#249c24",
+          animation = TRUE
+        )
+      }
+    )
+    shiny::observeEvent(
+      eventExpr = input_c$beta_info,
+      handlerExpr = {
+        shinyalert::shinyalert(
+          title = "Beta",
+          text = "The Relevance of the distance. The higher the more decreases the relevance.",
+          size = "s",
+          closeOnEsc = TRUE,
+          closeOnClickOutside = FALSE,
+          html = FALSE,
+          type = "info",
+          showConfirmButton = TRUE,
+          showCancelButton = FALSE,
+          confirmButtonText = "OK",
+          confirmButtonCol = "#249c24",
+          animation = TRUE
+        )
+      }
+    )
+    shiny::observeEvent(
+      eventExpr = input_c$randomness_f_info,
+      handlerExpr = {
+        shinyalert::shinyalert(
+          title = "Randomness Factor",
+          text = "Factor for random iterations.",
+          size = "s",
+          closeOnEsc = TRUE,
+          closeOnClickOutside = FALSE,
+          html = FALSE,
+          type = "info",
+          showConfirmButton = TRUE,
+          showCancelButton = FALSE,
+          confirmButtonText = "OK",
+          confirmButtonCol = "#249c24",
+          animation = TRUE
+        )
+      }
+    )
+    shiny::observeEvent(
+      eventExpr = input_c$numb_ants_info,
+      handlerExpr = {
+        shinyalert::shinyalert(
+          title = "Number of Ants",
+          text = "The Number of ants to use for the calculation",
+          size = "s",
+          closeOnEsc = TRUE,
+          closeOnClickOutside = FALSE,
+          html = FALSE,
+          type = "info",
+          showConfirmButton = TRUE,
+          showCancelButton = FALSE,
+          confirmButtonText = "OK",
+          confirmButtonCol = "#249c24",
+          animation = TRUE
+        )
+      }
+    )
+    shiny::observeEvent(
+      eventExpr = input_c$iterations_info,
+      handlerExpr = {
+        shinyalert::shinyalert(
+          title = "Iterations",
+          text = "The Number of iterations to use for the calculation",
+          size = "s",
+          closeOnEsc = TRUE,
+          closeOnClickOutside = FALSE,
+          html = FALSE,
+          type = "info",
+          showConfirmButton = TRUE,
+          showCancelButton = FALSE,
+          confirmButtonText = "OK",
+          confirmButtonCol = "#249c24",
+          animation = TRUE
+        )
+      }
+    )
   })
 }

@@ -94,14 +94,14 @@ update_controlbar <- function(input, output, session) {
                 max = 20,
                 step = 1
               ),
-             # shiny::sliderInput(
-            #    inputId = "iterations",
-            #    label = "Iterations:",
-            #    min = 0,
-            #    max = 120,
-            #    value = 1,
-            #    step = 1
-            #  ),
+              # shiny::sliderInput(
+              #    inputId = "iterations",
+              #    label = "Iterations:",
+              #    min = 0,
+              #    max = 120,
+              #    value = 1,
+              #    step = 1
+              #  ),
               shiny::sliderInput(
                 inputId = "hor_numb",
                 label = "Number of Ants:",
@@ -139,59 +139,150 @@ update_controlbar <- function(input, output, session) {
             id = "controlbar_menu",
             bs4Dash::controlbarItem(
               title = "Settings",
-              shiny::sliderInput(
-                inputId = "alpha",
-                label = "Alpha:",
-                min = 1,
-                max = 10,
-                value = 5
+              fluidRow(
+                width = 12,
+                column(width = 10, shiny::sliderInput(
+                  inputId = "alpha",
+                  label = "Alpha:",
+                  min = 1,
+                  max = 10,
+                  value = 5
+                )), column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "alpha_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
               ),
-              shiny::sliderInput(
-                inputId = "beta",
-                label = "Beta:",
-                min = 1,
-                max = 10,
-                value = 5
+              fluidRow(
+                width = 12,
+                column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "beta",
+                    label = "Beta:",
+                    min = 1,
+                    max = 10,
+                    value = 5
+                  )
+                ),
+                column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "beta_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
               ),
-              shiny::sliderInput(
-                inputId = "evaporation",
-                label = "Evaporation:",
-                min = 0.1,
-                max = 1.0,
-                value = 0.5
+              fluidRow(
+                width = 12,
+                column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "evaporation",
+                    label = "Evaporation:",
+                    min = 0.1,
+                    max = 1.0,
+                    value = 0.5
+                  )
+                ),
+                column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "beta_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
               ),
-              shiny::sliderInput(
-                inputId = "randomness_f",
-                label = "Randomnessfactor:",
-                min = 0,
-                max = 10,
-                value = 5
+              fluidRow(
+                width = 12,
+                column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "randomness_f",
+                    label = "Randomness Factor:",
+                    min = 0,
+                    max = 10,
+                    value = 5
+                  )
+                ),
+                column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "randomness_f_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
               ),
-              shiny::sliderInput(
-                inputId = "numb_ants",
-                label = "Number of Ants:",
-                min = 1,
-                max = 50,
-                value = 10
+              fluidRow(
+                width = 12,
+                column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "numb_ants",
+                    label = "Number of Ants:",
+                    min = 1,
+                    max = 50,
+                    value = 10
+                  )
+                ),
+                column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "numb_ants_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
               ),
-              shiny::sliderInput(
-                inputId = "iterations",
-                label = "Iterations:",
-                min = 1,
-                max = 50,
-                value = 5
+              fluidRow(
+                width = 12,
+                column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "iterations",
+                    label = "Iterations:",
+                    min = 1,
+                    max = 50,
+                    value = 5
+                  )
+                ),
+                column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "iterations_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                )
               ),
-              bs4Dash::actionButton(
-                inputId = "action",
-                label = "Action"
-              ),
-              bs4Dash::actionButton(
-                inputId = "info",
-                label = "Info"
+              fluidRow(
+                column(
+                  width = 12,
+                  align = "center",
+                  bs4Dash::actionButton(
+                    inputId = "action",
+                    icon = shiny::icon("play-circle"),
+                    label = "Calculate",
+                    status = "success"
+                  ),
+                )
               )
             )
           )
         })
+        bs4Dash::updateControlbar(id = "controlbar", session = session)
       }
       else if (input$visualisations == "performance") {
         output$controlbar <- bs4Dash::renderMenu({

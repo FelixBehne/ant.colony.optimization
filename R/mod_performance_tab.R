@@ -24,7 +24,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          bs4Dash::infoBoxOutput(outputId = ns("aco"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::valueBoxOutput(outputId = ns("aco"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "alo_box",
@@ -34,7 +34,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          bs4Dash::infoBoxOutput(outputId = ns("alo"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::valueBoxOutput(outputId = ns("alo"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "ba_nox",
@@ -44,7 +44,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          bs4Dash::infoBoxOutput(outputId = ns("ba"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::valueBoxOutput(outputId = ns("ba"), tags$style("#dri {width:400px; height:300px;}"))
         )
       ),
       shiny::column(
@@ -57,7 +57,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          bs4Dash::infoBoxOutput(outputId = ns("cso"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::valueBoxOutput(outputId = ns("cso"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "da_box",
@@ -67,7 +67,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          bs4Dash::infoBoxOutput(outputId = ns("da"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::valueBoxOutput(outputId = ns("da"), tags$style("#dri {width:400px; height:300px;}"))
         ),
         bs4Dash::box(
           id = "ffa_box",
@@ -77,7 +77,7 @@ mod_performance_tab_ui <- function(id) {
           closable = TRUE,
           width = 12,
           height = "100%",
-          bs4Dash::infoBoxOutput(outputId = ns("ffa"), tags$style("#dri {width:400px; height:300px;}"))
+          bs4Dash::valueBoxOutput(outputId = ns("ffa"), tags$style("#dri {width:400px; height:300px;}"))
         )
       )
     )
@@ -92,7 +92,7 @@ mod_performance_tab_ui <- function(id) {
 mod_performance_tab_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    output$aco <- renderInfoBox({
+    output$aco <- renderValueBox({
       valueBox(
         subtitle = "",
         value = h2("MIN", 150),
@@ -100,14 +100,14 @@ mod_performance_tab_server <- function(id) {
         icon = shiny::icon("bug")
       )
     })
-    output$alo <- bs4Dash::renderInfoBox({
+    output$alo <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN", 150),
         icon = shiny::icon("paw"),
       )
     })
-    output$ba <- bs4Dash::renderInfoBox({
+    output$ba <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
         value = h2("MIN:", 150),

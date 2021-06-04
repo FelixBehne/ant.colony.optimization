@@ -94,7 +94,6 @@ app_ui <- function(request) {
       ),
       controlbar = bs4Dash::dashboardControlbar(
         id = "controlbar",
-        skin = "light",
         pinned = NULL,
         collapsed = TRUE,
         overlay = FALSE,
