@@ -157,7 +157,7 @@ mod_welcome_tab_server <- function(id) {
     })
     shiny::observeEvent(input$security_and_license, {
       shinyalert::shinyalert(
-        title = "App Maintainers",
+        title = "Security and License ",
         text = "All the information on this website - https://felixbehne.shinyapps.io/ant-colony-optimization/ - is published in good faith and for general information purpose only. ACO Dashboard does not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website (ACO Dashboard), is strictly at your own risk. ACO Dashboard will not be liable for any losses and/or damages in connection with the use of our website. #nolint
         License: MIT
         ",
