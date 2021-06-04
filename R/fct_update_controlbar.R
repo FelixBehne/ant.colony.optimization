@@ -94,14 +94,14 @@ update_controlbar <- function(input, output, session) {
                 max = 20,
                 step = 1
               ),
-              shiny::sliderInput(
-                inputId = "iterations",
-                label = "Iterations:",
-                min = 0,
-                max = 120,
-                value = 1,
-                step = 1
-              ),
+             # shiny::sliderInput(
+            #    inputId = "iterations",
+            #    label = "Iterations:",
+            #    min = 0,
+            #    max = 120,
+            #    value = 1,
+            #    step = 1
+            #  ),
               shiny::sliderInput(
                 inputId = "hor_numb",
                 label = "Number of Ants:",
@@ -111,7 +111,7 @@ update_controlbar <- function(input, output, session) {
               ),
               shiny::sliderInput(
                 inputId = "gen_numb",
-                label = "Number of Generationen",
+                label = "Number of generations/iterations",
                 min = 0,
                 max = 50,
                 value = 1
