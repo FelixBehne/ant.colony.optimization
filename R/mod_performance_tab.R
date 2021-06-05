@@ -203,7 +203,7 @@ mod_performance_tab_server <- function(id, input_g) {
     output$aco <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("min f(x) = ", results[["aco"]]),
+        value = h2("min f(x1, x2) = ", results[["aco"]]),
         icon = shiny::icon("bug"),
         color = get_color(results[["aco"]], isolate(reactiveValuesToList(results)))
       )
@@ -211,7 +211,7 @@ mod_performance_tab_server <- function(id, input_g) {
     output$alo <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("min f(x) = ", results[["alo"]]),
+        value = h2("min f(x1, x2) = ", results[["alo"]]),
         icon = shiny::icon("paw"),
         color = get_color(results[["alo"]], isolate(reactiveValuesToList(results)))
       )
@@ -219,7 +219,7 @@ mod_performance_tab_server <- function(id, input_g) {
     output$ba <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("min f(x) = ", results[["ba"]]),
+        value = h2("min f(x1, x2) = ", results[["ba"]]),
         width = 6,
         icon = shiny::icon("dove"),
         color = get_color(results[["ba"]], isolate(reactiveValuesToList(results)))
@@ -228,7 +228,7 @@ mod_performance_tab_server <- function(id, input_g) {
     output$cso <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("min f(x) = ", results[["cso"]]),
+        value = h2("min f(x1, x2) = ", results[["cso"]]),
         width = NULL,
         icon = shiny::icon("cat"),
         color = get_color(results[["cso"]], isolate(reactiveValuesToList(results)))
@@ -237,7 +237,7 @@ mod_performance_tab_server <- function(id, input_g) {
     output$da <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("min f(x) = ", results[["da"]]),
+        value = h2("min f(x1, x2) = ", results[["da"]]),
         width = 6,
         icon = shiny::icon("dragon"),
         color = get_color(results[["da"]], isolate(reactiveValuesToList(results)))
@@ -246,7 +246,7 @@ mod_performance_tab_server <- function(id, input_g) {
     output$ffa <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("min f(x) = ", results[["ffa"]]),
+        value = h2("min f(x1, x2) = ", results[["ffa"]]),
         width = 6,
         icon = shiny::icon("crow"),
         color = get_color(results[["ffa"]], isolate(reactiveValuesToList(results)))

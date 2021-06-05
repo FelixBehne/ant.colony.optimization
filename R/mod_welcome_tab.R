@@ -19,7 +19,7 @@ mod_welcome_tab_ui <- function(id) {
       width = 12,
       height = "330px",
       shiny::tags$h1("Welcome to the ACO Dashboard !"),
-      shiny::tags$h4("We can't wait for you to see our plots")
+      shiny::tags$h4("We can't wait for you to see our plots.")
     ),
     br(),
     br(),
@@ -115,7 +115,7 @@ mod_welcome_tab_server <- function(id) {
     shiny::observeEvent(input$directions, {
       shinyalert::shinyalert(
         title = "Directions",
-        text = "If you need any help with using this dashboard please use the info buttons and have fun!",
+        text = "If you need any help with using this dashboard please use the info buttons.",
         size = "m",
         closeOnEsc = TRUE,
         closeOnClickOutside = FALSE,
@@ -123,7 +123,7 @@ mod_welcome_tab_server <- function(id) {
         type = "info",
         showConfirmButton = TRUE,
         showCancelButton = FALSE,
-        confirmButtonText = "Thanks, I will!",
+        confirmButtonText = "Ok",
         confirmButtonCol = "#249c24",
         animation = TRUE
       )
@@ -146,9 +146,10 @@ mod_welcome_tab_server <- function(id) {
       )
     })
     shiny::observeEvent(input$security_and_license, {
+      # nolint start
       shinyalert::shinyalert(
         title = "Security and License ",
-        text = "All the information on this website - https://felixbehne.shinyapps.io/ant-colony-optimization/ - is published in good faith and for general information purpose only. ACO Dashboard does not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website (ACO Dashboard), is strictly at your own risk. ACO Dashboard will not be liable for any losses and/or damages in connection with the use of our website. #nolint
+        text = "All the information on this website - https://felixbehne.shinyapps.io/ant-colony-optimization/ is published in good faith and for general information purpose only. We do not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website, is strictly at your own risk. We will not be liable for any losses and/or damages in connection with the use of our website.
         License: MIT
         ",
         size = "m",
@@ -162,6 +163,7 @@ mod_welcome_tab_server <- function(id) {
         confirmButtonCol = "#249c24",
         animation = TRUE
       )
+      # nolint end
     })
   })
 }

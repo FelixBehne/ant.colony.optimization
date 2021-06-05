@@ -114,6 +114,8 @@ c_sigma <- function(param_list, eps) {
 #' @param desv the calculated standard deviation of each ants x and y values
 #' @param param_list_r the range of the x, y and f value in which we search the minimum
 #'
+#' @importFrom(stats, rnorm, runif)
+#'
 #' @return a list of the x and y value of each ant of the generation
 new_gen <- function(param_list, desv, prob, param_list_r) {
   res <- param_list

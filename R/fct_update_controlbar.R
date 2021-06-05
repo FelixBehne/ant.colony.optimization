@@ -320,8 +320,8 @@ update_controlbar <- function(input, output, session) {
                   shiny::sliderInput(
                     inputId = "lower_bound_performance",
                     label = "Lower Bound",
-                    min = 0,
-                    max = -50,
+                    min = -50,
+                    max = 0,
                     value = -10
                   )
                 ),
@@ -388,7 +388,7 @@ update_controlbar <- function(input, output, session) {
                   bs4Dash::actionButton(
                     inputId = "recalculate_performance",
                     icon = shiny::icon("play"),
-                    label = "Realculate",
+                    label = "Calculate",
                     status = "success"
                   )
                 )
