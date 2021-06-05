@@ -23,8 +23,6 @@ app_ui <- function(request) {
       ),
       sidebar = bs4Dash::dashboardSidebar(
         id = "sidebar",
-        skin = "light",
-        status = "primary",
         brandColor = "primary",
         collapsed = TRUE,
         bs4Dash::sidebarMenu(
@@ -81,7 +79,7 @@ app_ui <- function(request) {
           id = "application",
           bs4Dash::sidebarHeader("Applying the algorithm"),
           bs4Dash::menuItem(
-            text = "Traveling Salesman Problem",
+            text = "Traveling Salesman Probl.",
             tabName = "tsp_plot",
             icon = icon("map")
           ),

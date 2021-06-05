@@ -125,6 +125,25 @@ mod_tsp_tab_server <- function(id, input_g) {
       }
     )
     shiny::observeEvent(
+      eventExpr = input_g$evaporation_info,
+      handlerExpr = {
+        shinyalert::shinyalert(
+          title = "Evaporation",
+          text = "Strength with which the pheromones evaporate.",
+          size = "s",
+          closeOnEsc = TRUE,
+          closeOnClickOutside = FALSE,
+          html = FALSE,
+          type = "info",
+          showConfirmButton = TRUE,
+          showCancelButton = FALSE,
+          confirmButtonText = "OK",
+          confirmButtonCol = "#249c24",
+          animation = TRUE
+        )
+      }
+    )
+    shiny::observeEvent(
       eventExpr = input_g$randomness_f_info,
       handlerExpr = {
         shinyalert::shinyalert(

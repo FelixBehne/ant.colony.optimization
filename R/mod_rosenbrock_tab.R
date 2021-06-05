@@ -72,9 +72,6 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
 
     # output element to show the minimum calculated by ACO (with package evoper)
     output$result_aco <- shiny::renderTable({
-      print(input_g$iterations_test)
-      print(input_g$lower_bound_test)
-      print(input_g$upper_bound_test)
       calculate_min(
         iterations = input_g$iterations_test,
         lower_bound = input_g$lower_bound_test,

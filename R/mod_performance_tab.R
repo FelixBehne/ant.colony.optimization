@@ -4,7 +4,7 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @import shiny bs4Dash htmltools
+#' @import shiny bs4Dash htmltools waiter
 #'
 #' @noRd
 mod_performance_tab_ui <- function(id) {
@@ -106,123 +106,157 @@ mod_performance_tab_server <- function(id, input_g) {
     results[["da"]] <- "-"
     results[["ffa"]] <- "-"
 
+    # Calculate the algorithm results
     shiny::observeEvent(
       eventExpr = input_g$recalculate_performance,
       handlerExpr = {
+
         # Get the test function
         test_function <- get_test_function(function_name = input_g$test_function_performance, numb_parameters = 1)
 
-        # Calculate the algorithm results
+        # Create a progress bar
+        shiny::withProgress(message = "Calculating...", value = 0, {
 
-        # Ant Colony Optimization
-        aco <- calculate_min(
-          test_function = input_g$test_function_performance,
-          lower_bound = input_g$lower_bound_performance,
-          upper_bound = input_g$upper_bound_performance,
-          iterations = input_g$iterations_performance
-        )
-        results[["aco"]] <- test_function(c(aco[["x1"]], aco[["x1"]]))
+          # Ant Colony Optimization
+          aco <- calculate_min(
+            test_function = input_g$test_function_performance,
+            lower_bound = input_g$lower_bound_performance,
+            upper_bound = input_g$upper_bound_performance,
+            iterations = input_g$iterations_performance
+          )
+          results[["aco"]] <- round(test_function(c(aco[["x1"]], aco[["x2"]])), digits = 2)
+          shiny::incProgress(1 / 6)
 
-        # Ant Lion Optimization
-        results[["alo"]] <- test_function(metaheuristicOpt::ALO(
-          FUN = test_function,
-          optimType = "MIN",
-          numVar = 2, # Static because aco calculation is done with two
-          numPopulation = input_g$swarm_size_performance,
-          maxIter = input_g$iterations_performance,
-          rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
-        ))
+          # Ant Lion Optimization
+          results[["alo"]] <- round(
+            x = test_function(metaheuristicOpt::ALO(
+              FUN = test_function,
+              optimType = "MIN",
+              numVar = 2, # Static because aco calculation is done with two
+              numPopulation = input_g$swarm_size_performance,
+              maxIter = input_g$iterations_performance,
+              rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
+            )),
+            digits = 2
+          )
+          shiny::incProgress(1 / 6)
 
-        # Bat Optimizer
-        results[["ba"]] <- test_function(metaheuristicOpt::BA(
-          FUN = test_function,
-          optimType = "MIN",
-          numVar = 2, # Static because aco calculation is done with two
-          numPopulation = input_g$swarm_size_performance,
-          maxIter = input_g$iterations_performance,
-          rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
-        ))
+          # Bat Optimizer
+          results[["ba"]] <- round(
+            x = test_function(metaheuristicOpt::BA(
+              FUN = test_function,
+              optimType = "MIN",
+              numVar = 2, # Static because aco calculation is done with two
+              numPopulation = input_g$swarm_size_performance,
+              maxIter = input_g$iterations_performance,
+              rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
+            )),
+            digits = 2
+          )
+          shiny::incProgress(1 / 6)
 
-        # Cat Swarm Optimizer
-        results[["cso"]] <- test_function(metaheuristicOpt::CSO(
-          FUN = test_function,
-          optimType = "MIN",
-          numVar = 2, # Static because aco calculation is done with two
-          numPopulation = input_g$swarm_size_performance,
-          maxIter = input_g$iterations_performance,
-          rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
-        ))
+          # Cat Swarm Optimizer
+          results[["cso"]] <- round(
+            x = test_function(metaheuristicOpt::CSO(
+              FUN = test_function,
+              optimType = "MIN",
+              numVar = 2, # Static because aco calculation is done with two
+              numPopulation = input_g$swarm_size_performance,
+              maxIter = input_g$iterations_performance,
+              rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
+            )),
+            digits = 2
+          )
+          shiny::incProgress(1 / 6)
 
-        # Dragonfly Optimizer
-        results[["da"]] <- test_function(metaheuristicOpt::DA(
-          FUN = test_function,
-          optimType = "MIN",
-          numVar = 2, # Static because aco calculation is done with two
-          numPopulation = input_g$swarm_size_performance,
-          maxIter = input_g$iterations_performance,
-          rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
-        ))
+          # Dragonfly Optimizer
+          results[["da"]] <- round(
+            x = test_function(metaheuristicOpt::DA(
+              FUN = test_function,
+              optimType = "MIN",
+              numVar = 2, # Static because aco calculation is done with two
+              numPopulation = input_g$swarm_size_performance,
+              maxIter = input_g$iterations_performance,
+              rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
+            )),
+            digits = 2
+          )
+          shiny::incProgress(1 / 6)
 
-        # Firefly Optimizer
-        results[["ffa"]] <- test_function(metaheuristicOpt::FFA(
-          FUN = test_function,
-          optimType = "MIN",
-          numVar = 2, # Static because aco calculation is done with two
-          numPopulation = input_g$swarm_size_performance,
-          maxIter = input_g$iterations_performance,
-          rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
-        ))
+          # Firefly Optimizer
+          results[["ffa"]] <- round(
+            x = test_function(metaheuristicOpt::FFA(
+              FUN = test_function,
+              optimType = "MIN",
+              numVar = 2, # Static because aco calculation is done with two
+              numPopulation = input_g$swarm_size_performance,
+              maxIter = input_g$iterations_performance,
+              rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
+            )),
+            digits = 2
+          )
+          shiny::incProgress(1 / 6)
+        })
       }
     )
 
     output$aco <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("MIN", results[["aco"]]),
-        icon = shiny::icon("bug")
+        value = h2("min f(x) = ", results[["aco"]]),
+        icon = shiny::icon("bug"),
+        color = get_color(results[["aco"]], isolate(reactiveValuesToList(results)))
       )
     })
     output$alo <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("MIN", results[["alo"]]),
-        icon = shiny::icon("paw")
+        value = h2("min f(x) = ", results[["alo"]]),
+        icon = shiny::icon("paw"),
+        color = get_color(results[["alo"]], isolate(reactiveValuesToList(results)))
       )
     })
     output$ba <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("MIN:", results[["ba"]]),
+        value = h2("min f(x) = ", results[["ba"]]),
         width = 6,
-        icon = shiny::icon("dove")
+        icon = shiny::icon("dove"),
+        color = get_color(results[["ba"]], isolate(reactiveValuesToList(results)))
       )
     })
     output$cso <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("MIN", results[["cso"]]),
+        value = h2("min f(x) = ", results[["cso"]]),
         width = NULL,
-        icon = shiny::icon("cat")
+        icon = shiny::icon("cat"),
+        color = get_color(results[["cso"]], isolate(reactiveValuesToList(results)))
       )
     })
     output$da <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("MIN", results[["da"]]),
+        value = h2("min f(x) = ", results[["da"]]),
         width = 6,
-        icon = shiny::icon("dragon")
+        icon = shiny::icon("dragon"),
+        color = get_color(results[["da"]], isolate(reactiveValuesToList(results)))
       )
     })
     output$ffa <- bs4Dash::renderValueBox({
       bs4Dash::valueBox(
         subtitle = "",
-        value = h2("MIN", results[["ffa"]]),
+        value = h2("min f(x) = ", results[["ffa"]]),
         width = 6,
-        icon = shiny::icon("crow")
+        icon = shiny::icon("crow"),
+        color = get_color(results[["ffa"]], isolate(reactiveValuesToList(results)))
       )
     })
+
+    # Fill the help buttons with content
+
     shiny::observeEvent(
-      eventExpr = input_g$test_function_info,
+      eventExpr = input_g$test_function_performance_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Test Function",
@@ -241,7 +275,7 @@ mod_performance_tab_server <- function(id, input_g) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_g$upper_bound_info,
+      eventExpr = input_g$upper_bound_performance_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Upper Bound",
@@ -260,7 +294,7 @@ mod_performance_tab_server <- function(id, input_g) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_g$lower_bound_info,
+      eventExpr = input_g$lower_bound_performance_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Lower Bound",
@@ -279,7 +313,7 @@ mod_performance_tab_server <- function(id, input_g) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_g$iterations_info,
+      eventExpr = input_g$iterations_performance_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Number of Iterations",
@@ -298,7 +332,7 @@ mod_performance_tab_server <- function(id, input_g) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_g$swarm_size_info,
+      eventExpr = input_g$swarm_size_performance_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Swarm Size",

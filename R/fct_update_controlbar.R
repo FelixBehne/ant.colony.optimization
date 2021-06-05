@@ -175,7 +175,7 @@ update_controlbar <- function(input, output, session) {
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "beta_info",
+                    inputId = "evaporation_info",
                     icon = icon("info"),
                     size = "xs"
                   )
@@ -285,7 +285,7 @@ update_controlbar <- function(input, output, session) {
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "test_function_info",
+                    inputId = "test_function_performance_info",
                     icon = icon("info"),
                     size = "xs"
                   )
@@ -295,19 +295,19 @@ update_controlbar <- function(input, output, session) {
                 width = 12,
                 shiny::column(
                   width = 10,
-                  shiny::numericInput(
+                  shiny::sliderInput(
                     inputId = "upper_bound_performance",
                     label = "Upper Bound",
                     min = 0,
                     max = 50,
-                    value = 1
+                    value = 10
                   )
                 ),
                 shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "upper_bound_info",
+                    inputId = "upper_bound_performance_info",
                     icon = icon("info"),
                     size = "xs"
                   )
@@ -317,19 +317,19 @@ update_controlbar <- function(input, output, session) {
                 width = 12,
                 shiny::column(
                   width = 10,
-                  shiny::numericInput(
+                  shiny::sliderInput(
                     inputId = "lower_bound_performance",
                     label = "Lower Bound",
                     min = 0,
                     max = -50,
-                    value = -1
+                    value = -10
                   )
                 ),
                 shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "lower_bound_info",
+                    inputId = "lower_bound_performance_info",
                     icon = icon("info"),
                     size = "xs"
                   )
@@ -344,15 +344,14 @@ update_controlbar <- function(input, output, session) {
                     label = "Number of Iterations:",
                     min = 0,
                     max = 120,
-                    value = 1,
-                    step = 1
+                    value = 10
                   )
                 ),
                 shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "iterations_info",
+                    inputId = "iterations_performance_info",
                     icon = icon("info"),
                     size = "xs"
                   )
@@ -367,14 +366,14 @@ update_controlbar <- function(input, output, session) {
                     label = "Swarm Size:",
                     min = 1,
                     max = 100,
-                    value = 40
+                    value = 20
                   )
                 ),
                 shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "swarm_size_info",
+                    inputId = "swarm_size_performance_info",
                     icon = icon("info"),
                     size = "xs"
                   )

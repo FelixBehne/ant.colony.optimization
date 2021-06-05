@@ -204,3 +204,25 @@ prepare_for_plot <- function(hor_number, xyf) {
 
   return(xyf)
 }
+
+#---Performance Tab Utils--------------------
+
+#' Get box colour according the algorithm result (performance tab)
+#'
+#' @param value the result of the algorithm to evaluate
+#' @param results all results of all algorithms in a list
+#'
+get_color <- function(value, results) {
+  if (value == "-") {
+    return(NULL)
+  }
+  else if (value == min(unlist(results))) {
+    return("olive")
+  }
+  else if (value == max(unlist(results))) {
+    return("danger")
+  }
+  else {
+    return("warning")
+  }
+}
