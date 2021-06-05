@@ -64,8 +64,6 @@ The task was to create a dashboard to illustrate a metaheuristic algorithm, in t
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * [golem](https://github.com/ThinkR-open/golem)
 * [shiny](https://shiny.rstudio.com/tutorial/)
 * [bs4Dash](https://rinterface.github.io/bs4Dash/)
