@@ -21,7 +21,6 @@ Imports:
     fresh,
     golem (>= 0.3.1),
     graphics,
-    hash,
     htmltools,
     metaheuristicOpt,
     parallel,
@@ -31,6 +30,7 @@ Imports:
     shinycssloaders,
     shinyWidgets,
     slickR,
+    stats,
     thematic,
     waiter
 Encoding: UTF-8

@@ -114,14 +114,14 @@ c_sigma <- function(param_list, eps) {
 #' @param desv the calculated standard deviation of each ants x and y values
 #' @param param_list_r the range of the x, y and f value in which we search the minimum
 #'
-#' @importFrom(stats, rnorm, runif)
+#' @import stats
 #'
 #' @return a list of the x and y value of each ant of the generation
 new_gen <- function(param_list, desv, prob, param_list_r) {
   res <- param_list
   hor <- dim(param_list)[1] # Anzahl der x1 Werte
   pars <- dim(param_list)[2] # Anzahl der x2-Werte
-  r_num <- matrix(abs(rnorm(hor * pars, 1, 0.1)), ncol = pars)
+  r_num <- matrix(abs(stats::rnorm(hor * pars, 1, 0.1)), ncol = pars)
   aux_r <- matrix(sample(c(-1, 1), size = hor * pars, replace = TRUE), ncol = pars)
   r_num <- r_num * aux_r
   for (i in 1:dim(param_list)[2]) {
