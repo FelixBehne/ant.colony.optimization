@@ -38,7 +38,7 @@ app_ui <- function(request) {
         ),
         br(),
         bs4Dash::sidebarMenu(
-          id = "general",
+          id = "theoretical_background",
           bs4Dash::sidebarHeader("Theoretical Background"),
           bs4Dash::menuItem(
             text = "Timeline",

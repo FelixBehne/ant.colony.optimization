@@ -47,12 +47,12 @@ mod_himmelblau_tab_ui <- function(id) {
 #' himmelblau_tab Server Functions
 #'
 #' @param id Ui Module Id. Needed to allocate the right inputs to the right outputs.
-#' @param input_c INput from the global server that contains the controlbar inputs.
+#' @param input_g INput from the global server that contains the controlbar inputs.
 #'
 #' @import shiny
 #'
 #' @noRd
-mod_himmelblau_tab_server <- function(id, input_c) {
+mod_himmelblau_tab_server <- function(id, input_g) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns # nolintr
 
@@ -60,11 +60,11 @@ mod_himmelblau_tab_server <- function(id, input_c) {
     output$himmelblau <- shiny::renderPlot({
       return_3d_plot(
         fu = "himmelblau",
-        minim = input_c$interval_min,
-        maxim = input_c$interval_max,
-        theta_input = input_c$theta,
-        phi_input = input_c$phi,
-        shade_input = input_c$shade,
+        minim = input_g$lower_bound_test,
+        maxim = input_g$upper_bound_test,
+        theta_input = input_g$theta,
+        phi_input = input_g$phi,
+        shade_input = input_g$shade,
         colour = "green"
       )
     })
@@ -74,10 +74,10 @@ mod_himmelblau_tab_server <- function(id, input_c) {
     # output element to show the minima calculated by ACO (with package evoper)
     output$result_aco <- shiny::renderTable({
       calculate_min(
-        iter = input_c$iterations,
-        minim = input_c$interval_min,
-        maxim = input_c$interval_max,
-        fu = "himmelblau"
+        iterations = input_g$iterations_test,
+        lower_bound = input_g$lower_bound_test,
+        upper_bound = input_g$upper_bound_test,
+        test_function = "himmelblau"
       )
     })
   })

@@ -51,7 +51,7 @@ mod_tsp_tab_ui <- function(id) {
 #' @import graphics shiny
 #'
 #' @noRd
-mod_tsp_tab_server <- function(id, input_c) {
+mod_tsp_tab_server <- function(id, input_g) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     # Returns the plot with the cities
@@ -64,30 +64,30 @@ mod_tsp_tab_server <- function(id, input_c) {
     })
 
     # Here the function acoAlg starts and be fuled with the values from the sliders
-    ntext <- shiny::eventReactive(input_c$action, {
+    ntext <- shiny::eventReactive(input_g$action, {
       options <- aco_tsp(
         x = get_x_values(),
         y = get_y_values(),
-        alpha = input_c$alpha,
-        beta = input_c$beta,
-        evaporation = input_c$evaporation,
-        randomness_factor = input_c$randomness_f,
-        numb_ants = input_c$numb_ants,
-        iterations = input_c$iterations
+        alpha = input_g$alpha,
+        beta = input_g$beta,
+        evaporation = input_g$evaporation,
+        randomness_factor = input_g$randomness_f,
+        numb_ants = input_g$numb_ants,
+        iterations = input_g$iterations
       )
     })
     # Returns the Table but waits until the actionButton is activated.
     output$table <- shiny::renderDataTable({
       options <- ntext()
     })
-    shiny::observeEvent(input_c$info, {
+    shiny::observeEvent(input_g$info, {
       shiny::showModal(shiny::modalDialog(
         title = "Info",
         includeMarkdown(app_sys("app/www/rmd/tsp.Rmd"))
       ))
     })
     shiny::observeEvent(
-      eventExpr = input_c$alpha_info,
+      eventExpr = input_g$alpha_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Alpha",
@@ -106,7 +106,7 @@ mod_tsp_tab_server <- function(id, input_c) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_c$beta_info,
+      eventExpr = input_g$beta_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Beta",
@@ -125,7 +125,7 @@ mod_tsp_tab_server <- function(id, input_c) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_c$randomness_f_info,
+      eventExpr = input_g$randomness_f_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Randomness Factor",
@@ -144,7 +144,7 @@ mod_tsp_tab_server <- function(id, input_c) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_c$numb_ants_info,
+      eventExpr = input_g$numb_ants_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Number of Ants",
@@ -163,7 +163,7 @@ mod_tsp_tab_server <- function(id, input_c) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_c$iterations_info,
+      eventExpr = input_g$iterations_info,
       handlerExpr = {
         shinyalert::shinyalert(
           title = "Iterations",

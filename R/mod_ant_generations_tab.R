@@ -42,37 +42,29 @@ mod_ant_generations_tab_ui <- function(id) {
 #' @import shiny plotly thematic
 #'
 #' @noRd
-mod_ant_generations_tab_server <- function(id, input_c) {
+mod_ant_generations_tab_server <- function(id, input_g) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
-    # set the range of the x, y and f value in which we search the minimum and update it on user inputs
-    vars <- shiny::eventReactive(
-      eventExpr = input_c$start_gen,
-      valueExpr = {
-        data.frame(x1 = c(input_c$lower_bound, input_c$upper_bound), x2 = c(input_c$lower_bound, input_c$upper_bound))
-      },
-      ignoreNULL = FALSE
-    )
 
     # Plot the location of the ants, their mean value and the actual minima of the objective function in a scatter plot
     output$generation <- plotly::renderPlotly({
       # create the locations of the first generation randomly
       generation1 <- make_start_set(
-        number_ants = input_c$hor_numb,
-        start_interval = vars()
+        number_ants = input_g$hor_numb_ant_generations,
+        start_interval = data.frame(x1 = c(input_g$lower_bound_ant_generations, input_g$upper_bound_ant_generations), x2 = c(input_g$lower_bound_ant_generations, input_g$upper_bound_ant_generations)) # nolint
       )
       # calculate the new locations of the ants after a specified number of iterations
       xyf <- calc_gens(
-        cost_f = cost_function_himmelblau,
-        param_list = vars(),
+        cost_f = get_test_function(function_name = "himmelblau", numb_parameters = 1),
+        param_list = data.frame(x1 = c(input_g$lower_bound_ant_generations, input_g$upper_bound_ant_generations), x2 = c(input_g$lower_bound_ant_generations, input_g$upper_bound_ant_generations)) # nolint
+        ,
         gen_p = generation1,
-        gen = input_c$gen_numb
+        gen = input_g$gen_numb_ant_generations
       )
       # add the mean value of the ants' location, furthermore add the locations of the actual minima and add
       # a column for the colour of the points in the plot
       plot_data <- prepare_for_plot(
-        hor_number = input_c$hor_numb,
+        hor_number = input_g$hor_numb_ant_generations,
         xyf = xyf
       )
       # generate the 3d scatterplot
@@ -87,6 +79,6 @@ mod_ant_generations_tab_server <- function(id, input_c) {
     })
 
     # return a table with the actual minima of the Himmelblau function
-    output$table_minima <- shiny::renderTable(minima_himmelblau2)
+    output$table_minima <- shiny::renderTable(minima_himmelblau)
   })
 }

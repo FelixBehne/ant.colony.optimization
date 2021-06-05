@@ -19,16 +19,16 @@ update_controlbar <- function(input, output, session) {
             id = "controlbar_menu",
             bs4Dash::controlbarItem(
               title = "Algorithm",
-              shiny::sliderInput(
-                inputId = "interval_min",
-                label = "Interval Lower Limit:",
+              shiny::numericInput(
+                inputId = "lower_bound_test",
+                label = "Lower Bound:",
                 value = -1,
                 min = -50,
                 max = -1,
                 step = 1
               ),
-              shiny::sliderInput(
-                inputId = "interval_max",
+              shiny::numericInput(
+                inputId = "upper_bound_test",
                 label = "Interval Upper Limit:",
                 value = 1,
                 min = 1,
@@ -36,7 +36,7 @@ update_controlbar <- function(input, output, session) {
                 step = 1
               ),
               shiny::sliderInput(
-                inputId = "iterations",
+                inputId = "iterations_test",
                 label = "Iterations:",
                 min = 0,
                 max = 120,
@@ -78,55 +78,35 @@ update_controlbar <- function(input, output, session) {
             id = "controlbar_menu",
             bs4Dash::controlbarItem(
               title = "ACO Config",
-              shiny::sliderInput(
-                inputId = "lower_bound",
-                label = "Interval Lower Limit:",
+              shiny::numericInput(
+                inputId = "lower_bound_ant_generations",
+                label = "Lower Bound:",
                 value = -5,
                 min = -20,
                 max = -1,
                 step = 1
               ),
-              shiny::sliderInput(
-                inputId = "upper_bound",
-                label = "Interval Upper Limit:",
+              shiny::numericInput(
+                inputId = "upper_bound_ant_generations",
+                label = "Upper Bound:",
                 value = 5,
                 min = 1,
                 max = 20,
                 step = 1
               ),
-              # shiny::sliderInput(
-              #    inputId = "iterations",
-              #    label = "Iterations:",
-              #    min = 0,
-              #    max = 120,
-              #    value = 1,
-              #    step = 1
-              #  ),
               shiny::sliderInput(
-                inputId = "hor_numb",
-                label = "Number of Ants:",
-                min = 1,
-                max = 100,
-                value = 40
-              ),
-              shiny::sliderInput(
-                inputId = "gen_numb",
-                label = "Number of generations/iterations",
+                inputId = "gen_numb_ant_generations",
+                label = "Number of generations",
                 min = 0,
                 max = 50,
                 value = 1
               ),
-              br(),
-              shiny::column(
-                width = 12,
-                align = "center",
-                bs4Dash::actionButton(
-                  inputId = "start_gen",
-                  label = "Recalculate",
-                  icon = shiny::icon("play"),
-                  status = "success",
-                  width = "150px"
-                )
+              shiny::sliderInput(
+                inputId = "hor_numb_ant_generations",
+                label = "Number of Ants:",
+                min = 1,
+                max = 100,
+                value = 40
               )
             )
           )
@@ -139,15 +119,15 @@ update_controlbar <- function(input, output, session) {
             id = "controlbar_menu",
             bs4Dash::controlbarItem(
               title = "Settings",
-              fluidRow(
+              shiny::fluidRow(
                 width = 12,
-                column(width = 10, shiny::sliderInput(
+                shiny::column(width = 10, shiny::sliderInput(
                   inputId = "alpha",
                   label = "Alpha:",
                   min = 1,
                   max = 10,
                   value = 5
-                )), column(
+                )), shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
@@ -157,9 +137,9 @@ update_controlbar <- function(input, output, session) {
                   )
                 ),
               ),
-              fluidRow(
+              shiny::fluidRow(
                 width = 12,
-                column(
+                shiny::column(
                   width = 10,
                   shiny::sliderInput(
                     inputId = "beta",
@@ -169,7 +149,7 @@ update_controlbar <- function(input, output, session) {
                     value = 5
                   )
                 ),
-                column(
+                shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
@@ -179,9 +159,9 @@ update_controlbar <- function(input, output, session) {
                   )
                 ),
               ),
-              fluidRow(
+              shiny::fluidRow(
                 width = 12,
-                column(
+                shiny::column(
                   width = 10,
                   shiny::sliderInput(
                     inputId = "evaporation",
@@ -191,7 +171,7 @@ update_controlbar <- function(input, output, session) {
                     value = 0.5
                   )
                 ),
-                column(
+                shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
@@ -201,9 +181,9 @@ update_controlbar <- function(input, output, session) {
                   )
                 ),
               ),
-              fluidRow(
+              shiny::fluidRow(
                 width = 12,
-                column(
+                shiny::column(
                   width = 10,
                   shiny::sliderInput(
                     inputId = "randomness_f",
@@ -213,7 +193,7 @@ update_controlbar <- function(input, output, session) {
                     value = 5
                   )
                 ),
-                column(
+                shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
@@ -223,9 +203,9 @@ update_controlbar <- function(input, output, session) {
                   )
                 ),
               ),
-              fluidRow(
+              shiny::fluidRow(
                 width = 12,
-                column(
+                shiny::column(
                   width = 10,
                   shiny::sliderInput(
                     inputId = "numb_ants",
@@ -235,7 +215,7 @@ update_controlbar <- function(input, output, session) {
                     value = 10
                   )
                 ),
-                column(
+                shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
@@ -245,9 +225,9 @@ update_controlbar <- function(input, output, session) {
                   )
                 ),
               ),
-              fluidRow(
+              shiny::fluidRow(
                 width = 12,
-                column(
+                shiny::column(
                   width = 10,
                   shiny::sliderInput(
                     inputId = "iterations",
@@ -257,7 +237,7 @@ update_controlbar <- function(input, output, session) {
                     value = 5
                   )
                 ),
-                column(
+                shiny::column(
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
@@ -267,8 +247,8 @@ update_controlbar <- function(input, output, session) {
                   )
                 )
               ),
-              fluidRow(
-                column(
+              shiny::fluidRow(
+                shiny::column(
                   width = 12,
                   align = "center",
                   bs4Dash::actionButton(
@@ -290,55 +270,135 @@ update_controlbar <- function(input, output, session) {
             id = "controlbar_menu",
             bs4Dash::controlbarItem(
               title = "Algorithm",
-              selectInput(
-                inputId = "test_function",
-                label = "Test Function",
-                choices = c("Himmelblau" = "himmelblau", "Rosenbrock" = "rosenbrock"),
-                selected = "himmelblau",
-                multiple = FALSE,
-              ),
-              shiny::numericInput(
-                inputId = "upper_bound",
-                label = "Upper Bound",
-                min = 0,
-                max = 50,
-                value = 1
-              ),
-              shiny::numericInput(
-                inputId = "lower_bound",
-                label = "Lower Bound",
-                min = 0,
-                max = 50,
-                value = 1
-              ),
-              shiny::sliderInput(
-                inputId = "iterations",
-                label = "Number of Iterations:",
-                min = 0,
-                max = 120,
-                value = 1,
-                step = 1
-              ),
-              shiny::sliderInput(
-                inputId = "swarm_size",
-                label = "Swarm Size (count):",
-                min = 1,
-                max = 100,
-                value = 40
-              ),
-              br(),
-              br(),
-              shiny::column(
+              shiny::fluidRow(
                 width = 12,
-                align = "center",
-                bs4Dash::actionButton(inputId = "start_gen", label = "Recalculate", icon = shiny::icon("play"), status = "success", width = "150px")
+                shiny::column(
+                  width = 10,
+                  selectInput(
+                    inputId = "test_function_performance",
+                    label = "Test Function",
+                    choices = c("Himmelblau" = "himmelblau", "Rosenbrock" = "rosenbrock"),
+                    selected = "himmelblau",
+                    multiple = FALSE,
+                  )
+                ), shiny::column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "test_function_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
+              ),
+              shiny::fluidRow(
+                width = 12,
+                shiny::column(
+                  width = 10,
+                  shiny::numericInput(
+                    inputId = "upper_bound_performance",
+                    label = "Upper Bound",
+                    min = 0,
+                    max = 50,
+                    value = 1
+                  )
+                ),
+                shiny::column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "upper_bound_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
+              ),
+              shiny::fluidRow(
+                width = 12,
+                shiny::column(
+                  width = 10,
+                  shiny::numericInput(
+                    inputId = "lower_bound_performance",
+                    label = "Lower Bound",
+                    min = 0,
+                    max = -50,
+                    value = -1
+                  )
+                ),
+                shiny::column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "lower_bound_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
+              ),
+              shiny::fluidRow(
+                width = 12,
+                shiny::column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "iterations_performance",
+                    label = "Number of Iterations:",
+                    min = 0,
+                    max = 120,
+                    value = 1,
+                    step = 1
+                  )
+                ),
+                shiny::column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "iterations_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                ),
+              ),
+              shiny::fluidRow(
+                width = 12,
+                shiny::column(
+                  width = 10,
+                  shiny::sliderInput(
+                    inputId = "swarm_size_performance",
+                    label = "Swarm Size:",
+                    min = 1,
+                    max = 100,
+                    value = 40
+                  )
+                ),
+                shiny::column(
+                  width = 2,
+                  style = "margin-top: 45px;",
+                  shinyWidgets::circleButton(
+                    inputId = "swarm_size_info",
+                    icon = icon("info"),
+                    size = "xs"
+                  )
+                )
+              ),
+              br(),
+              br(),
+              shiny::fluidRow(
+                shiny::column(
+                  width = 12,
+                  align = "center",
+                  bs4Dash::actionButton(
+                    inputId = "recalculate_performance",
+                    icon = shiny::icon("play"),
+                    label = "Realculate",
+                    status = "success"
+                  )
+                )
               )
             )
           )
         })
         bs4Dash::updateControlbar(id = "controlbar", session = session)
-      }
-      else {
+      } else {
         output$controlbar <- bs4Dash::renderMenu({
           bs4Dash::controlbarMenu(
             id = "controlbar_menu",
@@ -349,6 +409,7 @@ update_controlbar <- function(input, output, session) {
           )
         })
       }
-    }
+    },
+    ignoreNULL = FALSE
   ))
 }

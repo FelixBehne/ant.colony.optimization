@@ -1,27 +1,33 @@
+#---Test Functions ------------------------------------
 
-#---Himmelblau ------------------------------------
-
-#' Himmelblau function
-himmelblau <- function(x) {
-  x1 <- x[1]
-  x2 <- x[2]
+#' Himmelblau function with vector parameter
+#'
+#' @description Test function for the application of optimisation methods (vectorized)
+#' @param param_list The parameters (x, y) to be used for the test function
+#'
+himmelblau_1 <- function(param_list) {
+  x1 <- param_list[1]
+  x2 <- param_list[2]
   (x1^2 + x2 - 11)^2 + (x1 + x2^2 - 7)^2
 }
 
-#' Gradient of the Himmelblau function
-gradient_himmelblau <- function(x) {
-  x1 <- x[1]
-  x2 <- x[2]
-  c(
-    4 * x1 * (x1^2 + x2 - 11) + 2(x1 + x2^2 - 7),
-    4 * x2 * (x2^2 + x1 - 7) + 2 * (x2 + x1^2 - 11)
-  )
+#' Himmelblau function with extracted parameters
+#'
+#' @description Test function for the application of optimisation methods
+#' @param x1, x2 The parameters to be used for the test function
+#'
+himmelblau_2 <- function(x1, x2) {
+  (x1^2 + x2 - 11)^2 + (x1 + x2^2 - 7)^2
 }
+
 
 #' Minimize Himmelblau function
 #'
 #' @details If convergence=0 function converges; 4 local mimima and a global minimum at x1=-3.77, x2=-3.28, f=0
-opt_himmelblau <- optim(c(-5, 5), himmelblau)
+opt_himmelblau <- optim(
+  par = c(-5, 5),
+  fn = himmelblau_1
+)
 
 minima_himmelblau <- data.frame(
   x1 = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
@@ -30,35 +36,56 @@ minima_himmelblau <- data.frame(
 )
 
 
-#---Rosenbrock ------------------------------------
-
-#' Rosenbrock function
-rosenbrock <- function(x) {
-  x1 <- x[1]
-  x2 <- x[2]
+#' Rosenbrock function with vector parameter
+#'
+#' @description Test function for the application of optimisation methods
+#' @param param_list The parameters (x, y) to be used for the test function
+#'
+rosenbrock_1 <- function(param_list) {
+  x1 <- param_list[1]
+  x2 <- param_list[2]
   100 * (x2 - x1 * x1)^2 + (1 - x1)^2
 }
 
-#' Gradient of the Rosenbrock function
-gradient_rosenbrock <- function(x) {
-  x1 <- x[1]
-  x2 <- x[2]
-  c(
-    -400 * x1 * (x2 - x1^2) - 2 * (1 - x1), # first derivative after x1
-    200 * (x2 - x1^2)
-  ) # # first derivative after x2
+#' Rosenbrock function with extracted parameters
+#'
+#' @description Test function for the application of optimisation methods
+#' @param x1, x2  The parameters to be used for the test function
+#'
+rosenbrock_2 <- function(x1, x2) {
+  (1 - x1)^2 + 100 * (x2 - x1^2)^2
 }
 
 #' Minimize Rosenbrock function
 #'
 #' @details If convergence=0 function converges; Mimimum at x1=1, x2=1, f=0
-opt_rosenbrock <- optim(c(-1.2, 1), rosenbrock)
+opt_rosenbrock <- optim(
+  par = c(-1.2, 1),
+  fn = rosenbrock_1
+)
 
 minima_rosenbrock <- data.frame(
   x1 = c(opt_rosenbrock$par[1]),
   x2 = c(opt_rosenbrock$par[2]),
   f = c(opt_rosenbrock$value)
 )
+
+#' Return a test function acording to the function name
+#'
+#' @param function_name the name of the test function to returns
+#' @param numb_parameters the number of parameters that the test function takes (vector vs x, y)
+#'
+get_test_function <- function(function_name, numb_parameters) {
+  if (function_name == "himmelblau" && numb_parameters == 1) {
+    return(himmelblau_1)
+  } else if (function_name == "himmelblau" && numb_parameters == 2) {
+    return(himmelblau_2)
+  } else if (function_name == "rosenbrock" && numb_parameters == 1) {
+    return(rosenbrock_1)
+  } else {
+    return(rosenbrock_2)
+  }
+}
 
 #---Plotting Utils ------------------------------------
 
@@ -73,17 +100,17 @@ minima_rosenbrock <- data.frame(
 #'    produce no shading. Values in the range 0.5 to 0.75 provide an approximation to daylight illumination.
 #' @param colour The color(s) of the surface facets._input
 return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input = "150", phi_input = "20", shade_input = 0.3, colour = "green") {
-  if (fu == "rosenbrock") {
-    fun <- function(x, y) {
-      (1 - x)^2 + 100 * (y - x^2)^2
-    }
-  } else if (fu == "himmelblau") {
-    fun <- function(x, y) {
-      (x^2 + y - 11)^2 + (x + y^2 - 7)^2
-    }
-  }
-  x <- y <- seq(minim, maxim, length = 20)
-  z <- outer(x, y, fun)
+  x <- y <- seq(
+    from = minim,
+    to = maxim,
+    length = 20
+  )
+  z <- outer(
+    X = x,
+    Y = y,
+    FUN = get_test_function(function_name = fu, numb_parameters = 2)
+  )
+
   persp(x, y, z,
     theta = theta_input, phi = phi_input,
     shade = shade_input, col = colour,
@@ -91,15 +118,6 @@ return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input
 }
 
 #---Plot Generations of ants on Himmelblau function --------------------
-
-#' Cost function of Himmelblau Function
-#'
-#' @param param_list List of Parameters.
-cost_function_himmelblau <- function(param_list) {
-  x1 <- param_list[1]
-  x2 <- param_list[2]
-  (x1^2 + x2 - 11)^2 + (x1 + x2^2 - 7)^2
-}
 
 #' Creates a start set
 #'
@@ -125,7 +143,6 @@ get_first_generation_with_f <- function(datos = "NA", gen_p, cost_f, paralelo = 
 #' @param cost_f the objective function
 #' @return a new list of the x-, y- and f- value of each ant which represents the new locations of the ants
 calc_gens <- function(datos = "NA", cost_f, param_list, gen_p, gen, q = 0.2, eps = 0.5, paralelo = 0) {
-  print(param_list)
   while (gen > 0) {
     err_gen <- calc_err(datos, cost_f, gen_p, paralelo = paralelo)
     pesos_gen <- pesos(err_gen, q)
@@ -175,7 +192,6 @@ prepare_for_plot <- function(hor_number, xyf) {
 
   # Calculate mean values of ants
   mean_f <- sum(xyf$f) / hor_number
-  # assign("meanF", meanF, envir = .GlobalEnv) #try to assign a value to a global variable
   mean_x1 <- sum(xyf$x) / hor_number
   mean_x2 <- sum(xyf$y) / hor_number
 
@@ -188,10 +204,3 @@ prepare_for_plot <- function(hor_number, xyf) {
 
   return(xyf)
 }
-
-#' Actual minima of Himmelblau Function in a data frame
-minima_himmelblau2 <- data.frame(
-  x = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
-  y = c(opt_himmelblau$par[2], 2, -3.28, -1.85),
-  f = c(opt_himmelblau$value, 0, 0, 0)
-)

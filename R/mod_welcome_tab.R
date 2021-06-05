@@ -19,17 +19,7 @@ mod_welcome_tab_ui <- function(id) {
       width = 12,
       height = "330px",
       shiny::tags$h1("Welcome to the ACO Dashboard !"),
-      shiny::tags$h4("We can't wait for you to see our plots"),
-      br(),
-      br(),
-      bs4Dash::actionButton(
-        inputId = "show_me",
-        label = "Show Me",
-        status = "success",
-        icon = shiny::icon("rocket"),
-        size = "lg",
-        style = "padding-x:18px;"
-      )
+      shiny::tags$h4("We can't wait for you to see our plots")
     ),
     br(),
     br(),

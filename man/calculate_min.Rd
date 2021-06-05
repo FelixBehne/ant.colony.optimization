@@ -4,16 +4,16 @@
 \alias{calculate_min}
 \title{ACO Implemenatation with the package evoper}
 \usage{
-calculate_min(iter = 30, minim = -1, maxim = 1, fu = "rosenbrock")
+calculate_min(iterations, lower_bound, upper_bound, test_function)
 }
 \arguments{
-\item{iter}{number of iterations (= generations)}
+\item{iterations}{number of iterations (= generations)}
 
-\item{minim}{the minimum limit of the range in which we search the minimum (for the x1, x2, f value)}
+\item{lower_bound}{the minimum limit of the range in which we search the minimum (for the x1, x2, f value)}
 
-\item{maxim}{the maximum limit of the range in which we search the minimum (for the x1, x2, f value)}
+\item{upper_bound}{the maximum limit of the range in which we search the minimum (for the x1, x2, f value)}
 
-\item{fu}{the objective function to minimize}
+\item{test_function}{the objective function to minimize}
 }
 \value{
 the calculated minimum (x1, x2 and f value)
