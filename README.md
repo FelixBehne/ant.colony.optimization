@@ -118,6 +118,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [shiny-url]: hhttps://felixbehne.shinyapps.io/ant-colony-optimization/
 [lifecycle-shield]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
 [lifecycle-url]: https://lifecycle.r-lib.org/articles/stages.html#experimental
-[license-shield]: https://img.shields.io/github/license/felixbehne/ant-colony-optimization.svg?style=flat
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/felixbehne/ant.colony.optimization.svg?style=flat
+[license-url]: https://github.com/FelixBehne/ant.colony.optimization/blob/master/LICENSE.md
 [product-screenshot]: inst/app/www/img/product-screenshot.png
