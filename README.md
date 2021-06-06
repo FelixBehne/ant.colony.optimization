@@ -107,7 +107,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * Sarah Engelmayer 
 * Markus Koch 
 * Moritz Link 
-* Felix Behen
+* Felix Behne
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
