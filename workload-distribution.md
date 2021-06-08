@@ -8,6 +8,7 @@ Sarah Engelmayer:
 
 Markus Koch:
 * Ant Foraging Tab
+* Welcome Tab
 
 Moritz Link:
 * Traveling Salesman Tab
