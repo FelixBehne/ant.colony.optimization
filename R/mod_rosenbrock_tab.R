@@ -36,9 +36,13 @@ mod_rosenbrock_tab_ui <- function(id) {
         maximizable = TRUE,
         collapsible = TRUE,
         closable = TRUE,
-        width = 6,
-        shinycssloaders::withSpinner(shiny::tableOutput(ns("result_actual")))
-      ),
+        width = 6,shiny::fluidRow(
+          shiny::column(
+            10,
+            shinycssloaders::withSpinner(shiny::tableOutput(ns("result_actual")))),
+          shiny::column(
+            2,
+            bs4Dash::actionButton(ns("rosenbrock_button"), label = "", width = "60px", icon = icon("info"))))),
     )
   )
 }
@@ -79,5 +83,37 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
         test_function = "rosenbrock"
       )
     })
+    # Event-Listener for the Infobutton for the Rosenbrock formula
+    shiny::observeEvent(input$rosenbrock_button, {
+      shinyalert::shinyalert(
+        title = "Formula of the Rosenbrock function",
+        text = tagList(
+          shinycssloaders::withSpinner(uiOutput(ns("rose_formula"))) 
+        ),
+        size = "m",
+        closeOnEsc = TRUE,
+        closeOnClickOutside = FALSE,
+        html = TRUE,
+        type = "info",
+        showConfirmButton = TRUE,
+        showCancelButton = FALSE,
+        confirmButtonText = "OK",
+        confirmButtonCol = "#249c24",
+        animation = TRUE
+      )
+    })
+    # Render the formula of the Himmelblau function for the Info Button with central alignment
+    output$rose_formula <- renderUI({
+      fluidRow(
+        column(12, align="center",
+          withMathJax(
+            helpText("
+                 $$z(x,y)=(a-x)^2+b(y-x^2)^2$$
+                   ")
+          )
+        )
+      )
+    })
+    
   })
 }
