@@ -10,7 +10,7 @@
 mod_himmelblau_tab_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
-      shiny::titlePanel("Himmelblau Function"),
+    shiny::titlePanel("Himmelblau Function"),
     bs4Dash::box(
       id = "himmelblau",
       title = "Himmelblau-Function",
@@ -41,12 +41,16 @@ mod_himmelblau_tab_ui <- function(id) {
         shiny::fluidRow(
           shiny::column(
             10,
-            shinycssloaders::withSpinner(shiny::tableOutput(ns("result_actual")))),
+            shinycssloaders::withSpinner(shiny::tableOutput(ns("result_actual")))
+          ),
           shiny::column(
             2,
-            bs4Dash::actionButton(ns("himmelblau_button"), label = "", width = "60px", icon = icon("info"))))),
-      )
+            bs4Dash::actionButton(ns("himmelblau_button"), label = "", width = "60px", icon = icon("info"))
+          )
+        )
+      ),
     )
+  )
 }
 
 #' himmelblau_tab Server Functions
@@ -90,7 +94,7 @@ mod_himmelblau_tab_server <- function(id, input_g) {
       shinyalert::shinyalert(
         title = "Formula of the Himmelblau Function",
         text = tagList(
-          shinycssloaders::withSpinner(uiOutput(ns("him_formula"))) 
+          shinycssloaders::withSpinner(uiOutput(ns("him_formula")))
         ),
         size = "m",
         closeOnEsc = TRUE,
@@ -104,10 +108,11 @@ mod_himmelblau_tab_server <- function(id, input_g) {
         animation = TRUE
       )
     })
-     # Render the formula of the Himmelblau function for the Info Button with central alignment
+    # Render the formula of the Himmelblau function for the Info Button with central alignment
     output$him_formula <- renderUI({
       fluidRow(
-        column(12, align="center",
+        column(12,
+          align = "center",
           withMathJax(
             helpText("
                   $$z(x,y)=(x^2+y-11)^2+(x+y^2-7)^2$$
@@ -116,6 +121,5 @@ mod_himmelblau_tab_server <- function(id, input_g) {
         )
       )
     })
-    
   })
 }
