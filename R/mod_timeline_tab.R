@@ -57,7 +57,7 @@ mod_timeline_tab_ui <- function(id) {
             elevation = 2,
             icon = icon("info"),
             status = "orange",
-            time = "1992",
+            time = "1997",
             "In this algorithm, the global best solution deposits pheromone on its trail after every iteration
             (even if this trail has not been revisited), along with all the other ants."
           ),
@@ -90,7 +90,7 @@ mod_timeline_tab_ui <- function(id) {
             elevation = 2,
             icon = icon("info"),
             status = "orange",
-            time = "1991",
+            time = "1940",
             "Richard P. Feynman wrote about the behavior from ants",
           ),
           bs4Dash::timelineStart(color = "primary")
