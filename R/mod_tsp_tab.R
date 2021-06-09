@@ -77,8 +77,9 @@ mod_tsp_tab_server <- function(id, input_g) {
       )
     })
     # Returns the Table but waits until the actionButton is activated.
-    output$table <- shiny::renderTable(ntext(), width = "100%"
-      #DT::table( ntext(),list(pageLength = 5), filter ="none", )
+    output$table <- shiny::renderTable(
+      ntext(),
+      width = "100%"
     )
     shiny::observeEvent(input_g$info, {
       shiny::showModal(shiny::modalDialog(
