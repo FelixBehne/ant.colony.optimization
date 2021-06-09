@@ -109,6 +109,7 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
           withMathJax(
             helpText("
                  $$z(x,y)=(a-x)^2+b(y-x^2)^2$$
+                 with \\(a\\)=1, \\(b\\)=100
                    ")
           )
         )
