@@ -10,7 +10,7 @@
 mod_tsp_tab_ui <- function(id) {
   ns <- shiny::NS(id) # nolint
   shiny::tagList(
-    shiny::titlePanel("Travelling Salesman Problem"),
+    shiny::titlePanel("Traveling Salesman Problem"),
     shiny::fluidRow(
       bs4Dash::box(
         id = "tsp_plot",
@@ -30,7 +30,7 @@ mod_tsp_tab_ui <- function(id) {
         closable = TRUE,
         width = 12,
         height = "100%",
-        shinycssloaders::withSpinner(shiny::dataTableOutput(ns("table")))
+        shinycssloaders::withSpinner(shiny::tableOutput(ns("table")))
       ),
       bs4Dash::box(
         id = "UseCases",
@@ -77,9 +77,9 @@ mod_tsp_tab_server <- function(id, input_g) {
       )
     })
     # Returns the Table but waits until the actionButton is activated.
-    output$table <- shiny::renderDataTable({
-      options <- ntext()
-    })
+    output$table <- shiny::renderTable(ntext(), width = "100%"
+      #DT::table( ntext(),list(pageLength = 5), filter ="none", )
+    )
     shiny::observeEvent(input_g$info, {
       shiny::showModal(shiny::modalDialog(
         title = "Info",

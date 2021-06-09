@@ -9,7 +9,8 @@ make_start_set(number_ants, start_interval)
 \arguments{
 \item{number_ants}{number of ants of each generation.}
 
-\item{start_interval}{the range of the x, y and f value in which we search the minimum; the interval of the initial locations of the ants}
+\item{start_interval}{the range of the x, y and f value in which we search the minimum; the interval 
+of the initial locations of the ants}
 }
 \value{
 a list of the x-, y- and f- value of each ant which represents the locations of the ants
