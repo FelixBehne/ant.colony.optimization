@@ -88,7 +88,7 @@ mod_himmelblau_tab_server <- function(id, input_g) {
     # Event-Listener for the Infobutton for the Himmelblau formula
     shiny::observeEvent(input$himmelblau_button, {
       shinyalert::shinyalert(
-        title = "Formula of the Himmelblau function",
+        title = "Formula of the Himmelblau Function",
         text = tagList(
           shinycssloaders::withSpinner(uiOutput(ns("him_formula"))) 
         ),

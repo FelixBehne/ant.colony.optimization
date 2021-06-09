@@ -86,7 +86,7 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
     # Event-Listener for the Infobutton for the Rosenbrock formula
     shiny::observeEvent(input$rosenbrock_button, {
       shinyalert::shinyalert(
-        title = "Formula of the Rosenbrock function",
+        title = "Formula of the Rosenbrock Function",
         text = tagList(
           shinycssloaders::withSpinner(uiOutput(ns("rose_formula"))) 
         ),
