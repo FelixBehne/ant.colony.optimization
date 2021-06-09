@@ -30,9 +30,9 @@ opt_himmelblau <- optim(
 )
 
 minima_himmelblau <- data.frame(
-  x1 = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
-  x2 = c(opt_himmelblau$par[2], 2, -3.28, -1.85),
-  f = c(opt_himmelblau$value, 0, 0, 0)
+  x = c(opt_himmelblau$par[1], 3, -3.78, 3.58),
+  y = c(opt_himmelblau$par[2], 2, -3.28, -1.85),
+  z = c(opt_himmelblau$value, 0, 0, 0)
 )
 
 
@@ -65,9 +65,9 @@ opt_rosenbrock <- optim(
 )
 
 minima_rosenbrock <- data.frame(
-  x1 = c(opt_rosenbrock$par[1]),
-  x2 = c(opt_rosenbrock$par[2]),
-  f = c(opt_rosenbrock$value)
+  x = c(opt_rosenbrock$par[1]),
+  y = c(opt_rosenbrock$par[2]),
+  z = c(opt_rosenbrock$value)
 )
 
 #' Return a test function acording to the function name

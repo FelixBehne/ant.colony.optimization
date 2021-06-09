@@ -24,9 +24,9 @@ calculate_min <- function(iterations, lower_bound, upper_bound, test_function) {
 
   # Extract the result into a dataframe
   results_df <- data.frame(
-    x1 = c(results$getBest()$x1),
-    x2 = c(results$getBest()$x2),
-    f = c(results$getBest()$fitness)
+    x = c(results$getBest()$x1),
+    y = c(results$getBest()$x2),
+    z = c(results$getBest()$fitness)
   )
   return(results_df)
 }
