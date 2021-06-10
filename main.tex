@@ -1,0 +1,275 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                         %%
+%%                   LaTeX Vorlage für die Studenten der                   %%
+%%              Dualen Hochschule Baden-Württemberg Ravensburg             %%
+%%                                                                         %%
+%%  Die Vorlage orientiert sich an den Gestaltungsrichtlinien der DHBW RV  %%
+%%                                                                         %%
+%%                                                                         %%
+%% Ersteller:        Markus Schutz (WI06)                                  %%
+%% letzten Änderung: 26. November 2013                                     %%
+%%                                                                         %%
+%%                                                                         %%
+%% Wichtiger Hinweis:                                                      %%
+%%                                                                         %%
+%% Keine Änderungen an den Dateien im Verzeichnis "pages" vornehmen. Für   %%
+%% die Arbeit beziehen sich alle Änderungen auf diese Datei und die        %%
+%% Dateien im Verzeichnis "chapter".                                       %%
+%% Für die Erstellung des Literaturverzeichnises empfiehlt sich die Ver-   %%
+%% wendung von JabRef (http://jabref.sourceforge.net). Die Datei ist unter %%
+%% dem Namen literatur.bib im Verzeichnis "literatur" zu speichern.        %%
+%%                                                                         %%
+%% Zur sinnvollen Nutzung dieser Vorlage empfiehlt es sich, die Dokus zu   %%
+%% den eingebundenen Paketen durchzulesen. Sie sind im doc-Verzeichnis der %%
+%% MiKTeX-Installation zu finden.                                          %%
+%%                                                                         %%
+%% Enthaltene Titelblätter:                                                %%
+%%   - Seminararbeit                                                       %%
+%%   - Projektarbeit                                                       %%
+%%   - Bachelorarbeit                                                      %%
+%%                                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,12pt]{article}                                         % Schriftgröße, Layout, Papierformat, Art des Dokumentes
+\usepackage[left=3cm,right=2cm,top=2cm,bottom=2cm,includehead]{geometry}      % Einstellungen der Seitenränder
+\usepackage[ngerman]{babel}                                                   % deutsche Silbentrennung
+\usepackage[utf8]{inputenc}                                                   % Umlaute
+\usepackage[hyperfootnotes=false, hidelinks=true]{hyperref}                                   % pfd-Output [Fußnoten nicht verlinken]
+\usepackage[nottoc]{tocbibind}                                                % Inhaltsverzeichniserweiterung (Inhaltsverzeichnis selbst ausblenden)
+\usepackage{makeidx}                                                          % Index
+\usepackage[intoc]{nomencl}                                                   % Abkürzungsverzeichnis
+\usepackage{fancyhdr}                                                         % Fancy Header
+\usepackage[round]{natbib}                                                    % Zitate (Erweiterung für Literaturverzeichnis)
+\usepackage{amsmath}                                                          % Zurücksetzen der Tabellen- und Abbildungsnummerierung je Sektion
+\usepackage[labelfont=bf,aboveskip=1mm]{caption}                              % Bild- und Tabellenunterschrift (fett)
+\usepackage{setspace}                                                         % Zeilenabstand (vor footmisc laden!)
+\usepackage[bottom,multiple,hang,marginal]{footmisc}                          % Fußnoten [Ausrichtung unten, Trennung durch Seperator bei mehreren Fußnoten]
+\usepackage{graphicx}                                                         % Grafiken
+\usepackage{tabularx}                                                         % erweiterte Tabellen
+\usepackage{longtable}                                                        % mehrseitige Tabellen
+\usepackage{color}                                                            % Farben
+\usepackage{enumitem}                                                         % Befehl setlist (Zeilenabstand für itemize Umgebung auf 1 setzen)
+\usepackage{listings}                                                         % Quelltexte
+\usepackage{zref}                                                             % Verweise (Anhangsverweise)
+\usepackage[toc,style=altlist,translate=false]{glossaries}                    % Glossar (nach hyperref, inputenc, babel und ngerman)
+\usepackage{glossaries-babel}                                                 % Glossar: Übersetzung im TOC
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{listing}
+\usepackage{pdfpages}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                         %%
+%% \/   \/      Bitte hier die Änderungen zur Arbeit vornehmen     \/   \/ %%
+%%                                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%% Definitionen bzgl. der Arbeit %%%%%%%%%%%%%%%%%%%%%%%
+\def\myType{0}           % [0=Seminararbeit|1=Projektarbeit|2=Bachelorarbeit]
+
+\def\myTopic{Ant Colony Optimization }
+\def\mySubTopic{(Ameisen-Algorithmen)}
+\def\myAutor{Felix Behne, Moritz Link, Markus Koch, Sarah Engelmayer}
+\def\myProf{Herr Timo Buck}
+\def\myEndDate{25.06.2021}
+
+%%%%%%%%%%%%%%%%%%%% Folgende Angaben für: Seminararbeit %%%%%%%%%%%%%%%%%%%%
+\def\myVorlesung{Applied Optimization Techniques}
+
+%%%%%%%%%%%%%%%%%%%% Folgende Angaben für: Projektarbeit %%%%%%%%%%%%%%%%%%%%
+\def\myProjNumber{Nummer der Projektarbeit}         % [1|2]
+\def\myPraxPhase{Studienjahr}                       % [1|2|3]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                         %%
+%% /\   /\         Ab hier keine Änderungen mehr vornehmen         /\   /\ %%
+%%                                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% Eigene Farbwerte definieren %%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{boxgray}{gray}{0.9}         % Hintergrundfarbe für Zitatboxen
+\definecolor{commentgray}{gray}{0.5}     % Grau für Kommentare in Quelltexten
+\definecolor{darkgreen}{rgb}{0,.5,0}     % Grün für Strings in Quelltexten
+
+%%%%%%%%%%%%%%%%%%%%%%%% Eigene Kommandos definieren %%%%%%%%%%%%%%%%%%%%%%%%
+% Definition von \gqq{#1: text}: Text in Anführungszeichen
+\newcommand{\gqq}[1]{\glqq #1\grqq}
+
+% Definition von \footref{#1: label}
+% Verweis auf bereits existierende Fußnoten mittels
+\providecommand*{\footref}[1]{
+	\begingroup
+		\unrestored@protected@xdef\@thefnmark{\ref{#1}}
+	\endgroup
+\@footnotemark}
+
+% Definition von \mypageref{#1: label}
+% Kombination aus \ref{#1: label} und \pageref{#1: label}
+\newcommand{\mypageref}[1]{\ref{#1} auf Seite \pageref{#1}}
+
+% Definition von \myboxquote{#1: text}
+% grau hinterlegte Quotation-Umgebung (für Zitate)
+\newcommand{\myboxquote}[1]{
+	\begin{quotation}
+		\colorbox{boxgray}{\parbox{0.78\textwidth}{#1}}
+	\end{quotation}
+	\vspace*{1mm}
+}
+
+\makeatletter
+\zref@newprop*{appsec}{}
+\zref@addprop{main}{appsec}
+
+% Definition von \applabel{#1: label}{#2: text}
+% von \appsec{#1: text}{#2: label} zur Erzeugung des Labels verwendet)
+\def\applabel#1#2{%
+	\zref@setcurrent{appsec}{#2}%   
+	\zref@wrapper@immediate{\zref@label{#1}}%
+}
+
+% Definition von \appref{#1: label}
+% anstelle \ref{#1: label} zum referenzieren von Anhängen verwenden)
+\def\appref#1{%
+	\hyperref[#1]{\zref@extract{#1}{appsec}}%
+}
+\makeatother
+
+% Definition von \appsection{#1: text}{#2: label}
+% Ersetzt \section{#1: text} und \label{#2: label} für Anhänge)
+\newcommand{\theappsection}[1]{Anhang \Alph{section}:~\protect #1}
+\newcommand{\appsection}[2]{
+	\addtocounter{section}{1}
+	\phantomsection
+	\addcontentsline{toc}{section}{\theappsection{#1}}
+	\markboth{\theappsection{#1}}{}
+
+	\section*{\theappsection{#1}}
+	\applabel{#2}{Anhang \Alph{section}}
+	\label{#2}
+}
+
+%%%%%%%%%%%%% Index, Abkürzungsverzeichnis und Glossar erstellen %%%%%%%%%%%%
+\makeindex
+\makenomenclature
+\makeglossaries
+
+% Festlegung der Art der Zitierung (Havardmethode: Abkuerzung Autor + Jahr) %
+\bibliographystyle{dinat}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF-Optionen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	bookmarksopen=false,
+	bookmarksnumbered=true,
+	bookmarksopenlevel=0,
+	pdftitle=\myTopic,
+	pdfsubject=\myTopic,
+	pdfauthor=\myAutor,
+	pdfstartview=Fit,
+	pdfpagelayout=SinglePage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Kopf- und Fußzeile %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}                         % Kopfzeile rechts bzw. außen
+\renewcommand{\headrulewidth}{0.5pt}            % Kopfzeile rechts bzw. außen
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Layout und Beschriftungen %%%%%%%%%%%%%%%%%%%%%%%%%
+\onehalfspacing                % Zeilenabstand: 1.5 (Standard: 1.2)
+\setlist{noitemsep}            % Zeilenabstand für items auf 1 setzen
+
+\addto\captionsngerman{        % Tabllen- und Abbildungsunterschriften ändern
+  \renewcommand{\figurename}{Abb.}
+  \renewcommand{\tablename}{Tab.}
+}
+\numberwithin{table}{section}                               % Tabellennummerierung je Sektion zurücksetzen
+\numberwithin{figure}{section}                              % Abbildungsnummerierung je Sektion zurücksetzen
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}   % Tabellennummerierung mit Section
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}} % Abbildungsnummerierung mit Section
+\renewcommand{\thefootnote}{\arabic{footnote}}              % Sektionsbezeichnung von Fußnoten entfernen
+
+\renewcommand{\multfootsep}{, }                             % Mehrere Fußnoten durch ", " trennen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Listingstyle %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{
+	basicstyle=\ttfamily\scriptsize,
+	commentstyle=\color{commentgray}\textit,
+	showstringspaces=false,
+	stringstyle=\color{darkgreen},
+	keywordstyle=\color{blue},
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=15pt,
+	tabsize=2,
+	fontadjust=true,
+	frame=single,
+	backgroundcolor=\color{boxgray},
+	captionpos=b,
+	linewidth=0.94\linewidth,
+	xleftmargin=0.1\linewidth,
+	breaklines=true,
+	aboveskip=16pt
+}
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                         %%
+%% \/   \/      Bitte hier die Änderungen zur Arbeit vornehmen     \/   \/ %%
+%%                                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Seiten und Kapitel einbinden
+\begin{document}
+	\pagenumbering{Roman}
+	% Das Titelblatt wird automatisch ausgewählt. Keine Änderung hier
+	\ifcase\myType
+		\include{pages/10_titel_seminar}
+	\or
+		\include{pages/10_titel_projekt}
+	\or
+		\include{pages/10_titel_bachelor}
+	\else
+	\fi
+	
+	\pagestyle{fancy}
+	\include{pages/12_inhaltsverzeichnis}
+	\include{pages/13_abkuerzungsverzeichnis}
+	% \include{pages/14_glossar}
+	\include{pages/15_abbildungsverzeichnis}
+	% \include{pages/16_tabellenverzeichnis}
+
+	% Kapitel
+	\pagestyle{fancy}
+	\fancyhead[L]{\nouppercase{\leftmark}}                               % Kopfzeile links bzw. innen
+	\pagenumbering{arabic}
+	\include{projektarbeit-ant-colony-optimization/chapter/01_Einleitung}
+	\include{projektarbeit-ant-colony-optimization/chapter/02_Aufbau_und_Organisation}
+	\include{projektarbeit-ant-colony-optimization/chapter/03_Theoretische_Hintergründe}
+	\include{projektarbeit-ant-colony-optimization/chapter/04_Visualisierung_des_Algorithmus}
+	\include{projektarbeit-ant-colony-optimization/chapter/05_Das_Problem_des_Handlungsreisenden_als_Beispielanwendungsfall}
+	\include{projektarbeit-ant-colony-optimization/chapter/06_Performancevergleich_mit_anderen_Algorithmen}
+	\include{projektarbeit-ant-colony-optimization/chapter/07_Fazit}
+    \include{projektarbeit-ant-colony-optimization/chapter/08_Kennzeichnung_der_Anteile_der_Studierenden}
+
+    
+	% Anhang
+	\renewcommand{\thetable}{\Alph{section}.\arabic{table}}              % Tabellennummerierung mit Section
+	\renewcommand{\thefigure}{\Alph{section}.\arabic{figure}}            % Abbildungsnummerierung mit Section
+	\renewcommand{\thelstlisting}{\Alph{section}.\arabic{lstlisting}}    % Listingsnummerierung mit Section
+	
+	\begin{appendix}
+	%\include{chapter/30_anhang}
+	\end{appendix}
+	
+	% Abschluss
+	\include{pages/18_literaturverzeichnis}
+	\include{pages/19_index}
+	\include{pages/20_erklaerung}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                         %%
+%% /\   /\         Ab hier keine Änderungen mehr vornehmen         /\   /\ %%
+%%                                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

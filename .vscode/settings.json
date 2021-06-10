@@ -1,0 +1,13 @@
+{
+  "r.bracketedPaste": true,
+  "r.rpath.mac": "/usr/local/bin/R",
+  "r.lsp.debug": true,
+  "r.lsp.diagnostics": true,
+  "r.rterm.option": [
+    "--no-save",
+    "--no-restore",
+    "--r-binary=*Path to R executable*"
+  ],
+  "editor.formatOnSave": true,
+  "tinypng.apiKeys": ["ml6wJXw1K7RXrmvZ01XNjzpGqYp8Bm4R"]
+}

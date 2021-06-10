@@ -1,7 +1,0 @@
-linters: with_defaults(
-  line_length_linter(150),
-   spaces_left_parentheses_linter = NULL,
-   single_quotes_linter = NULL,
-   object_usage_linter = NULL
-  )
-exclusions: list("inst/doc/creating_linters.R" = 1, "inst/example/bad.R", "tests/testthat/exclusions-test", "dev")
