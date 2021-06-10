@@ -23,7 +23,7 @@ himmelblau_2 <- function(x1, x2) {
 
 #' Minimize Himmelblau function
 #'
-#' @details If convergence=0 function converges; 4 local mimima and a global minimum at x1=-3.77, x2=-3.28, f=0
+#' @details If convergence=0 function converges; 4 mimima and a global minimum at x1=-3.77, x2=-3.28, f=0
 opt_himmelblau <- optim(
   par = c(-5, 5),
   fn = himmelblau_1
@@ -85,6 +85,26 @@ get_test_function <- function(function_name, numb_parameters) {
   } else {
     return(rosenbrock_2)
   }
+}
+
+#' Return a dataframe with the absolute difference of the x, y and z values of the calculated minimum and the actual minimum
+#'
+#' @param min_aco_df a dataframe with the x,y and z values of the calculated minimum 
+#' @param min_actual a dataframe with the x,y and z values of the actual minimum 
+#'
+calc_abs_diff_to_actual_min<- function(min_aco_df, min_actual){
+  # calc the differences
+  delta_x =abs(min_aco_df$x - min_actual$x )
+  delta_y =abs(min_aco_df$y - min_actual$y )
+  delta_z =abs(min_aco_df$z - min_actual$z )
+  
+  # Save the calculated differences in the form of a dataframe
+  delta_df <- data.frame(
+    delta_x = c(delta_x),
+    delta_y = c(delta_y),
+    delta_z = c(delta_z)
+  )
+  return(delta_df) 
 }
 
 #---Plotting Utils ------------------------------------
