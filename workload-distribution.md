@@ -18,4 +18,4 @@ Felix Behne:
 * Welcome Tab
 * Performance Tab
 * Design
-* App Structure (Golem, Shiny Modules, Deployment)
+* App Structure (Golem, Shiny Modules, Bs4Dash, Controlbar, Deployment)

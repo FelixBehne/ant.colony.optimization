@@ -89,22 +89,22 @@ get_test_function <- function(function_name, numb_parameters) {
 
 #' Return a dataframe with the absolute difference of the x, y and z values of the calculated minimum and the actual minimum
 #'
-#' @param min_aco_df a dataframe with the x,y and z values of the calculated minimum 
-#' @param min_actual a dataframe with the x,y and z values of the actual minimum 
+#' @param min_aco_df a dataframe with the x,y and z values of the calculated minimum
+#' @param min_actual a dataframe with the x,y and z values of the actual minimum
 #'
-calc_abs_diff_to_actual_min<- function(min_aco_df, min_actual){
+calc_abs_diff_to_actual_min <- function(min_aco_df, min_actual) {
   # calc the differences
-  delta_x =abs(min_aco_df$x - min_actual$x )
-  delta_y =abs(min_aco_df$y - min_actual$y )
-  delta_z =abs(min_aco_df$z - min_actual$z )
-  
+  delta_x <- abs(min_aco_df$x - min_actual$x)
+  delta_y <- abs(min_aco_df$y - min_actual$y)
+  delta_z <- abs(min_aco_df$z - min_actual$z)
+
   # Save the calculated differences in the form of a dataframe
   delta_df <- data.frame(
     delta_x = c(delta_x),
     delta_y = c(delta_y),
     delta_z = c(delta_z)
   )
-  return(delta_df) 
+  return(delta_df)
 }
 
 #---Plotting Utils ------------------------------------
@@ -230,7 +230,7 @@ prepare_for_plot <- function(hor_number, xyf) {
 
 #---Performance Tab Utils--------------------
 
-#' Get box colour according the algorithm result (performance tab)
+#' Get box colour according to the algorithm result (performance tab)
 #'
 #' @param value the result of the algorithm to evaluate
 #' @param results all results of all algorithms in a list

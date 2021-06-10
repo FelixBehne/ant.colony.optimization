@@ -14,6 +14,6 @@ opt_himmelblau
 Minimize Himmelblau function
 }
 \details{
-If convergence=0 function converges; 4 local mimima and a global minimum at x1=-3.77, x2=-3.28, f=0
+If convergence=0 function converges; 4 mimima and a global minimum at x1=-3.77, x2=-3.28, f=0
 }
 \keyword{datasets}

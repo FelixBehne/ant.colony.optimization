@@ -29,10 +29,12 @@ mod_rosenbrock_tab_ui <- function(id) {
         closable = TRUE,
         width = 6,
         shiny::fluidRow(
-          shiny::column(10,
-                        shinycssloaders::withSpinner(shiny::tableOutput(ns(
-                          "result_aco"
-                        )))),
+          shiny::column(
+            10,
+            shinycssloaders::withSpinner(shiny::tableOutput(ns(
+              "result_aco"
+            )))
+          ),
           shiny::column(
             2,
             bs4Dash::actionButton(
@@ -52,10 +54,12 @@ mod_rosenbrock_tab_ui <- function(id) {
         closable = TRUE,
         width = 6,
         shiny::fluidRow(
-          shiny::column(10,
-                        shinycssloaders::withSpinner(shiny::tableOutput(
-                          ns("result_actual")
-                        ))),
+          shiny::column(
+            10,
+            shinycssloaders::withSpinner(shiny::tableOutput(
+              ns("result_actual")
+            ))
+          ),
           shiny::column(
             2,
             bs4Dash::actionButton(
@@ -96,8 +100,8 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
     })
     # output element to show actual minimum of the Rosenbrock function
     output$result_actual <- shiny::renderTable(minima_rosenbrock)
-    
-    
+
+
     # output element to show the minimum calculated by ACO (with package evoper)
     output$result_aco <- shiny::renderTable({
       calculate_min(
@@ -117,7 +121,7 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
       )
       calc_abs_diff_to_actual_min(min_aco_df, minima_rosenbrock)
     })
-    
+
     # Event-Listener for the Infobutton showing the difference of the calculated and the real minimum
     shiny::observeEvent(input$show_dif_to_real_minimum_button, {
       shinyalert::shinyalert(
@@ -147,7 +151,7 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
         )))
       ))
     })
-    
+
     # Event-Listener for the Infobutton for the Rosenbrock formula
     shiny::observeEvent(input$rosenbrock_formula_button, {
       shinyalert::shinyalert(
@@ -170,13 +174,14 @@ mod_rosenbrock_tab_server <- function(id, input_g) {
     # Render the formula of the Rosenbrock function for the Info Button with central alignment
     output$rose_formula <- renderUI({
       fluidRow(column(12,
-                      align = "center",
-                      withMathJax(
-                        helpText(
-                          "$$z(x,y)=(a-x)^2+b(y-x^2)^2$$
+        align = "center",
+        withMathJax(
+          helpText(
+            "$$z(x,y)=(a-x)^2+b(y-x^2)^2$$
                           with \\(a\\)=1, \\(b\\)=100"
-                        )
-                      )))
+          )
+        )
+      ))
     })
   })
 }

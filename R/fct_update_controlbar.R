@@ -340,8 +340,8 @@ update_controlbar <- function(input, output, session) {
                 shiny::column(
                   width = 10,
                   shiny::sliderInput(
-                    inputId = "iterations_performance",
-                    label = "Number of Iterations:",
+                    inputId = "evolution_performance",
+                    label = "Number of Evolutions:",
                     min = 0,
                     max = 120,
                     value = 10
@@ -351,7 +351,7 @@ update_controlbar <- function(input, output, session) {
                   width = 2,
                   style = "margin-top: 45px;",
                   shinyWidgets::circleButton(
-                    inputId = "iterations_performance_info",
+                    inputId = "evolution_performance_info",
                     icon = icon("info"),
                     size = "xs"
                   )

@@ -1,5 +1,5 @@
 #' ant_foraging_tab UI Function
-#' 
+#'
 #'
 #' @description A shiny Module.
 #'

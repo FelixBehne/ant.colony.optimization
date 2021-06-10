@@ -122,7 +122,7 @@ mod_performance_tab_server <- function(id, input_g) {
             test_function = input_g$test_function_performance,
             lower_bound = input_g$lower_bound_performance,
             upper_bound = input_g$upper_bound_performance,
-            iterations = input_g$iterations_performance
+            iterations = input_g$evolution_performance
           )
           results[["aco"]] <- round(test_function(c(aco[["x"]], aco[["y"]])), digits = 2)
           shiny::incProgress(1 / 6)
@@ -134,7 +134,7 @@ mod_performance_tab_server <- function(id, input_g) {
               optimType = "MIN",
               numVar = 2, # Static because aco calculation is done with two
               numPopulation = input_g$swarm_size_performance,
-              maxIter = input_g$iterations_performance,
+              maxIter = input_g$evolution_performance,
               rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
             )),
             digits = 2
@@ -148,7 +148,7 @@ mod_performance_tab_server <- function(id, input_g) {
               optimType = "MIN",
               numVar = 2, # Static because aco calculation is done with two
               numPopulation = input_g$swarm_size_performance,
-              maxIter = input_g$iterations_performance,
+              maxIter = input_g$evolution_performance,
               rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
             )),
             digits = 2
@@ -162,7 +162,7 @@ mod_performance_tab_server <- function(id, input_g) {
               optimType = "MIN",
               numVar = 2, # Static because aco calculation is done with two
               numPopulation = input_g$swarm_size_performance,
-              maxIter = input_g$iterations_performance,
+              maxIter = input_g$evolution_performance,
               rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
             )),
             digits = 2
@@ -176,7 +176,7 @@ mod_performance_tab_server <- function(id, input_g) {
               optimType = "MIN",
               numVar = 2, # Static because aco calculation is done with two
               numPopulation = input_g$swarm_size_performance,
-              maxIter = input_g$iterations_performance,
+              maxIter = input_g$evolution_performance,
               rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
             )),
             digits = 2
@@ -190,7 +190,7 @@ mod_performance_tab_server <- function(id, input_g) {
               optimType = "MIN",
               numVar = 2, # Static because aco calculation is done with two
               numPopulation = input_g$swarm_size_performance,
-              maxIter = input_g$iterations_performance,
+              maxIter = input_g$evolution_performance,
               rangeVar = matrix(c(input_g$lower_bound_performance, input_g$upper_bound_performance), nrow = 2)
             )),
             digits = 2
@@ -313,10 +313,10 @@ mod_performance_tab_server <- function(id, input_g) {
       }
     )
     shiny::observeEvent(
-      eventExpr = input_g$iterations_performance_info,
+      eventExpr = input_g$evolution_performance_info,
       handlerExpr = {
         shinyalert::shinyalert(
-          title = "Number of Iterations",
+          title = "Number of Evolutions",
           text = "The maximum number of iterations to use for calculating the minimum.",
           size = "s",
           closeOnEsc = TRUE,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/global_utils.R
 \name{get_color}
 \alias{get_color}
-\title{Get box colour according the algorithm result (performance tab)}
+\title{Get box colour according to the algorithm result (performance tab)}
 \usage{
 get_color(value, results)
 }
@@ -12,5 +12,5 @@ get_color(value, results)
 \item{results}{all results of all algorithms in a list}
 }
 \description{
-Get box colour according the algorithm result (performance tab)
+Get box colour according to the algorithm result (performance tab)
 }
