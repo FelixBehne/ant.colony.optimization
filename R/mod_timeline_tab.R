@@ -20,7 +20,6 @@ mod_timeline_tab_ui <- function(id) {
         closable = TRUE,
         width = 12,
         height = "100%",
-        # htmltools::includeMarkdown(app_sys("app/www/rmd/history.Rmd"))
         bs4Dash::timelineBlock(
           width = 12,
           reversed = TRUE,
@@ -74,7 +73,6 @@ mod_timeline_tab_ui <- function(id) {
             (iii) At the end of each iteration, only the best ant is allowed to update the trails by applying a modified global pheromone updating rule"
             # nolint end
           ),
-         
           bs4Dash::timelineLabel("1991", color = "lightblue"),
           bs4Dash::timelineItem(
             title = "Ant Sytem (AS)",

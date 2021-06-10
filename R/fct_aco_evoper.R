@@ -28,5 +28,6 @@ calculate_min <- function(iterations, lower_bound, upper_bound, test_function) {
     y = c(results$getBest()$x2),
     z = c(results$getBest()$fitness)
   )
+
   return(results_df)
 }

@@ -27,7 +27,7 @@ return_3d_plot(
 
 \item{colour}{The color(s) of the surface facets._input}
 
-\item{shade_inputValues}{Values of shade close to one yield shading similar to a point light source model and values 
+\item{shade_inputValues}{Values of shade close to one yield shading similar to a point light source model and values
 close to zero
    produce no shading. Values in the range 0.5 to 0.75 provide an approximation to daylight illumination.}
 }

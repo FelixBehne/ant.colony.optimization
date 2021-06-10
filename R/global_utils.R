@@ -96,11 +96,11 @@ get_test_function <- function(function_name, numb_parameters) {
 #' @param maxim Maximum limit of the axes
 #' @param theta_input Angle defining the viewing direction. Theta gives the degree of the vertical rotation.
 #' @param phi_input Angle defining the viewing direction. Phi gives the degree of the horizontal rotation.
-#' @param shade_inputValues Values of shade close to one yield shading similar to a point light source model and values 
+#' @param shade_inputValues Values of shade close to one yield shading similar to a point light source model and values
 #' close to zero
 #'    produce no shading. Values in the range 0.5 to 0.75 provide an approximation to daylight illumination.
 #' @param colour The color(s) of the surface facets._input
-return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input = "150", 
+return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input = "150",
                            phi_input = "20", shade_input = 0.3, colour = "green") {
   x <- y <- seq(
     from = minim,
@@ -124,7 +124,7 @@ return_3d_plot <- function(fu = "rosenbrock", minim = -1, maxim = 1, theta_input
 #' Creates a start set
 #'
 #' @param number_ants number of ants of each generation.
-#' @param start_interval the range of the x, y and f value in which we search the minimum; the interval 
+#' @param start_interval the range of the x, y and f value in which we search the minimum; the interval
 #' of the initial locations of the ants
 #' @return a list of the x-, y- and f- value of each ant which represents the locations of the ants
 make_start_set <- function(number_ants, start_interval) {

@@ -124,7 +124,7 @@ mod_performance_tab_server <- function(id, input_g) {
             upper_bound = input_g$upper_bound_performance,
             iterations = input_g$iterations_performance
           )
-          results[["aco"]] <- round(test_function(c(aco[["x1"]], aco[["x2"]])), digits = 2)
+          results[["aco"]] <- round(test_function(c(aco[["x"]], aco[["y"]])), digits = 2)
           shiny::incProgress(1 / 6)
 
           # Ant Lion Optimization
